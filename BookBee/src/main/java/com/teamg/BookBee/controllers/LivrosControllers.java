@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teamg.BookBee.gerenciadores.LivroGerenciador;
+import com.teamg.BookBee.model.Livro;
 import com.teamg.BookBee.service.CookieService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,5 +46,12 @@ public class LivrosControllers {
             return "livros/detalhedolivro";
         }
         return "redirect:/error/404";
+    }
+
+    @PostMapping("/adicionar")
+    public String adicionar(@RequestBody Livro livro, HttpServletRequest request){
+        String usuarioId = CookieService.getCookie(request, "usuarioId");
+        livroGereciador.adicionar(livro, usuarioId);
+        return "redirect:/livro";
     }
 }
