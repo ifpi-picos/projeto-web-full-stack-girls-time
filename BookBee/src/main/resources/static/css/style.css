@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Belleza&family=EB+Garamond:ital,wght@0,400;1,700&family=Inter:wght@200;300&family=Merriweather:ital,wght@1,300&family=Noto+Emoji:wght@300&family=Playfair+Display:ital@1&family=Poppins&display=swap');
+
+* {
+    font-family: Belleza;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+/*:root {
+    --main-color: #BB86FC;
+    --second-color: #FFF;
+    --third-color: #52327D;
+    --fourth-color: #7F39FB;
+    --fifth-color: #9B72CF;
+}*/
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #FFFBEB;
+}
+
+.logo img{
+    width: 200px;
+    height: 200px;
+    padding-left: 10px;
+    margin-top: -30px;
+}
+
+.bemvindo {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.56);
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 200px;
+}
+
+.titulo p{
+    width: 20px;
+    height: 30px;
+    flex-shrink: 0;
+    font-size: 150px;
+    text-shadow: 9px 6px 4px rgba(0, 0, 0, 0.13);
+    padding-left: 97px;
+    margin-top: 0px;
+}
+
+.cor1{
+    color: #A7886C;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.cor2{
+    color: #4B3831;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.text{
+    width: 430px;
+    color: rgba(0, 0, 0, 0.66);
+    text-align: justify;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 160px;
+}
+
+.botoes{
+    display: flex;
+    padding-left: 170px;
+    margin-top: 50px;
+}
+
+
+.botaologin a button{
+    width: 170px;
+    height: 50px;
+    flex-shrink: 0;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: #FFFBEB;
+    border-color: rgba(0, 0, 0, 0.50);
+    margin-right: 50px;
+    color: #412E27;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.botaocadastro a button{
+    width: 170px;
+    height: 50px;
+    flex-shrink: 0;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: #FFFBEB;
+    border-color: rgba(0, 0, 0, 0.50);
+    margin-right: 50px;
+    color: #412E27;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.livro1{
+    width: 130px;
+    height: 800px;
+    transform: rotate(22deg);
+    flex-shrink: 0;
+    background: #5D2410;
+    box-shadow: 9px 4px 4px 0px #000;
+    float: right;
+    margin-right: 31%;
+    position: relative;
+    top: -420px;
+}
+
+.livro1 p{
+    transform: rotate(-90deg);
+    color: #FFFBEB;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 1px;
+    line-height: normal;
+    margin-top: 340px;
+}
+
+.livro1 img{
+    width: 58.993px;
+    height: 58.993px;
+    transform: rotate(-55deg);
+    flex-shrink: 0;
+    margin-top: 60px;
+    padding-left: 50px;
+}
+
+.livro2 {
+    width: 130px;
+    height: 800px;
+    transform: rotate(11deg);
+    flex-shrink: 0;
+    background: #7E5F43;
+    box-shadow: 9px 4px 4px 0px #000;
+    float: right;
+    margin-right: -354px;
+    position: relative;
+    top: -450px;
+}
+
+.livro2 p{
+    transform: rotate(-90deg);
+    color: #FFFBEB;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 1px;
+    line-height: normal;
+    margin-top: 360px;
+}
+
+.livro2 img{
+    width: 58.993px;
+    height: 58.993px;
+    transform: rotate(-60deg);
+    flex-shrink: 0;
+    margin-top: 60px;
+    padding-left: 52px;
+}
+
+.livro3 {
+    width: 130px;
+    height: 800px;
+    transform: rotate(0.543deg);
+    flex-shrink: 0;
+    background: #6A6F4C;
+    box-shadow: 9px 4px 4px 0px #000;
+    float: right;
+    margin-right: -566px;
+    position: relative;
+    top: -520px;
+}
+
+.livro3 p{
+    transform: rotate(-90deg);
+    color: #FFFBEB;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 1px;
+    line-height: normal;
+    margin-top: 430px;
+}
+
+.livro3 img{
+    width: 58.993px;
+    height: 58.993px;
+    transform: rotate(-60deg);
+    flex-shrink: 0;
+    margin-top: 60px;
+    padding-left: 50px;
+}
