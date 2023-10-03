@@ -83,6 +83,7 @@ body {
 .botaologin a button{
     width: 170px;
     height: 50px;
+    cursor: pointer;
     flex-shrink: 0;
     border-width: 1px;
     border-radius: 5px;
@@ -99,6 +100,7 @@ body {
 .botaocadastro a button{
     width: 170px;
     height: 50px;
+    cursor: pointer;
     flex-shrink: 0;
     border-width: 1px;
     border-radius: 5px;
@@ -633,4 +635,87 @@ body {
     flex-shrink: 0;
     margin-top: 60px;
     padding-left: 50px;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 145px;
+    height: 100%;
+    padding: 40px 10px 30px 10px;
+    flex-shrink: 0;
+    background: #A7886C;
+    box-shadow: 9px 4px 8px 0px #000;
+}
+
+.sidebar-header{
+    width: 100%;
+    margin-left: 32px;
+}
+
+.hexagomenu{
+    width: 58.993px;
+    height: 58.993px;
+    transform: rotate(179.88deg);
+    flex-shrink: 0;
+    background: cover no-repeat;
+    margin-bottom: 40px;
+    margin-left: 9px;
+}
+
+.sidebar button{
+    height: 45px;
+    background: transparent;
+    border: 0;
+    color: #412E27;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.sidebar button span{
+    font-size: 21px;
+}
+
+.sidebar button img{
+    height: 20px;
+    margin-right: 10px;
+
+}
+
+.sidebar button:last-child {
+    margin-top: auto;
+    padding-bottom: 0px; /* Ajuste o espaçamento do último botão */
+  }
+  
+  /* Adicione a linha branca após o último botão */
+  .sidebar::after {
+    content: '';
+    width: 85%;
+    height: 1px;
+    background: white;
+    margin-top: -135px; /* Ajuste o espaçamento entre a linha branca e o logotipo */
+    margin-left: 10px;
+    display: block;
+  }
+
+
+.logomenu img{
+    width: 130px;
+    margin-top: 12px;
+    margin-left: 6px;
+}
+
+.sidebar button > span{
+    display: inline-flex;
+    align-items: center;
+    
+}
+
+.sidebar button:hover{
+    border-radius: 15px;
+    
+    background: rgb(255, 255, 255, 0.08);
 }
