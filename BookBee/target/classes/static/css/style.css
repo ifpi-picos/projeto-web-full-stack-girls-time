@@ -941,3 +941,128 @@ body {
     scrollbar-width: none;
 }
 
+.container-favoritos{
+    margin-left: 225px;
+    margin-top: 70px;
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.titulo-favoritos p {
+    color: #412E27;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.titulo-favoritos a{
+    width: 57px;
+    height: 28px;
+    color: #412E27;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    float: right;
+    margin-right: 100px;
+    margin-top: -60px;
+}
+
+.titulo-favoritos img{
+    width: 17px;
+    height: 17px;
+    float: right;
+    margin-right: 90px;
+    margin-top: -57px;
+}
+
+.carousel-container{
+    position: relative;
+    padding: 15px;
+    max-width: 970px;
+    margin-left: 310px;
+}
+
+.carousel-wrapper{
+    overflow-x: auto;
+
+}
+
+.carousel-gallery{
+    display: flex;
+    flex-flow: row nowrap;      
+    gap:15px;
+}
+
+.carousel-gallery img{
+    width: 700px;
+    height: 300px;
+    padding-left: 22px;
+}
+
+.carousel-container button{
+    background: transparent;
+    border: 0;
+    
+}
+
+.carousel-container button img{
+    width: 90px;
+    cursor: pointer;
+}
+
+.carousel-arrow-left{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: -70px;
+}
+
+.carousel-arrow-right{
+    position: absolute;
+    margin-top: 101px;
+    margin-left: 940px;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+.carousel-wrapper{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.container-citacao{
+    margin-left: 225px;
+    margin-top: 70px;
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.titulo-citacao p {
+    color: #412E27;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.titulo-citacao a{
+    width: 57px;
+    height: 28px;
+    color: #412E27;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    float: right;
+    margin-right: 100px;
+    margin-top: -60px;
+}
+
+.titulo-citacao img{
+    width: 17px;
+    height: 17px;
+    float: right;
+    margin-right: 90px;
+    margin-top: -57px;
+}

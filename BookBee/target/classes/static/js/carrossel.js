@@ -30,3 +30,38 @@ function updateGallery() {
 // Inicializa o carrossel
 updateGallery();
 
+
+
+const carouselContainer = document.querySelector('.carousel-container');
+const carouselGallery = document.querySelector('.carousel-wrapper');
+const carouselArrowLeft = document.querySelector(".carousel-arrow-left");
+const carouselArrowRight = document.querySelector(".carousel-arrow-right");
+const carouselItems = document.querySelectorAll('.carousel-item');
+const maxCarouselItems = carouselItems.length;
+
+let currentCarouselItem = 0;
+
+function moveCarouselLeft() {
+    currentCarouselItem = (currentCarouselItem - 1 + maxCarouselItems) % maxCarouselItems;
+    carouselGallery.scrollLeft -= 250;
+    updateCarousel();
+}
+
+function moveCarouselRight() {
+    currentCarouselItem = (currentCarouselItem + 1) % maxCarouselItems;
+    carouselGallery.scrollLeft += 250;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    carouselItems.forEach((item, index) => {
+        if (index === currentCarouselItem) {
+            item.classList.add('current-carousel-item');
+        } else {
+            item.classList.remove('current-carousel-item');
+        }
+    });
+}
+
+// Inicializa o carrossel
+updateCarousel();
