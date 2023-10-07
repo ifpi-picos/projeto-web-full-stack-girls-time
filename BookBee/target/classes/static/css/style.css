@@ -676,6 +676,7 @@ body {
     border: 0;
     color: #412E27;
     cursor: pointer;
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
     margin-top: 15px;
 }
 
@@ -765,7 +766,7 @@ body {
 .container-lidos-recentes{
     margin-left: 225px;
     margin-top: 70px;
-
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .titulo-lidos-recentes p {
@@ -774,6 +775,7 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
 }
 
 .titulo-lidos-recentes a{
@@ -787,6 +789,7 @@ body {
     float: right;
     margin-right: 100px;
     margin-top: -60px;
+
 }
 
 .titulo-lidos-recentes img{
@@ -805,6 +808,7 @@ body {
     padding: 0;
     margin-left: 340px;
     margin-top: 50px;
+    
 }
 
 .estilizacaoLidos li {
@@ -849,7 +853,7 @@ body {
 .container-metas{
     margin-left: 225px;
     margin-top: 70px;
-
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
 
 .titulo-metas p {
@@ -879,5 +883,61 @@ body {
     float: right;
     margin-right: 90px;
     margin-top: -57px;
+}
+
+.container-carrossel{
+    position: relative;
+    padding: 15px;
+    max-width: 970px;
+    margin-left: 310px;
+}
+
+.gallery-wrapper{
+    overflow-x: auto;
+
+}
+
+.gallery{
+    display: flex;
+    flex-flow: row nowrap;      
+    gap:15px;
+}
+
+.gallery img{
+    width: 700px;
+    height: 300px;
+    padding-left: 22px;
+}
+
+.container-carrossel button{
+    background: transparent;
+    border: 0;
+    
+}
+
+.container-carrossel button img{
+    width: 90px;
+    cursor: pointer;
+}
+
+.arrow-left{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: -70px;
+}
+
+.arrow-rigth{
+    position: absolute;
+    margin-top: 101px;
+    margin-left: 940px;
+}
+
+.gallery-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+.gallery-wrapper{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 

@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <title>Principal</title>
+    <title>Inicial</title>
 </head>
 <body>
     <div class="containerlogo">
         <div class="logofixamain">
-                <img src="/BookBee/src/main/resources/static/img/logo.png" alt="logo">
+            <img src="/BookBee/src/main/resources/static/img/logo.png" alt="logo">
         </div>
     </div>
 
@@ -137,9 +137,27 @@
         </div>
     </div>
 
- 
-    </main>
+    <div class="container-carrossel">
+        <button class="arrow-left" aria-label="previuos-image" onclick="left()"> 
+            <img src="/BookBee/src/main/resources/static/img/ordenar-para-esquerda.png" alt="" onmouseover="this.src='/BookBee/src/main/resources/static/img/ordenar-para-esquerda-preenchido.png'" onmouseout="this.src='/BookBee/src/main/resources/static/img/ordenar-para-esquerda.png'">
+        </button>
+        <button class="arrow-rigth" aria-label="next-image" onclick="right()">
+            <img src="/BookBee/src/main/resources/static/img/ordenar-para-a-direita.png" alt="" onmouseover="this. src='/BookBee/src/main/resources/static/img/ordenar-para-a-direita-preenchido.png'" onmouseout="this.src='/BookBee/src/main/resources/static/img/ordenar-para-a-direita.png'">    
+        </button>
+        <div class="gallery-wrapper">
+            <div class="gallery">
+                <img class="item current-item" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=EwyvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+            </div>
+        </div>
+    </div>
 
+</main>
 
+<script src="/BookBee/src/main/resources/static/js/carrossel.js"></script>
 </body>
 </html>
