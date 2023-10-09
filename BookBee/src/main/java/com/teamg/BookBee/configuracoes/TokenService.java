@@ -24,7 +24,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                 .withIssuer("bbee-api")
-                .withSubject(leitor.getNomeUsuario())
+                .withSubject(leitor.getUsername())
                 .withExpiresAt(genExpirationDate())
                 .sign(algorithm);
                 return token;
@@ -33,7 +33,7 @@ public class TokenService {
         }
     }
 
-    public String validateToke(String token) {
+    public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)

@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        RequestMatcher mvcMATcher = new MvcRequestMatcher(null, "/livros");
+        RequestMatcher mvcMATcher = new MvcRequestMatcher(null, "/livros/**");
         RequestMatcher antMatcher = new AntPathRequestMatcher("/login");
         RequestMatcher antMatcherI = new AntPathRequestMatcher("/cadastro");
         RequestMatcher antMatcherII = new AntPathRequestMatcher("/");
