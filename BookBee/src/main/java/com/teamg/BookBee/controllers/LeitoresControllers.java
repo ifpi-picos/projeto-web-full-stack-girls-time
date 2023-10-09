@@ -18,7 +18,7 @@ public class LeitoresControllers {
     @Autowired
     private LeitorGerenciador leitorGerenciador;
 
-    @PostMapping("/cadastra")
+    @PostMapping("/cadastro")
     public String cadastra(@RequestBody Leitor leitor, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
