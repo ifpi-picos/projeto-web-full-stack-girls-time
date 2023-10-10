@@ -647,7 +647,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 145px;
+    width: 175px;
     height: 100%;
     padding: 40px 10px 30px 10px;
     flex-shrink: 0;
@@ -657,7 +657,7 @@ body {
 
 .sidebar-header{
     width: 100%;
-    margin-left: 32px;
+    margin-left: 59px;
 }
 
 .hexagomenu{
@@ -667,26 +667,26 @@ body {
     flex-shrink: 0;
     background: cover no-repeat;
     margin-bottom: 40px;
-    margin-left: 9px;
 }
 
 .sidebar button{
-    height: 45px;
+    height: 65px;
     background: transparent;
     border: 0;
     color: #412E27;
     cursor: pointer;
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
     margin-top: 15px;
+    margin-left: 10px;
 }
 
 .sidebar button span{
-    font-size: 21px;
+    font-size: 25px;
 }
 
 .sidebar button img{
-    height: 20px;
-    margin-right: 10px;
+    height: 27px;
+    margin-right: 12px;
 
 }
 
@@ -709,8 +709,8 @@ body {
 
 .logomenu img{
     width: 130px;
-    margin-top: 70px;
-    margin-left: 6px;
+    margin-top: 50px;
+    margin-left: 15px;
 }
 
 .sidebar button > span{
@@ -719,16 +719,11 @@ body {
     
 }
 
-.sidebar button:hover{
-    border-radius: 15px;
-    background: rgb(255, 255, 255, 0.08);
-}
-
 .usuario{
     display: flex;
     align-items: center;
     font-size: 20px;
-    margin-left: 200px;
+    margin-left: 230px;
     margin-top: 40px;
     color: rgba(0, 0, 0, 0.60);
 }
@@ -742,7 +737,7 @@ body {
 }
 
 .barradepes{
-    margin-left: 205px;
+    margin-left: 230px;
     margin-top: 55px;
     
 }
@@ -764,7 +759,7 @@ body {
 }
 
 .container-lidos-recentes{
-    margin-left: 225px;
+    margin-left: 250px;
     margin-top: 70px;
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
@@ -851,7 +846,7 @@ body {
 }
 
 .container-metas{
-    margin-left: 225px;
+    margin-left: 250px;
     margin-top: 70px;
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
@@ -904,8 +899,8 @@ body {
 }
 
 .gallery img{
-    width: 700px;
-    height: 300px;
+    width: 500px;
+    height: 250px;
     padding-left: 22px;
 }
 
@@ -922,14 +917,14 @@ body {
 
 .arrow-left{
     position: absolute;
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: -70px;
 }
 
 .arrow-rigth{
     position: absolute;
-    margin-top: 101px;
-    margin-left: 940px;
+    margin-top: 80px;
+    margin-left: 960px;
 }
 
 .gallery-wrapper::-webkit-scrollbar {
@@ -942,7 +937,7 @@ body {
 }
 
 .container-favoritos{
-    margin-left: 225px;
+    margin-left: 250px;
     margin-top: 70px;
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
@@ -995,8 +990,8 @@ body {
 }
 
 .carousel-gallery img{
-    width: 700px;
-    height: 300px;
+    width: 500px;
+    height: 250px;
     padding-left: 22px;
 }
 
@@ -1013,14 +1008,14 @@ body {
 
 .carousel-arrow-left{
     position: absolute;
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: -70px;
 }
 
 .carousel-arrow-right{
     position: absolute;
-    margin-top: 101px;
-    margin-left: 940px;
+    margin-top: 80px;
+    margin-left: 960px;
 }
 
 .carousel-wrapper::-webkit-scrollbar {
@@ -1033,7 +1028,7 @@ body {
 }
 
 .container-citacao{
-    margin-left: 225px;
+    margin-left: 250px;
     margin-top: 70px;
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
 }
