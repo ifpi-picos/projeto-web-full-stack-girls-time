@@ -92,7 +92,26 @@ public class LivrosControllers {
                 Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataInicio != null && !dataInicio.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
-                    livroGereciador.atualizar(livro, dataInicio, subject);
+                    livroGereciador.atualizarDataIni(livro, dataInicio, subject);
+                    return ResponseEntity.ok("redirect:/livros/" + id + "/detalhes");
+                }
+                else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/livros");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/error/404");
+    }
+
+    @PostMapping("/{id}/atualizar-data-fim")
+    public ResponseEntity<String> atualizarDataFim(@PathVariable Long id, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim, HttpServletRequest request) {
+        String token = CookieService.getCookie(request, "token");
+
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(subject.isEmpty()) {
+                Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
+                if(optionalLivro.isPresent() && (dataFim != null && !dataFim.isAfter(LocalDate.now()))){
+                    Livro livro = optionalLivro.get();
+                    livroGereciador.atualizarDataFim(livro, dataFim, subject);
                     return ResponseEntity.ok("redirect:/livros/" + id + "/detalhes");
                 }
                 else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/livros");
