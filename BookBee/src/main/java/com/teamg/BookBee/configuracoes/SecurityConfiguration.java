@@ -1,5 +1,8 @@
 package com.teamg.BookBee.configuracoes;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,23 +25,27 @@ public class SecurityConfiguration {
     
     @Autowired
     private SecurityFilter securityFilter;
+
+    List<RequestMatcher> matchers = Arrays.asList(
+        new AntPathRequestMatcher("/"),
+        new AntPathRequestMatcher("/login"),
+        new AntPathRequestMatcher("/cadastro"),
+        new AntPathRequestMatcher("/swagger-custom"),
+        new AntPathRequestMatcher("/swagger-ui/index"),
+        new AntPathRequestMatcher("/api-docs"),
+        new AntPathRequestMatcher("/css/**"),
+        new AntPathRequestMatcher("/img/**")
+    );
     
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         RequestMatcher mvcMATcher = new MvcRequestMatcher(null, "/livros/**");
-        RequestMatcher antMatcher = new AntPathRequestMatcher("/login");
-        RequestMatcher antMatcherI = new AntPathRequestMatcher("/cadastro");
-        RequestMatcher antMatcherII = new AntPathRequestMatcher("/");
-        RequestMatcher antStyle = new AntPathRequestMatcher("/css/**");
-        RequestMatcher antStyleImg = new AntPathRequestMatcher("/img/**");
 
         return httpSecurity
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(antMatcher, antMatcherI, antMatcherII).permitAll()
-            .requestMatchers(
-            antStyle, antStyleImg).permitAll()
+            .requestMatchers(matchers.toArray(new RequestMatcher[0])).permitAll()
             .requestMatchers(mvcMATcher).authenticated().anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
