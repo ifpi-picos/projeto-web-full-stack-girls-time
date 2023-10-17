@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.teamg.BookBee.configuracoes.TokenService;
+import com.teamg.BookBee.gerenciadores.LeitorGerenciador;
 import com.teamg.BookBee.model.Leitor;
 import com.teamg.BookBee.repositorios.LeitorRepositorio;
 import com.teamg.BookBee.service.CookieService;
@@ -22,7 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class LoginController {
 
     @Autowired
-    private LeitorRepositorio repo;
+    private LeitorGerenciador leitorGerenciador;
 
     @Autowired
     private AuthenticationManager authenticationManeger;
@@ -46,7 +47,7 @@ public class LoginController {
             String subject = tokenService.validateToken(token);
 
             if(!subject.isEmpty()){
-                Leitor leitor = this.repo.findByEmail(subject);
+                Leitor leitor = this.leitorGerenciador.findLeitorByEmail(subject);
 
                 CookieService.setCookie(response, "token", token);
                 CookieService.setCookie(response, "nomeLeitor", leitor.getNome());
