@@ -23,7 +23,7 @@ public interface LivroRepositorio extends CrudRepository<Livro, Long>{
     
     @Modifying
     @Query("update Livro l set l.dataDeFim = :dataDeFim where l.id = :id")
-    void atualizarDataDeFim(Long idLivro, LocalDate dataFim);
+    void atualizarDataDeFim(@Param("id")Long id,@Param("dataDeFim") LocalDate dataFim);
     
 }
 
