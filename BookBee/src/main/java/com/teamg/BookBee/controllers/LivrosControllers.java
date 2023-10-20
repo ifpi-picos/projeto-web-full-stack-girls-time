@@ -6,8 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,18 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.teamg.BookBee.configuracoes.TokenService;
 import com.teamg.BookBee.gerenciadores.LivroGerenciador;
 import com.teamg.BookBee.model.Livro;
 import com.teamg.BookBee.service.CookieService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
-@RestController
-@RequestMapping("livros")
+@Controller
+@RequestMapping("/livros")
 public class LivrosControllers {
     
     @Autowired
@@ -35,24 +37,59 @@ public class LivrosControllers {
     @Autowired
     private TokenService tokenService;
 
-    @GetMapping
-    public ResponseEntity<String> index(Model model, HttpServletRequest request) {
+    @Operation(summary = "Obtém todos os livros e anotações do usuário", method = "GET")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description  = "Obtenção bem-sucedida dos livros e anotações"),
+            @ApiResponse(responseCode = "403", description = "Acesso negado")
+        })
+    @GetMapping("/")
+    public String index(Model model, 
+                        HttpServletRequest request, 
+                        HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-
                 Map<String, Object> livroModel = livroGereciador.getLivrosEAnotacoes(subject);
                 model.addAllAttributes(livroModel);
                 model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
-                return ResponseEntity.ok("livros/index");
+                response.setStatus(HttpServletResponse.SC_OK);
+                return   "livros/index";
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/");
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        return "redirect:/error/403";
     }
 
+    @Operation(summary = "Exibe todos os livros do usuário", method = "GET")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida de todos os livros"),
+            @ApiResponse(responseCode = "404", description = "Livros não encontrados")
+        })
+    @GetMapping("/todos-os-livros")
+    public String exibirTodosOslivros(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+         String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                Map<String, Object> livroModel = livroGereciador.getTodosOsLivros(subject);
+                model.addAllAttributes(livroModel);
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                response.setStatus(HttpServletResponse.SC_OK);
+                return   "livros/lista";
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "redirect:/error/404";
+    }
+
+    @Operation(summary = "Exibe os detalhes de um livro especifico", method = "GET")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida dos detalhes do livros"),
+            @ApiResponse(responseCode = "404", description = "Livros não encontrados")
+        })
     @GetMapping("/{id}/detalhes")
-    public ResponseEntity<String> detalhe(@PathVariable Long id, Model model, HttpServletRequest request) {
+    public String detalhe(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         
         if(token != null){
@@ -62,28 +99,67 @@ public class LivrosControllers {
                 model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
                 if(livroEAnotacaoModel.size() != 0){
                     model.addAllAttributes(livroEAnotacaoModel);
-                    return ResponseEntity.ok("livros/detalhedolivro");
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    return  "livros/detalhedolivro";
                 }
             }
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/error/404");
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "redirect:/error/404";
     }
 
+    @Operation(summary = "Exibe a página de busca de livros", method = "GET")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida da página de busca"),
+            @ApiResponse(responseCode = "403", description = "Acesso negado")
+        })
+    @GetMapping("/pagina-de-busca")
+    public String paginaDeBusca(Model model, HttpServletRequest request, HttpServletResponse response ){
+        String token = CookieService.getCookie(request, "token");
+        
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                response.setStatus(HttpServletResponse.SC_OK);
+                return "livros/paginabusca";
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        return "redirect:/error/403";
+    }
+
+    @Operation(summary = "Adiciona um novo livro", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description  = "Adição bem-sucedida do livro"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @PostMapping("/adicionar")
-    public ResponseEntity<String> adicionar(@RequestBody Livro livro, HttpServletRequest request){
+    public String adicionar(@RequestBody Livro livro, HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
             livroGereciador.adicionar(livro, subject);
-            return ResponseEntity.ok("redirect:/livros");
-
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            return   "redirect:/livros";
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/error/404");
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        return "redirect:/error/403";
     }
 
+    @Operation(summary = "Atualiza a data de início de um livro específico", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Atualização bem-sucedida da data de início do livro"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "404", description = "Livro não encontrado")
+    })
     @PostMapping("/{id}/atualizar-data-ini")
-    public ResponseEntity<String> atualizarDataInicio(@PathVariable Long id, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, HttpServletRequest request) {
+    public String atualizarDataInicio(@PathVariable Long id, 
+                                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
+                                        HttpServletRequest request, 
+                                        HttpServletResponse response) throws Exception {
+
         String token = CookieService.getCookie(request, "token");
 
         if(token != null){
@@ -93,16 +169,31 @@ public class LivrosControllers {
                 if(optionalLivro.isPresent() && (dataInicio != null && !dataInicio.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
                     livroGereciador.atualizarDataIni(livro, dataInicio, subject);
-                    return ResponseEntity.ok("redirect:/livros/" + id + "/detalhes");
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    return   "redirect:/livros/" + id + "/detalhes";
                 }
-                else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/livros");
+                else {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    return   "redirect:/livros";
+                }
+    
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/error/404");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return "redirect:/error/404";
     }
 
+    @Operation(summary = "Atualiza a data de fim de um livro específico", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Atualização bem-sucedida da data de fim do livro"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "404", description = "Livro não encontrado")
+    })
     @PostMapping("/{id}/atualizar-data-fim")
-    public ResponseEntity<String> atualizarDataFim(@PathVariable Long id, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim, HttpServletRequest request) {
+    public String atualizarDataFim(@PathVariable Long id, 
+                                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+                                                    HttpServletRequest request,
+                                                    HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
 
         if(token != null){
@@ -112,11 +203,16 @@ public class LivrosControllers {
                 if(optionalLivro.isPresent() && (dataFim != null && !dataFim.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
                     livroGereciador.atualizarDataFim(livro, dataFim, subject);
-                    return ResponseEntity.ok("redirect:/livros/" + id + "/detalhes");
+                      response.setStatus(HttpServletResponse.SC_OK);
+                    return   "redirect:/livros/" + id + "/detalhes";
                 }
-                else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/livros");
+                else {
+                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    return   "redirect:/livros";
+                }
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("redirect:/error/404");
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "redirect:/error/404";
     }
 }
