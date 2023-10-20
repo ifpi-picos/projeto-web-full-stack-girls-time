@@ -10,6 +10,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.teamg.BookBee.model.Leitor;
 import com.teamg.BookBee.repositorios.LeitorRepositorio;
+import com.teamg.BookBee.service.CookieService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,22 +30,15 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,         
                                     HttpServletResponse response, 
                                     FilterChain filterChain) throws ServletException, IOException {
-       
-        var token = this.recoverToken(request);
+       var token = CookieService.getCookie(request, "token");
         if(token != null){
             String login = tokenService.validateToken(token);
             Leitor leitor = leitorRepositorio.findByEmail(login);
 
-            var authentication = new UsernamePasswordAuthenticationToken(leitor.getUsername(), leitor.getPassword(), leitor.getAuthorities());
+            var authentication = new UsernamePasswordAuthenticationToken(leitor.getUsername(), null, leitor.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }
 
-    private String recoverToken(HttpServletRequest request) {
-        var authHeader = request.getHeader("Authorization");
-        if(authHeader == null) return null;
-        return authHeader.replace("Bearer ", "");
-    }
-    
 }

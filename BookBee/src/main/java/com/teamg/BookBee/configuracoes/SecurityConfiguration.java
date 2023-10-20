@@ -29,14 +29,22 @@ public class SecurityConfiguration {
     List<RequestMatcher> matchers = Arrays.asList(
         new AntPathRequestMatcher("/"),
         new AntPathRequestMatcher("/login"),
+        new AntPathRequestMatcher("/logar"),
         new AntPathRequestMatcher("/cadastro"),
-        new AntPathRequestMatcher("/swagger-custom"),
-        new AntPathRequestMatcher("/swagger-ui/**"),
-        new AntPathRequestMatcher("/api-docs"),
+        new AntPathRequestMatcher("/cadastra"),
         new AntPathRequestMatcher("/css/**"),
+        new AntPathRequestMatcher("/js/**"),
         new AntPathRequestMatcher("/img/**")
     );
     
+    List<RequestMatcher> matchersDoc = Arrays.asList(
+        new AntPathRequestMatcher("/api-docs"),
+        new AntPathRequestMatcher("/api-docs/swagger-config"),
+        new AntPathRequestMatcher("/swagger-custom"),
+        new AntPathRequestMatcher("/swagger-ui/**"),
+        new AntPathRequestMatcher("/swagger-ui.html")
+    );
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         RequestMatcher mvcMATcher = new MvcRequestMatcher(null, "/livros/**");

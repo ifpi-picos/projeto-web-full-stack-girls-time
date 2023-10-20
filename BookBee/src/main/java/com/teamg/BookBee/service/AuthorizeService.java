@@ -6,17 +6,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.teamg.BookBee.repositorios.LeitorRepositorio;
+import com.teamg.BookBee.gerenciadores.LeitorGerenciador;
+import com.teamg.BookBee.model.Leitor;
 
 @Service
 public class AuthorizeService implements UserDetailsService{
     
     @Autowired
-    private LeitorRepositorio leitorRepositorio;
+    private LeitorGerenciador leitorGerenciador;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return leitorRepositorio.findByEmail(email);
+       Leitor leitor;
+        try {
+            leitor = leitorGerenciador.findLeitorByEmail(email);
+            return leitor;
+        } catch (Exception e) {
+            throw new UsernameNotFoundException(email + "Nao encontrado");
+        }
     }
 
 }
