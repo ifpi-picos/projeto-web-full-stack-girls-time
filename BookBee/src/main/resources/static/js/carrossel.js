@@ -65,3 +65,38 @@ function updateCarousel() {
 
 // Inicializa o carrossel
 updateCarousel();
+
+
+// carossel notas
+const meuCarouselGallery = document.querySelector('.meu-carousel-wrapper');
+const meuCarouselArrowLeft = document.querySelector(".meu-carousel-arrow-esquerda");
+const meuCarouselArrowRight = document.querySelector(".meu-carousel-arrow-direita");
+const meuCarouselItems = document.querySelectorAll('.carousel-item-atual');
+const maxMeuCarouselItems = meuCarouselItems.length;
+
+let currentMeuCarouselItemAtual = 0;
+
+function moverCarrosselEsquerda() {
+    currentMeuCarouselItemAtual = (currentMeuCarouselItemAtual - 1 + maxMeuCarouselItems) % maxMeuCarouselItems;
+    meuCarouselGallery.scrollLeft -= 250;
+    atualizarCarrossel();
+}
+
+function moverCarrosselDireita() {
+    currentMeuCarouselItemAtual = (currentMeuCarouselItemAtual + 1) % maxMeuCarouselItems;
+    meuCarouselGallery.scrollLeft += 250;
+    atualizarCarrossel();
+}
+
+function atualizarCarrossel() {
+    meuCarouselItems.forEach((item, index) => {
+        if (index === currentMeuCarouselItemAtual) {
+            item.classList.add('carousel-item-atual');
+        } else {
+            item.classList.remove('carousel-item-atual');
+        }
+    });
+}
+
+// Inicializa o carrossel
+atualizarCarrossel();
