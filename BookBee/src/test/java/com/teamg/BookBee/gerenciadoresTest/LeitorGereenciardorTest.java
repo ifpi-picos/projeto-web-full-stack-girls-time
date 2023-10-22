@@ -4,17 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.teamg.BookBee.gerenciadores.LeitorGerenciador;
 import com.teamg.BookBee.model.Leitor;
 import com.teamg.BookBee.repositorios.LeitorRepositorio;
 
 @SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class LeitorGereenciardorTest {
      @InjectMocks
      private LeitorGerenciador leitorGerenciador;
@@ -26,8 +31,8 @@ public class LeitorGereenciardorTest {
     @Test
     public void testCadastra() {
         Leitor leitor = new Leitor();
-        leitor.setNome("Teste");
-        leitor.setEmail("teste@teste.com");
+        leitor.setNome("TesteLeitorGerenciadorConSucesso");
+        leitor.setEmail("TesteLeitorGerenciadorConSucesso@teste.com");
         leitor.setSenha("senha");
 
         Mockito.when(repo.findByNomeUsuario(leitor.getNome())).thenReturn(null);
