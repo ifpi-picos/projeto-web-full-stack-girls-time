@@ -66,9 +66,8 @@ public class LoginController {
                 Leitor leitor = this.leitorGerenciador.findLeitorByEmail(subject);
 
                 CookieService.setCookie(response, "token", token);
-                CookieService.setCookie(response, "UsuarionNome", leitor.getNome());
+                CookieService.setCookie(response, "usuarioNome", leitor.getNome());
 
-                model.addAttribute("nomeUsuario", leitor.getNomeUsuario());
                 response.setStatus(HttpServletResponse.SC_CREATED);
              
                 response.sendRedirect("/livros/");

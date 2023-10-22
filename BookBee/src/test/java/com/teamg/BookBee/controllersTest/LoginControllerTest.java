@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +15,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,48 +26,57 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import com.teamg.BookBee.controllers.LeitoresControllers;
+import com.teamg.BookBee.controllers.LoginController;
+import com.teamg.BookBee.model.Leitor;
+import com.teamg.BookBee.repositorios.LeitorRepositorio;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class LeitoresControllersTest{
-  
+public class LoginControllerTest {
+    
     @LocalServerPort
     private int port;
-    
-    @Autowired
-    private TestRestTemplate restRemplete;
 
     @Autowired
-    private LeitoresControllers leitoresControllers;
+    private TestRestTemplate restTemplate;
+
+    @Autowired
+    private LoginController loginController;
+
+    @Autowired
+    private LeitorRepositorio leitorRepositorio;
 
     private MockMvc mockiMvc;
 
-
     @Before
     public void setUp() {
-        this.mockiMvc = MockMvcBuilders.standaloneSetup(leitoresControllers).build();
-    } 
-
-    @Test
-    public void testA_RestornaPaginaDeCadastro() {
-        ResponseEntity<String> responseEntity = restRemplete.getForEntity(
-            "http://localhost:"+ port +"/cadastro", 
-            String.class);
-
-            assertSame(HttpStatus.OK, responseEntity.getStatusCode());
+        this.mockiMvc = MockMvcBuilders.standaloneSetup(loginController).build();
     }
- 
-    @Test
-    public void testB_CadastraLeitorComSucesso() throws Exception{
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("nome", "testeComSucesso");
-        map.add("email", "testeComSucesso@gmail.com");
-        map.add("senha", "senha");
 
+    @Test
+    public void testA_RetornandoPaginaDeLogin() {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://localhost:" + port + "/login", String.class);
+
+        assertSame(HttpStatus.OK, response.getStatusCode());
+    }
+
+    public void iniciarUmLeitor() {
+           Leitor leitorTeste  = new Leitor();
+        leitorTeste.setNome("testeLoginComSucesso");
+        leitorTeste.setEmail("loginComSucesso@gmail.com");
+        leitorTeste.setSenha("senha");
+
+        leitorRepositorio.save(leitorTeste);
+    }
+
+    @Test
+    public void testB_LoginComSucesso() throws Exception{
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+            map.add("email", "testeComSucesso@gmail.com");
+            map.add("senha", "senha");
+
+            
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -80,85 +86,72 @@ public class LeitoresControllersTest{
             .map(entry -> entry.getKey() + "=" + entry.getValue())
             .collect(Collectors.joining("&"));
 
-        this.mockiMvc.perform(MockMvcRequestBuilders.post("/cadastra")
+
+            
+        this.mockiMvc.perform(MockMvcRequestBuilders.post("/logar")
             .content(urlEncodedForm)
             .headers(headers)
             ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
             .andExpect(MockMvcResultMatchers.header()
-                .string("location", Matchers.containsString("/login")));
-
-    }
-
-    @Test
-    public void testC_CadastroSemNome() throws Exception {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("nome", "");
-        map.add("email", "testeSemNome@gmail.com");
-        map.add("senha", "senha");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-         String urlEncodedForm = request.getBody().toSingleValueMap()
-            .entrySet().stream()
-            .map(entry -> entry.getKey() + "=" + entry.getValue())
-            .collect(Collectors.joining("&"));
-
-        this.mockiMvc.perform(MockMvcRequestBuilders.post("/cadastra")
-            .content(urlEncodedForm)
-            .headers(headers)
-            ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-            .andExpect(MockMvcResultMatchers.header()
-                .string("location", Matchers.containsString("/")));
-    }
-
-    @Test
-    public void testD_CadastroEmailRepetido() throws Exception {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("nome", "testeEmailrepetido");
-        map.add("email", "testeComSucesso@gmail.com");
-        map.add("senha", "senha");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-         String urlEncodedForm = request.getBody().toSingleValueMap()
-            .entrySet().stream()
-            .map(entry -> entry.getKey() + "=" + entry.getValue())
-            .collect(Collectors.joining("&"));
-
-        this.mockiMvc.perform(MockMvcRequestBuilders.post("/cadastra")
-            .content(urlEncodedForm)
-            .headers(headers)
-            ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-            .andExpect(MockMvcResultMatchers.header()
-                .string("location", Matchers.containsString("/")));
-    }
-
-    @Test
-    public void testE_CadastroSemSenha() throws Exception {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("nome", "testeSemSenha");
-        map.add("email", "testeSemSenah@gmail.comm");
-        map.add("senha", "");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-         String urlEncodedForm = request.getBody().toSingleValueMap()
-            .entrySet().stream()
-            .map(entry -> entry.getKey() + "=" + entry.getValue())
-            .collect(Collectors.joining("&"));
-
-        this.mockiMvc.perform(MockMvcRequestBuilders.post("/cadastra")
-            .content(urlEncodedForm)
-            .headers(headers)
-            ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-            .andExpect(MockMvcResultMatchers.header()
-                .string("location", Matchers.containsString("/")));
-    
+                .string("location", Matchers.containsString("/livros")))
+            .andExpect(MockMvcResultMatchers.cookie().exists("token"))
+            .andExpect(MockMvcResultMatchers.cookie().exists("usuarioNome"));
         }
+
+    @Test
+    public void testB_LoginFalhaNaAutenticacao() throws Exception{
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+            map.add("email", "testeComSucesso@gmail.com");
+            map.add("senha", "sEnha");
+
+            
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+         String urlEncodedForm = request.getBody().toSingleValueMap()
+            .entrySet().stream()
+            .map(entry -> entry.getKey() + "=" + entry.getValue())
+            .collect(Collectors.joining("&"));
+
+
+            
+        this.mockiMvc.perform(MockMvcRequestBuilders.post("/logar")
+            .content(urlEncodedForm)
+            .headers(headers)
+            ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+            .andExpect(MockMvcResultMatchers.header()
+                .string("location", Matchers.containsString("/")))
+            .andExpect(MockMvcResultMatchers.cookie().doesNotExist("token"))
+            .andExpect(MockMvcResultMatchers.cookie().doesNotExist("usuarioNome"));
+        }
+
+    @Test
+    public void testC_LoginFalhaNaAutenticacao() throws Exception{
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+            map.add("email", "testeComSucessO@gmail.com");
+            map.add("senha", "senha");
+
+            
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+         String urlEncodedForm = request.getBody().toSingleValueMap()
+            .entrySet().stream()
+            .map(entry -> entry.getKey() + "=" + entry.getValue())
+            .collect(Collectors.joining("&"));
+
+
+            
+        this.mockiMvc.perform(MockMvcRequestBuilders.post("/logar")
+            .content(urlEncodedForm)
+            .headers(headers)
+            ).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+            .andExpect(MockMvcResultMatchers.header()
+                .string("location", Matchers.containsString("/")))
+            .andExpect(MockMvcResultMatchers.cookie().doesNotExist("token"))
+            .andExpect(MockMvcResultMatchers.cookie().doesNotExist("usuarioNome"));
+        }
+
 }
