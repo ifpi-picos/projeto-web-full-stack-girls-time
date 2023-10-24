@@ -100,3 +100,16 @@ document.addEventListener("DOMContentLoaded", function() {
         // Você pode adicionar validações e processamento aqui se necessário.
     });
 });
+
+
+
+function salvarConteudo() {
+    const posicao = document.getElementById("posicao").textContent;
+    const numPagina = document.getElementById("numPaginaValue").textContent;
+    const velocidade = document.getElementById("velocidade").textContent;
+
+    const conteudoSalvo = `Posição: ${posicao}, Páginas: ${numPagina}, Velocidade: ${velocidade}`;
+
+    const conteudoSalvoSpan = document.getElementById("conteudoSalvo");
+    conteudoSalvoSpan.textContent = conteudoSalvo;
+}
