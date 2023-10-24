@@ -4,9 +4,84 @@
     <link rel="stylesheet" type="text/css" href="teste.css">
 </head>
 <body>
-    <h1>Data de Início e Fim da Leitura</h1>
-    <button id="inicioButton" onclick="alterarData('inicio')"><span id="dataInicio">DD/MM/AAAA</span></button>
-    <button id="fimButton" onclick="alterarData('fim')"><span id="dataFim">DD/MM/AAAA</span></button>
-    <script src="teste.js"></script>
+    <div class="detalhePosicao">
+        <ul>
+            <li>
+                <span id="posicao" contenteditable="true">-</span>
+                <p id="posicaoLabel">Posição</p>
+            </li>
+            <li>
+                <span id="numPaginaValue" contenteditable="true">-</span>
+                <p id="numPaginaLabel">Páginas</p>
+            </li>
+            <li>
+                <span id="velocidade" contenteditable="true">-</span>
+                <p id="velocidadeLabel">Velocidade</p>
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const posicao = document.getElementById("posicao");
+        const numPaginaValue = document.getElementById("numPaginaValue");
+        const velocidade = document.getElementById("velocidade");
+    
+        // Definir o conteúdo das palavras diretamente nos elementos span
+        const posicaoLabel = document.getElementById("posicaoLabel");
+        const numPaginaLabel = document.getElementById("numPaginaLabel");
+        const velocidadeLabel = document.getElementById("velocidadeLabel");
+    
+        posicaoLabel.innerText = "Posição";
+        numPaginaLabel.innerText = "Páginas";
+        velocidadeLabel.innerText = "Velocidade";
+    
+        function removePlaceholderContent(element) {
+            if (element.textContent === "-" || element.textContent === "0") {
+                element.textContent = "";
+            }
+        }
+    
+        function restorePlaceholderContent(element) {
+            if (element.textContent === "") {
+                element.textContent = "-";
+            }
+        }
+    
+        posicao.addEventListener("click", function() {
+            removePlaceholderContent(posicao);
+        });
+    
+        posicao.addEventListener("blur", function() {
+            restorePlaceholderContent(posicao);
+            // Salvar o valor quando o usuário clica fora do elemento editável
+            // Você pode adicionar validações e processamento aqui se necessário.
+        });
+    
+        numPaginaValue.addEventListener("click", function() {
+            removePlaceholderContent(numPaginaValue);
+        });
+    
+        numPaginaValue.addEventListener("blur", function() {
+            restorePlaceholderContent(numPaginaValue);
+            // Salvar o valor quando o usuário clica fora do elemento editável
+            // Você pode adicionar validações e processamento aqui se necessário.
+        });
+    
+        velocidade.addEventListener("click", function() {
+            removePlaceholderContent(velocidade);
+        });
+    
+        velocidade.addEventListener("blur", function() {
+            restorePlaceholderContent(velocidade);
+            // Salvar o valor quando o usuário clica fora do elemento editável
+            // Você pode adicionar validações e processamento aqui se necessário.
+        });
+    });
+    </script>
+    
+        
+    
+    
 </body>
 </html>

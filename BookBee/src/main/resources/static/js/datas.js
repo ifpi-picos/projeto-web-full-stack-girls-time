@@ -51,3 +51,52 @@ function alterarData(tipo) {
         return day <= daysInMonth;
     }
 }
+
+ // Função posição
+document.addEventListener("DOMContentLoaded", function() {
+    const posicao = document.getElementById("posicao");
+    const numPaginaValue = document.getElementById("numPaginaValue");
+    const velocidade = document.getElementById("velocidade");
+
+    function removePlaceholderContent(element) {
+        if (element.textContent === "-" || element.textContent === "0") {
+            element.textContent = "";
+        }
+    }
+
+    function restorePlaceholderContent(element) {
+        if (element.textContent === "") {
+            element.textContent = "-";
+        }
+    }
+
+    posicao.addEventListener("click", function() {
+        removePlaceholderContent(posicao);
+    });
+
+    posicao.addEventListener("blur", function() {
+        restorePlaceholderContent(posicao);
+        // Salvar o valor quando o usuário clica fora do elemento editável
+        // Você pode adicionar validações e processamento aqui se necessário.
+    });
+
+    numPaginaValue.addEventListener("click", function() {
+        removePlaceholderContent(numPaginaValue);
+    });
+
+    numPaginaValue.addEventListener("blur", function() {
+        restorePlaceholderContent(numPaginaValue);
+        // Salvar o valor quando o usuário clica fora do elemento editável
+        // Você pode adicionar validações e processamento aqui se necessário.
+    });
+
+    velocidade.addEventListener("click", function() {
+        removePlaceholderContent(velocidade);
+    });
+
+    velocidade.addEventListener("blur", function() {
+        restorePlaceholderContent(velocidade);
+        // Salvar o valor quando o usuário clica fora do elemento editável
+        // Você pode adicionar validações e processamento aqui se necessário.
+    });
+});
