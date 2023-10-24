@@ -26,6 +26,10 @@
     
         <div class="formcadastro">
             <form action="" method="post">
+                <p th:if="${erro != null}"
+                th:text="${erro}"
+                class="errp-login"></p>
+                
                 <label for="Nome">Nome</label>
                 <input name="nome" type="text" id="nome" placeholder="Digite seu Nome" >
                 
@@ -44,9 +48,7 @@
                 
                 </div>
                 <div class="botaocadastro1">
-                    <a href="/BookBee/src/main/resources/templates/main.html">
-                <!--<a href="/principal.html">-->
-                        <button>Cadastro</button>
+                    <button><a href="/BookBee/src/main/resources/templates/main.html">Cadastrar</a></button>
                     </a>
                 </div>
                 </form>
