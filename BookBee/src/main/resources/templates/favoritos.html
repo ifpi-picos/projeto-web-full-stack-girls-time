@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <title>Detalhes do Livro</title>
+    <title>Meta de Leitura</title>
 </head>
 <body>
     <div class="containerlogo">
@@ -24,7 +24,7 @@
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Home.png" alt="home">
                     <a href="/BookBee/src/main/resources/templates/main.html"></a>
-                    <span>Home</span>
+                    <span><a href="/BookBee/src/main/resources/templates/main.html">Home</a></span>
                 </span>
             </button>
     
@@ -32,23 +32,21 @@
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Goal.png" alt="meta">
                     <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
-                    <span>Metas</span>
+                    <span><a href="#">Metas</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Favorites.png" alt="Favoritos">
-                    <a href=""></a>
-                    <span>Favoritos</span>
+                    <span><a href="#">Favoritos</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Quote.png" alt="Citações">
-                    <a href=""></a>
-                    <span>Anotações</span>
+                    <span><a href="#">Anotações</a></span>
                 </span>
             </button>
     
@@ -56,7 +54,7 @@
                 <span>
                 <a href="/BookBee/src/main/resources/templates/home.html"></a>
                     <img src="/BookBee/src/main/resources/static/img/Exit.png" alt="Sair">
-                    <span>Sair</span>
+                    <span><a href="/BookBee/src/main/resources/templates/home.html">Sair</a></span>
                 </span>
             </button>
             
@@ -73,7 +71,7 @@
             <a href="#"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
             <p id="username">Nome do Usuário</p> 
         </div>
-
+        
         <div class="barradepes">
             <input type="text" class="search-txt" placeholder="Encontre o livro que você gosta...">
             <a href="#">
@@ -82,65 +80,22 @@
             </a>
         </div>
 
-        <div class="container-lidos-recentes">
-            <div class="titulo-lidos-recentes">
-                <p>Detalhes do Livro</p>
+        <div class="container-favoritos" id="favoritos">
+            <div class="titulo-favoritos">
+                <p>Favoritos</p>
             </div>
         </div>
     
-        <div class="container-detalhes">
-            <div class="conteudo-detalhes">
-                <div class="capa">
-                    <img id="imgCapa" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                </div>
 
-            </div>
-        </div>
-
-        <div class="datas">
-            <div class="inicio">
-                <h5>Data de Início</h5>
-                <button id="inicioButton" onclick="alterarData('inicio')"><span id="dataInicio">DD/MM/AAAA</span></button>
-            </div>
-            <button class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
-            <div class="fim">
-                <h5>Data de Término</h5>
-                <button id="fimButton" onclick="alterarData('fim')"><span id="dataFim">DD/MM/AAAA</span></button>
-            </div>
-            <button class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
-        </div>
-        
-        <div class="modal">
-            <button class="notasP"> <a href="#">Notas Pessoais</a>
-                <a href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
-            </button>
+        <div class="adc-livro">
+            <a href="#">
+                <button>
+                    <img src="/BookBee/src/main/resources/static/img/adicionar.png" alt="Adicionar">
+                </button>
+            </a>
             
-            <button class="resenha"> <a href="#">Resenha e Classificação</a>
-                <a href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
-            </div>
-
-
-            
-            <div class="detalhePosicao">
-            <ul>
-                <li>
-                    <p><span id="posicao" contenteditable="true">-</span></p>
-                    <p>Posição</p>
-                </li>
-                <li>
-                    <p id="numPagina"><span id="numPaginaValue" contenteditable="true" >-</span></p>
-                    <p>Páginas</p>
-                </li>
-                <li>
-                    <p><span id="velocidade" contenteditable="true">-</span></p>
-                    <p>Velocidade</p>
-                </li>
-            </ul>
-
-            <div class="botao-adc">
-                <button class="adc">Adicionar</button>
-            </div>
         </div>
-        
-        <script src="/BookBee/src/main/resources/static/js/datas.js"></script>
+    
     </main>
+
+</body>
