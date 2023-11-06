@@ -38,8 +38,8 @@ const hadleEvent = async (event) => {
           livros.innerHTML = livros.innerHTML + 
           `<div class="conteudoLivros">
             <img src="${capaImagem}" >
-            <li> ${item.volumeInfo.title}- ${item.volumeInfo.authors}
-              <button onclick="adicionaLivro('${item.id}')" >Adicionar</button>
+            <li> ${item.volumeInfo.title} Pag: ${item.volumeInfo.pageCount}- ${item.volumeInfo.authors}
+              <button onclick="adicionaLivro('${item.id}')" >+</button>
             </li>
           </div>`; 
         });
@@ -74,7 +74,7 @@ window.addEventListener('load', () => {
       `<div class="conteudoLivros">
         <img src="${capaImagem}"  >
         <li> ${item.volumeInfo.title}; Pag: ${item.volumeInfo.pageCount} - ${item.volumeInfo.authors}
-          <button onclick="adicionaLivro('${item.id}')" >Adicionar</button>
+          <button onclick="adicionaLivro('${item.id}')" >+</button>
         </li>
       </div>`;  
     });

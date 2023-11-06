@@ -1416,12 +1416,12 @@ body {
     border-radius: 5px;
     background: #878C69;
     box-shadow: 5px 6px 10px 0px rgba(0, 0, 0, 0.25);
-    margin-left: 16%;
+    margin-left: 19%;
     margin-top: 80px;
 }
 
 .conteudoLivros {
-    width: 570px;
+    width: 500px;
     height: 190px;
     background-color: #878C69;
     border-radius: 5px;
@@ -1454,12 +1454,11 @@ body {
 }
 
 .conteudoLivros li{
-    width: 425px;
+    width: 355px;
     height: 20px;
     flex-shrink: 0;
     margin-bottom: 100px;
     color: #30351B;
-    font-family: Belleza;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -1467,14 +1466,14 @@ body {
 }
 
 .conteudoLivros button{
-    width: 142px;
-    height: 41px;
+    width: 52px;
+    height: 51px;
     background: transparent;
     font-size: 15px;
     border-radius: 10px;
     border: 1px solid rgba(48, 53, 27, 0.50);
     box-shadow: 5px 6px 10px 0px rgba(0, 0, 0, 0.25);
-    margin-top: 70px;
-    margin-left: 80px;
+    margin-top: 25px;
+    margin-left: 260px;
     cursor: pointer;
 }
