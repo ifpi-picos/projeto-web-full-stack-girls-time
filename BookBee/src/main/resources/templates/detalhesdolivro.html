@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,25 +98,23 @@
         </div>
 
         <div class="datas">
-            <div class="inicio">
-                <h5>Data de Início</h5>
-                <button id="inicioButton" onclick="alterarData('inicio')"><span id="dataInicio">DD/MM/AAAA</span></button>
-            </div>
-            <button class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
+           <form th:action="@{/livros/{id}/atualizar-data-ini(id=${livro.idLivro})}" method="post">
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="ini">
+                    <h5>Data de Início</h5>
+                    <input type="date" name="dataDeIni" th:value="${livro.dataDeIni}">
+                </div>
+                <button type="submit" class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
+           </form>
+
+           <form th:action="@{/livros/{id}/atualizar-data-fim(id=${livro.idLivro})}" method="post">
+            <input type="hidden" name="_method" value="PUT" />
             <div class="fim">
-                <h5>Data de Término</h5>
-                <button id="fimButton" onclick="alterarData('fim')"><span id="dataFim">DD/MM/AAAA</span></button>
+                <h5>Data de Início</h5>
+                <input type="date" name="dataDeFim" th:value="${livro.dataDeFim}">
             </div>
-            <button class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
-        </div>
-        
-        <div class="modal">
-            <button class="notasP"> <a href="#">Notas Pessoais</a>
-                <a href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
-            </button>
-            
-            <button class="resenha"> <a href="#">Resenha e Classificação</a>
-                <a href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
+            <button type="submit" class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
+       </form>
             </div>
 
 

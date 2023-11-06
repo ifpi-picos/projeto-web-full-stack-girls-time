@@ -1,8 +1,7 @@
 
 // Adicionar livros; 
-const btnBusca = document.getElementById('search')
-const busca = document.getElementById('search')
-const txtprocura = document.getElementById('keyWord')
+const btnBusca = document.getElementById('btnBuscar')
+const busca = document.getElementById('search-txt')
 const livros = document.getElementById('livros')
 
 
@@ -11,17 +10,20 @@ const hadleEvent = async (event) => {
   if(event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')){
     event.preventDefault();
     console.log()
-    const PrincipalBuscar = txtprocura.value.replace(' ', '+');
+    const PrincipalBuscar = busca.value.replace(' ', '+');
+    console.log(busca, " valores livros")
     const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${PrincipalBuscar}`);
     const dados = await res.json();
     console.log(dados)
     if(!dados.items || dados.items.length === 0){
      // criar algo para informa que o resultado não foi encontrado
     }else{
-      if(location.href != 'http://localhost:9090/livros/pagesearch'){
-        console.log('na condição')
+      if(location.href != 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html'){
+        // if(location.href != 'http://localhost:9090/livros/busca'){
+      console.log('na condição')
         localStorage.setItem('searchResults', JSON.stringify(dados.items));
-        location.href = '/livros/pagesearch';
+        // location.href = '/livros/pagina-de-busca';
+        location.href = 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html';
       }else{
         livros.innerHTML = '';
         
@@ -35,23 +37,25 @@ const hadleEvent = async (event) => {
 
           livros.innerHTML = livros.innerHTML + 
           `<div class="conteudoLivros">
-            <img src="${capaImagem}" alt="capa do livro">
-            <li> ${item.volumeInfo.title}; Pag: ${item.volumeInfo.pageCount} - ${item.volumeInfo.authors}
-              <button onclick="adicionaLivro('${item.id}')" >+</button>
+            <img src="${capaImagem}" >
+            <li> ${item.volumeInfo.title}- ${item.volumeInfo.authors}
+              <button onclick="adicionaLivro('${item.id}')" >Adicionar</button>
             </li>
-          </div>`;  
+          </div>`; 
         });
       } 
     }
   }
 }
 
-txtprocura.addEventListener('keydown', hadleEvent);
-busca.addEventListener('click', hadleEvent);
+// txtprocura.addEventListener('keydown', hadleEvent);
+btnBusca.addEventListener('click', hadleEvent);
   
 window.addEventListener('load', () => {
   console.log('dentro do load')
-  if(window.location.href == 'http://localhost:9090/livros/pagesearch'){
+  if(window.location.href == 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html'){
+    // if(location.href != 'http://localhost:9090/livros/busca'){
+
     console.log('depois do load')
     const livros = document.getElementById('livros');
     const searchResults = JSON.parse(localStorage.getItem('searchResults'));
@@ -68,9 +72,9 @@ window.addEventListener('load', () => {
       
       livros.innerHTML = livros.innerHTML + 
       `<div class="conteudoLivros">
-        <img src="${capaImagem}" alt="capa do livro">
+        <img src="${capaImagem}"  >
         <li> ${item.volumeInfo.title}; Pag: ${item.volumeInfo.pageCount} - ${item.volumeInfo.authors}
-          <button onclick="adicionaLivro('${item.id}')">+</button>
+          <button onclick="adicionaLivro('${item.id}')" >Adicionar</button>
         </li>
       </div>`;  
     });
@@ -86,7 +90,7 @@ function adicionaLivro(id) {
   .then(response => response.json())
   .then(data => {
     $.ajax({
-      url: '/livros/adiciona',
+      url: '/livros/adicionar',
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
@@ -116,47 +120,30 @@ function adicionaLivro(id) {
   })
 }
 
-const searchIcon = document.querySelector('.iconeBusca');
-const searchInput = document.querySelector('input');
-const searchButton = document.querySelector('.barraDeBusca button');
-const searchSpace = document.querySelector('.barraDeBusca');
+// const searchIcon = document.querySelector('.iconeBusca');
+// const searchInput = document.querySelector('input');
+// const searchButton = document.querySelector('.barraDeBusca button');
+// const searchSpace = document.querySelector('.barraDeBusca');
 
 
-searchIcon.addEventListener('click', () => {
+// searchIcon.addEventListener('click', () => {
 
-  if(window.innerWidth <= 950){
-    if (searchInput.style.display === 'none') {
-        searchInput.style.display = 'inline-block';
-        searchButton.style.display = 'flex';
-        searchButton.style.justifyContent = 'center';
-        searchButton.style. alignItems= 'center';
-        searchSpace.style.width = '150%';
-        searchSpace.style.height = 'auto';
-        searchSpace.style.borderRadius = '0';
-    } else {
-        searchInput.style.display = 'none';
-        searchButton.style.display = 'none';
-        searchSpace.style.width = '40px';
-        searchSpace.style.height = '40px';
-        searchSpace.style.borderRadius = '50%';
-  }
+//   if(window.innerWidth <= 950){
+//     if (searchInput.style.display === 'none') {
+//         searchInput.style.display = 'inline-block';
+//         searchButton.style.display = 'flex';
+//         searchButton.style.justifyContent = 'center';
+//         searchButton.style. alignItems= 'center';
+//         searchSpace.style.width = '150%';
+//         searchSpace.style.height = 'auto';
+//         searchSpace.style.borderRadius = '0';
+//     } else {
+//         searchInput.style.display = 'none';
+//         searchButton.style.display = 'none';
+//         searchSpace.style.width = '40px';
+//         searchSpace.style.height = '40px';
+//         searchSpace.style.borderRadius = '50%';
+//   }
     
-  }
-});
-
-
-
-// function enviar(event){
-//   event.preventDefault();
-//   let url = event.currentTArget.getAttribute('data-url');
-//   fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       'content-Type': 'application/json'
-//     }
-//   }) 
-// }
-// - ${item.volumeInfo.publisher} - ${item.volumeInfo.categories} -  ${item.volumeInfo.pageCount} 
-
-
- 
+//   }
+// });

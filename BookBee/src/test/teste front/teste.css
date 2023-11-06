@@ -1,22 +1,25 @@
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
+.conteudoLivros {
+    width: 400px;
+    height: 170px;
+    background-color: #878C69;
     border-radius: 5px;
+    color: #3E4320;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden; /* Para esconder a parte da imagem fora da div */
 }
 
-button:hover {
-    background-color: #0056b3;
+.imagem-container {
+    width: 220px; /* Largura desejada para o contêiner da imagem */
+    height: 220px; /* Altura desejada para o contêiner da imagem */
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-button span {
-    margin-left: 10px;
-    display: block;
-}
-
-h1 {
-    font-size: 24px;
+.imagem-container img {
+    width: 100%; /* Para garantir que a imagem preencha o contêiner */
+    height: 100%; /* Para garantir que a imagem preencha o contêiner */
+    border-radius: 5px;
 }

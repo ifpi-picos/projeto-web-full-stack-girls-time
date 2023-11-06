@@ -1196,14 +1196,14 @@ body {
     margin-top: 5px;
 }
 
-.inicio, .fim {
+.ini, .fim {
     display: inline-block;
     margin: 20px; 
     width: 200px; 
     
 }
 
-.inicio{
+.ini{
     margin-left: 210px;
 }
 
@@ -1211,7 +1211,7 @@ body {
     margin-left: 100px;
 }
 
-.inicio button{
+.ini button{
     width: 187px;
     height: 51px;
     flex-shrink: 0;

@@ -73,32 +73,31 @@
         </div>
 
         <div class="barradepes">
-            <input type="text" class="search-txt" placeholder="Encontre o livro que você gosta...">
-            <a href="/BookBee/src/main/resources/templates/busca.html">
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
                 <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
-                 
-            </a>
+            </button>
         </div>
-
-        <div class="container-lidos-recentes">
-            <div class="titulo-lidos-recentes">
-                <p>Lidos Recentes</p>
-                <a href="#">Todos</a>
-                <img class="todos-mais" src="/BookBee/src/main/resources/static/img/mais.png" alt="Mais">
+    
+    <div class="container-lidos-recentes">
+        <div class="titulo-lidos-recentes">
+            <p>Lidos Recentes</p>
+            <a href="#">Todos</a>
+            <img class="todos-mais" src="/BookBee/src/main/resources/static/img/mais.png" alt="Mais">
+        </div>
+    </div>
+    
+    <ul class="estilizacaoLidos">
+        <li onclick="exibirDetalheDoLivro('ud06EAAAQBAJ')">
+            <img src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+            <div class="informacaoLivro">
+                <p class="paginasLidas"> <i class="bi bi-speedometer2"></i> 04/245</p>
+                <p class="nomeLivro">A biblioteca da meia-noite</p>
             </div>
-        </div>
-
-        <ul class="estilizacaoLidos">
-            <li onclick="exibirDetalheDoLivro('ud06EAAAQBAJ')">
-                <img src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <div class="informacaoLivro">
-                    <p class="paginasLidas"> <i class="bi bi-speedometer2"></i> 04/245</p>
-                    <p class="nomeLivro">A biblioteca da meia-noite</p>
-                </div>
-            </li>
-            <li onclick=" exibirDetalheDoLivro('8hJfEAAAQBAJ')">
-                <img src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <div class="informacaoLivro">
+        </li>
+        <li onclick=" exibirDetalheDoLivro('8hJfEAAAQBAJ')">
+            <img src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+            <div class="informacaoLivro">
                     <p class="paginasLidas"> <i class="bi bi-speedometer2"></i> 04/470</p>
                     <p class="nomeLivro">Manual de assassinato para boas garotas</p>
                 </div>
@@ -119,7 +118,7 @@
             </li>
         </ul>
     </div>
-
+    
     <div class="container-metas" id="metaLeitura">
         <div class="titulo-metas">
             <p>Metas de Leitura</p>
@@ -137,14 +136,11 @@
         </button>
         <div class="gallery-wrapper">
             <div class="gallery">
-                <img class="item current-item" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=EwyvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+               <div th:each="livro: ${livros}">
+                <a th:href="@{/livros/{id}(id=${livros.idLivros})}">
+                    <img class="item current-item" th:src="${livros.linkImagem}" alt="">
+                </a>
+               </div>
             </div>
         </div>
     </div>
@@ -178,7 +174,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="container-citacao" id="citacao">
         <div class="titulo-citacao">
             <p>Notas Pessoais</p>
@@ -223,5 +219,6 @@
 </main>
 
 <script src="/BookBee/src/main/resources/static/js/carrossel.js"></script>
+<script src="/BookBee/src/main/resources/static/js/busca.js"></script>
 </body>
 </html>
