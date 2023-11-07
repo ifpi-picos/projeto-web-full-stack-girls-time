@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +30,9 @@ public class Livro {
 
     @OneToMany(mappedBy = "livro")
     private Set<Anotacao> anotacoes;
+
+    @OneToOne(mappedBy = "livro")
+    private Resenha resenha;
 
     @Column(name = "titulo")
     private String titulo;
@@ -85,6 +89,14 @@ public class Livro {
 
     public void setAnotacoes(Set<Anotacao> anotacoes) {
         this.anotacoes = anotacoes;
+    }
+
+    public Resenha getResenha() {
+        return resenha;
+    }
+
+    public void setResenha(Resenha resenha) {
+        this.resenha = resenha;
     }
 
     public String getTitulo() {

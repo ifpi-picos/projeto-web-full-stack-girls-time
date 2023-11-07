@@ -50,7 +50,7 @@ public class LoginController {
         }
     )
     @PostMapping("/logar")
-    public void logar(Model model, 
+    public String logar(Model model, 
                         @ModelAttribute Leitor leitorParam, 
                         HttpServletResponse response) throws IOException {
         authenticationManeger = context.getBean(AuthenticationManager.class);
@@ -70,17 +70,19 @@ public class LoginController {
 
                 response.setStatus(HttpServletResponse.SC_CREATED);
              
-                response.sendRedirect("/livros/");
+                return "redirect:/livros/";
             }else {
 
-                model.addAttribute("erro", "usuario ou senha invalidos");
+                model.addAttribute("erro", "Ocorreu erro ao validar o usuario");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.sendRedirect("/");
+                return "/login";
             }
 
         
         } catch(Exception e){
-          response.sendRedirect("/");
+            model.addAttribute("erro", "Usuario ou senha invalidos");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return  "/login";
 
         }
 

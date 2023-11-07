@@ -54,6 +54,7 @@ public class SecurityConfiguration {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
             .requestMatchers(matchers.toArray(new RequestMatcher[0])).permitAll()
+            .requestMatchers(matchersDoc.toArray(new RequestMatcher[0])).permitAll()
             .requestMatchers(mvcMATcher).authenticated().anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

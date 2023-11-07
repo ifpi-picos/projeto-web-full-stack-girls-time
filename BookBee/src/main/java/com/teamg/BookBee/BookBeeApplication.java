@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
-
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title= "BookBee", version = "1"))
+@OpenAPIDefinition(info = @Info(title= "BookBee", version = "1.1"))
 public class BookBeeApplication {
 
 	public static void main(String[] args) {

@@ -35,8 +35,7 @@ public class Anotacao {
     @Column(name = "pagina")
     private int pagina;
 
-    public Anotacao(Long idAnotacao, Leitor leitor, Livro livro, String anotacao, String capitulo, int pagina) {
-        this.idAnotacao = idAnotacao;
+    public Anotacao(Leitor leitor, Livro livro, String anotacao, String capitulo, int pagina) {
         this.leitor = leitor;
         this.livro = livro;
         this.anotacao = anotacao;
