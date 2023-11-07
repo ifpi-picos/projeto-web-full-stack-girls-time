@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +48,7 @@ public class LivrosControllers {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
+            System.out.println(subject);
             if(!subject.isEmpty()){
                 Map<String, Object> livroModel = livroGereciador.getLivrosEAnotacoes(subject);
                 model.addAllAttributes(livroModel);
@@ -68,7 +68,7 @@ public class LivrosControllers {
         })
     @GetMapping("/todos-os-livros")
     public String exibirTodosOslivros(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
-         String token = CookieService.getCookie(request, "token");
+        String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
@@ -76,7 +76,7 @@ public class LivrosControllers {
                 model.addAllAttributes(livroModel);
                 model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
                 response.setStatus(HttpServletResponse.SC_OK);
-                return   "livros/lista";
+                return   "livros/lista*";
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -88,7 +88,7 @@ public class LivrosControllers {
             @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida dos detalhes do livros"),
             @ApiResponse(responseCode = "404", description = "Livros não encontrados")
         })
-    @GetMapping("/{id}/detalhes")
+    @GetMapping("/{id}")
     public String detalhe(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         
@@ -100,7 +100,7 @@ public class LivrosControllers {
                 if(livroEAnotacaoModel.size() != 0){
                     model.addAllAttributes(livroEAnotacaoModel);
                     response.setStatus(HttpServletResponse.SC_OK);
-                    return  "livros/detalhedolivro";
+                    return  "livros/detalhesdolivro";
                 }
             }
         }
@@ -123,7 +123,7 @@ public class LivrosControllers {
             if(!subject.isEmpty()){
                 model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
                 response.setStatus(HttpServletResponse.SC_OK);
-                return "livros/paginabusca";
+                return "livros/busca";
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -140,8 +140,9 @@ public class LivrosControllers {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
+            System.out.println(subject);
             livroGereciador.adicionar(livro, subject);
-            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.setStatus(HttpServletResponse.SC_OK);
             return   "redirect:/livros";
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -156,7 +157,7 @@ public class LivrosControllers {
     })
     @PostMapping("/{id}/atualizar-data-ini")
     public String atualizarDataInicio(@PathVariable Long id, 
-                                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio, 
+                                        @RequestParam("dataDeIni") LocalDate dataDeIni, 
                                         HttpServletRequest request, 
                                         HttpServletResponse response) throws Exception {
 
@@ -164,17 +165,17 @@ public class LivrosControllers {
 
         if(token != null){
             var subject = tokenService.validateToken(token);
-            if(subject.isEmpty()) {
+            if(!subject.isEmpty()) {
                 Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
-                if(optionalLivro.isPresent() && (dataInicio != null && !dataInicio.isAfter(LocalDate.now()))){
+                if(optionalLivro.isPresent() && (dataDeIni != null && !dataDeIni.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
-                    livroGereciador.atualizarDataIni(livro, dataInicio, subject);
+                    livroGereciador.atualizarDataIni(livro, dataDeIni, subject);
                     response.setStatus(HttpServletResponse.SC_OK);
-                    return   "redirect:/livros/" + id + "/detalhes";
+                    return   "redirect:/livros/" + id;
                 }
                 else {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    return   "redirect:/livros";
+                    return   "redirect:/livros/";
                 }
     
             }
@@ -191,24 +192,24 @@ public class LivrosControllers {
     })
     @PostMapping("/{id}/atualizar-data-fim")
     public String atualizarDataFim(@PathVariable Long id, 
-                                                    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
-                                                    HttpServletRequest request,
-                                                    HttpServletResponse response) throws Exception {
+                                    @RequestParam("dataDeFim") LocalDate dataFim,
+                                    HttpServletRequest request,
+                                    HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
 
         if(token != null){
             var subject = tokenService.validateToken(token);
-            if(subject.isEmpty()) {
+            if(!subject.isEmpty()) {
                 Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataFim != null && !dataFim.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
                     livroGereciador.atualizarDataFim(livro, dataFim, subject);
                       response.setStatus(HttpServletResponse.SC_OK);
-                    return   "redirect:/livros/" + id + "/detalhes";
+                    return   "redirect:/livros/" + id ;
                 }
                 else {
                      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    return   "redirect:/livros";
+                    return   "redirect:/livros/";
                 }
             }
         }

@@ -39,6 +39,8 @@ BookBee/target/classes/com/teamg/BookBee/configuracoes/SecurityFilter.class
 BookBee/target/classes/com/teamg/BookBee/configuracoes/SecurityConfiguration.class
 BookBee/target/classes/com/teamg/BookBee/BookBeeApplication.class
 BookBee/target/classes/application.properties.example
+BookBee/target/classes/com/teamg/BookBee/model/Anotacao.class
+BookBee/target/classes/com/teamg/BookBee/model/Livro.class
 
 
 

@@ -5,9 +5,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamg.BookBee.configuracoes.TokenService;
 import com.teamg.BookBee.gerenciadores.AnotacaoGerenciador;
+import com.teamg.BookBee.model.Anotacao;
 import com.teamg.BookBee.service.CookieService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,6 +51,19 @@ public class AnotacoesController {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        return "redirect:/error/403";
+    }
+
+    @PostMapping("/criarNotas")
+    public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestBody Anotacao anotacaotxt, @RequestParam Long idLivros, @RequestParam Long idLeitor, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                anotacaoGerenciador.criarNota(anotacaotxt, idLivros, subject);
+                return "redirect:/livros/" + idLivros;
+            }
+        }
         return "redirect:/error/403";
     }
 }
