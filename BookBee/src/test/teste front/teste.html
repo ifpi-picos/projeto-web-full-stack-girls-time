@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="teste.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas de Livros</title>
+    <link rel="stylesheet" href="teste.css">
 </head>
 <body>
 
-  <div class="conteudoLivros">
-    <div class="imagem-container">
-        <img src="${capaImagem}" alt="capa do livro">
+<!-- ... (resto do código HTML) -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModalButton">&times;</span>
+        <h2>Criar Nova Lista</h2>
+        <input type="text" id="newListName" placeholder="Nome da Lista">
+        <input type="text" id="newListName" placeholder="Nome dos Livros">
+        <button id="createListButton">Criar Lista</button>
+        <h3>Listas Existentes</h3>
+        <ul id="existingLists"></ul>
     </div>
-    <li> ${item.volumeInfo.title}; Pag: ${item.volumeInfo.pageCount} - ${item.volumeInfo.authors}
-        <button onclick="adicionaLivro('${item.id}')">Adicionar</button>
-    </li>
 </div>
+<h3>Suas Listas de Livros</h3>
+<ul id="userLists"></ul>
+<!-- ... (resto do código HTML) -->
+
+    <button id="openModalButton">Criar Nova Lista</button>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalButton">&times;</span>
+            <h2>Criar Nova Lista</h2>
+            <input type="text" id="newListName" placeholder="Nome da Lista">
+            <button id="createListButton">Criar Lista</button>
+        </div>
+    </div>
+
     
+    <script src="teste.js"></script>
 </body>
 </html>

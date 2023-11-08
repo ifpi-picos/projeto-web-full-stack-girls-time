@@ -24,7 +24,7 @@
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Home.png" alt="home">
                     <a href="/BookBee/src/main/resources/templates/main.html"></a>
-                    <span>Home</span>
+                    <span><a href="/BookBee/src/main/resources/templates/main.html">Home</a></span>
                 </span>
             </button>
     
@@ -32,23 +32,21 @@
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Goal.png" alt="meta">
                     <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
-                    <span>Metas</span>
+                    <span><a href="#">Metas</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Favorites.png" alt="Favoritos">
-                    <a href=""></a>
-                    <span>Favoritos</span>
+                    <span><a href="#">Favoritos</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/BookBee/src/main/resources/static/img/Quote.png" alt="Citações">
-                    <a href=""></a>
-                    <span>Anotações</span>
+                    <span><a href="#">Anotações</a></span>
                 </span>
             </button>
     
@@ -56,7 +54,7 @@
                 <span>
                 <a href="/BookBee/src/main/resources/templates/home.html"></a>
                     <img src="/BookBee/src/main/resources/static/img/Exit.png" alt="Sair">
-                    <span>Sair</span>
+                    <span><a href="/BookBee/src/main/resources/templates/home.html">Sair</a></span>
                 </span>
             </button>
             
@@ -75,11 +73,10 @@
         </div>
 
         <div class="barradepes">
-            <input type="text" class="search-txt" placeholder="Encontre o livro que você gosta...">
-            <a href="#">
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
                 <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
-                 
-            </a>
+            </button>
         </div>
 
         <div class="container-lidos-recentes">
@@ -90,10 +87,21 @@
     
         <div class="container-detalhes">
             <div class="conteudo-detalhes">
-                <div class="capa">
-                    <img id="imgCapa" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                    <img id="imgCapaLivro" th:src="${livro.linkImagens}" alt="">
+                <div class="tituloAutorResumo">
+                    <h2 id="tituloLivro" th:text="${livro.titulo}"></h2>
+                    <h4 id="autorLivro" th:text="${livro.autor}"></h4>
+                    <div id="descricaoLivro"class="descricaoLivroP"></div>
+                    <div class="exibirClassificacao">
+                        <ul onmouseenter="adicionarClassificacaoEstrela()">
+                            <li><i class="bi bi-star"></i></li>
+                            <li><i class="bi bi-star"></i></li>
+                            <li><i class="bi bi-star"></i></li>
+                            <li><i class="bi bi-star"></i></li>
+                            <li><i class="bi bi-star"></i></li>
+                        </ul>
+                    </div>
                 </div>
-
             </div>
         </div>
 
@@ -104,21 +112,97 @@
                     <h5>Data de Início</h5>
                     <input type="date" name="dataDeIni" th:value="${livro.dataDeIni}">
                 </div>
-                <button type="submit" class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
+                <button type="submit" class="check-ini"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
            </form>
 
            <form th:action="@{/livros/{id}/atualizar-data-fim(id=${livro.idLivro})}" method="post">
-            <input type="hidden" name="_method" value="PUT" />
-            <div class="fim">
-                <h5>Data de Início</h5>
-                <input type="date" name="dataDeFim" th:value="${livro.dataDeFim}">
-            </div>
-            <button type="submit" class="check"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
-       </form>
-            </div>
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="fim">
+                    <h5>Data de Fim</h5>
+                    <input type="date" name="dataDeFim" th:value="${livro.dataDeFim}">
+                </div>
+                <button type="submit" class="check-fim"><img src="/BookBee/src/main/resources/static/img/check.png" alt=""></button>
+            </form>
+        </div>
 
-
+        
+        <div id="modal" class="modal">
+            <button class="notasP">Notas Pessoais
+                <a id="btn1" href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc">   </a>
+            </button>
             
+            <button class="resenha"> Resenha e Classificação
+                <a id="btn2" href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
+            </button>
+
+            <!-- <div class="modal-lista">
+                <h3>Suas Listas de Livros</h3>
+                <ul id="userLists"></ul>
+                    <button id="openModalButton">Criar Nova Lista</button>
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" id="closeModalButton">&times;</span>
+                            <h2>Criar Nova Lista</h2>
+                            <input type="text" id="newListName" placeholder="Nome da Lista">
+                            <button id="createListButton">Criar Lista</button>
+                        </div>
+                    </div> -->
+        </div>
+            
+            
+            <!-- Modal  1 -->
+                  <div id="myModal1" class="modalNotas">
+                      <div class="modal-content-notas">
+                      <span class="close-notas">&times;</span>
+                      <div class="modal-body-notas">
+                          <div class="modal-capa-notas">
+                              <img id="img-capa-modal-notas">
+                            </div>
+                            <div class="modal-notas">
+                                <h3 id="titulo-modal-notas"></h3>
+                                <div>
+                                    <textarea placeholder="Adicionar Notas" id="reviewTextArea" rows="4" cols="50"></textarea>
+                                </div>
+                                <div class="textNotasSalvas" id="textNotasSalvas"></div>
+                            </div>
+                        </div>
+                        <button id="salarModalNotas">Salvar</button>
+                    </div>
+                </div>
+                
+                <!-- Modal 2 -->
+          <div id="myModal2" class="modal-res">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="modal-body">
+                <div class="modal-capa">
+                  <img id="img-capa-modal">
+                  <div class="modal-exibirClassificacao">
+                    <ul onmouseenter="adicionarClassificacaoEstrela()">
+                      <li><i class="bi bi-star"></i></li>
+                      <li><i class="bi bi-star"></i></li>
+                      <li><i class="bi bi-star"></i></li>
+                      <li><i class="bi bi-star"></i></li>
+                      <li><i class="bi bi-star"></i></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="modal-resenha">
+                  <h3 id="titulo-modal"></h3>
+                  <textarea  placeholder="Escreva uma resenha sobre o livro..." name="" id="" cols="30" rows="10"></textarea>
+                </div>
+              </div>
+              <button>Salvar</button>
+            </div>
+          </div>
+                <div id="modalDescricaoLivro" class="modalDetalhes">
+                    <div class="modalContentDetalhes">
+                        <span class="closeDetalhe">&times;</span>
+                        <div id="descricaoLivroM"></div>
+                    </div>
+                </div>
+
+
             <div class="detalhePosicao">
             <ul>
                 <li>
@@ -126,11 +210,11 @@
                     <p>Posição</p>
                 </li>
                 <li>
-                    <p id="numPagina"><span id="numPaginaValue" contenteditable="true" >-</span></p>
+                    <p id="numPagina"><span id="numPaginaValue">-</span></p>
                     <p>Páginas</p>
                 </li>
                 <li>
-                    <p><span id="velocidade" contenteditable="true">-</span></p>
+                    <p><span id="velocidade">-</span></p>
                     <p>Velocidade</p>
                 </li>
             </ul>
@@ -141,4 +225,7 @@
         </div>
         
         <script src="/BookBee/src/main/resources/static/js/datas.js"></script>
+        <script src="/BookBee/src/main/resources/static/js/busca.js"></script>
+        <script src="/BookBee/src/main/resources/static/js/detalhesdolivro.js"></script>
+        <script src="/BookBee/src/main/resources/static/js/modal.js"></script>
     </main>

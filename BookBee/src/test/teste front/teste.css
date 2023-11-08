@@ -1,25 +1,25 @@
-.conteudoLivros {
-    width: 400px;
-    height: 170px;
-    background-color: #878C69;
-    border-radius: 5px;
-    color: #3E4320;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden; /* Para esconder a parte da imagem fora da div */
-}
-
-.imagem-container {
-    width: 220px; /* Largura desejada para o contêiner da imagem */
-    height: 220px; /* Altura desejada para o contêiner da imagem */
-    position: absolute;
+/* Estilos para o modal */
+.modal {
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-.imagem-container img {
-    width: 100%; /* Para garantir que a imagem preencha o contêiner */
-    height: 100%; /* Para garantir que a imagem preencha o contêiner */
+.modal-content {
+    background-color: #fff;
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
     border-radius: 5px;
 }
+
+.close {
+    float: right;
+    cursor: pointer;
+}
+
+/* Outros estilos conforme necessário */

@@ -80,25 +80,25 @@ document.addEventListener("DOMContentLoaded", function() {
         // Você pode adicionar validações e processamento aqui se necessário.
     });
 
-    numPaginaValue.addEventListener("click", function() {
-        removePlaceholderContent(numPaginaValue);
-    });
+//     numPaginaValue.addEventListener("click", function() {
+//         removePlaceholderContent(numPaginaValue);
+//     });
 
-    numPaginaValue.addEventListener("blur", function() {
-        restorePlaceholderContent(numPaginaValue);
-        // Salvar o valor quando o usuário clica fora do elemento editável
-        // Você pode adicionar validações e processamento aqui se necessário.
-    });
+//     numPaginaValue.addEventListener("blur", function() {
+//         restorePlaceholderContent(numPaginaValue);
+//         // Salvar o valor quando o usuário clica fora do elemento editável
+//         // Você pode adicionar validações e processamento aqui se necessário.
+//     });
 
-    velocidade.addEventListener("click", function() {
-        removePlaceholderContent(velocidade);
-    });
+//     velocidade.addEventListener("click", function() {
+//         removePlaceholderContent(velocidade);
+//     });
 
-    velocidade.addEventListener("blur", function() {
-        restorePlaceholderContent(velocidade);
-        // Salvar o valor quando o usuário clica fora do elemento editável
-        // Você pode adicionar validações e processamento aqui se necessário.
-    });
+//     velocidade.addEventListener("blur", function() {
+//         restorePlaceholderContent(velocidade);
+//         // Salvar o valor quando o usuário clica fora do elemento editável
+//         // Você pode adicionar validações e processamento aqui se necessário.
+//     });
 });
 
 

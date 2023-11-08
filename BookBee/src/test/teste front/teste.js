@@ -1,53 +1,65 @@
-function alterarData(tipo) {
-    var elementoData = (tipo === 'inicio') ? document.getElementById("dataInicio") : document.getElementById("dataFim");
-    var botao = (tipo === 'inicio') ? document.getElementById("inicioButton") : document.getElementById("fimButton");
-    
-    // Criar um campo de entrada para a data
-    var input = document.createElement("input");
-    input.type = "text";
-    input.value = elementoData.textContent;
+    // Array para armazenar as listas de livros
+    const lists = [];
 
-    // Substituir o texto pelo campo de entrada
-    botao.innerHTML = '';
-    botao.appendChild(input);
+    // Botão para abrir o modal
+    const openModalButton = document.getElementById("openModalButton");
 
-    // Definir o foco no campo de entrada
-    input.focus();
+    // Modal e elementos relacionados
+    const modal = document.getElementById("modal");
+    const closeModalButton = document.getElementById("closeModalButton");
+    const createListButton = document.getElementById("createListButton");
+    const newListName = document.getElementById("newListName");
+    const existingLists = document.getElementById("existingLists");
 
-    // Definir um evento para capturar a nova data
-    input.addEventListener("blur", function () {
-        if (isValidDate(input.value)) {
-            elementoData.textContent = input.value;
-            botao.innerHTML = tipo === 'inicio' ? `<span id="dataInicio">${input.value}</span>` : `<span id="dataFim">${input.value}</span>`;
-        } else {
-            alert("Por favor, digite uma data válida no formato dd/mm/yyyy.");
-            botao.innerHTML = tipo === 'inicio' ? `<span id="dataInicio">${elementoData.textContent}</span>` : `<span id="dataFim">${elementoData.textContent}</span>`;
-        }
-    });
-
-    // Adicionar um evento para a tecla Enter
-    input.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            if (isValidDate(input.value)) {
-                elementoData.textContent = input.value;
-                botao.innerHTML = tipo === 'inicio' ? `Data de Início: <span id="dataInicio">${input.value}</span>` : `Data de Fim: <span id="dataFim">${input.value}</span>`;
-            } else {
-                alert("Por favor, digite uma data válida no formato dd/mm/yyyy.");
-                botao.innerHTML = tipo === 'inicio' ? `Data de Início: <span id="dataInicio">${elementoData.textContent}</span>` : `Data de Fim: <span id="dataFim">${elementoData.textContent}</span>`;
-            }
-        }
-    });
-
-    // Função para validar a data
-    function isValidDate(dateString) {
-        var regex = /^\d{2}\/\d{2}\/\d{4}$/;
-        if (!regex.test(dateString)) return false;
-        var parts = dateString.split("/");
-        var day = parseInt(parts[0], 10);
-        var month = parseInt(parts[1], 10);
-        var year = parseInt(parts[2], 10);
-        if (year < 1000 || year > 3000 || month == 0 || month > 12) return false;
-        var daysInMonth = new Date(year, month, 0).getDate();
-        return day <= daysInMonth;
+    // Função para exibir as listas existentes na modal
+    function displayLists() {
+        existingLists.innerHTML = "";
+        lists.forEach((list, index) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = list;
+            listItem.addEventListener("click", () => {
+                // Simule a rota da lista selecionada
+                window.location.href = `/lista/${index}`;
+            });
+            existingLists.appendChild(listItem);
+        });
     }
-}
+
+    // Função para exibir o botão de criação de lista apenas quando o modal é acionado
+    function toggleModalButtonVisibility() {
+        openModalButton.style.display = modal.style.display === "block" ? "none" : "block";
+    }
+
+    // Ao clicar no botão "Criar Nova Lista", o modal é exibido
+    openModalButton.addEventListener("click", () => {
+        modal.style.display = "block";
+        toggleModalButtonVisibility();
+        displayLists();
+    });
+
+    // Ao clicar no botão "Fechar", o modal é fechado
+    closeModalButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        toggleModalButtonVisibility();
+    });
+
+    // Ao clicar no botão "Criar Lista", a nova lista é criada e o modal é fechado
+    createListButton.addEventListener("click", () => {
+        const listName = newListName.value;
+        if (listName) {
+            // Adicionar a nova lista ao array
+            lists.push(listName);
+            // Limpar o campo de entrada
+            newListName.value = "";
+            // Atualizar a exibição das listas na modal
+            displayLists();
+        }
+    });
+
+    // Fechar o modal se o usuário clicar fora dele
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            toggleModalButtonVisibility();
+        }
+    });
