@@ -1177,7 +1177,7 @@ body {
 }
 
 .container-detalhes{
-    width: 570px;
+    width: 580px;
     height: 345px;
     margin-top: 50px;
     margin-left: 515px;
@@ -1194,9 +1194,45 @@ body {
     border-radius: 5px;
 }
 
+.tituloAutorResumo {
+    width: 271px;
+    height: 29px;
+    flex-shrink: 0;
+    color: #301212;
+    margin-left: 250px;
+    margin-top: -65%;
+}
+
+
+.tituloAutorResumo h2{
+    color: #301212;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 30px;
+}
+
+.tituloAutorResumo h4{
+    margin-top: -20px;
+    color: #301212;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 16px;
+}
+
+.descricaoLivroP{
+    width: 310px;
+    height: 188px;
+    flex-shrink: 0;
+    color: #301212;
+    text-align: justify;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .exibirClassificacao ul {
-    margin-top: -100px;
-    margin-left: 260px;
     color: #301212;
 }
 
@@ -1410,10 +1446,6 @@ body {
     margin-bottom: 20px;
 }
 
-.adc-livro{
-    margin-top: 50px;
-    margin-left: 350px;
-}
 
 .adc-livro button{
     width: 199px;
@@ -1424,9 +1456,47 @@ body {
     border-radius: 5px;
     background: none;
     cursor: pointer;
+    margin-top: 17px;
+    margin-left: 20px;
+}
+
+
+
+.favoritos{
+    margin-top: 50px;
+    position: relative;
+}
+
+.resultfavoritos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 20%;
+    cursor: pointer;
+}
+
+.livrosFavoritosTodos{
+    width: 199px;
+    height: 300px;
+    margin: 20px 10px;
+}
+
+.livrosFavoritosTodos img{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.container-caixas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas com largura igual */
+    gap: 10px; /* Espaçamento entre as caixas */
+    margin-left: auto; /* Isso alinha o contêiner à direita da página */
+  max-width: 85%;
 }
 
 .caixa-notas-adc{
+    
     width: 360px;
     height: 150px;
     flex-shrink: 0;
@@ -1564,7 +1634,7 @@ body {
     background-color:#A7886C;
 }
 
-.close {
+.close-res {
     color: #A7886C;
     position: absolute;
     background-color: #301212;
@@ -1576,8 +1646,8 @@ body {
     border-radius: 4px;
 }
 
-.close:hover,
-.close:focus {
+.close-res:hover,
+.close-res:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -1811,3 +1881,267 @@ body {
 .modalDetalhes {
     display: none;
 }
+
+/* modal list */
+
+.list{
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center;
+    width: 316px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: transparent;
+    font-size: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    box-shadow: 5px 6px 10px 0px rgba(0, 0, 0, 0.25);
+    margin-top: 50px;
+    margin-left: 45%;
+
+}
+
+.lista img{
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    margin-left: 120px;
+}
+
+.modal-list {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 120%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+.modal-content-list {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    background-color:  #A7886C;
+    margin-left: 23%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    justify-items: center;
+}
+
+
+.close {
+    color: #A7886C;
+    position: absolute;
+    background-color: #301212;
+    top: -6px;
+    right: -3px;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-content-list h2{
+    width: 80%; /* Define a largura para preencher a largura do contêiner pai */
+    height: 40px;
+    border-radius: 3px;
+    background-color: #FFFBEB;
+    color: #301212;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    justify-content: center;
+    padding-top: 10px; 
+}
+
+.modal-content-list input{
+    width: 541px;
+    height: 45.539px;
+    flex-shrink: 0;
+    border-radius: 3px;
+    background: #FFFBEB;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+}
+
+.modal-content-list input::placeholder{
+    width: 417.229px;
+    height: 34.609px;
+    flex-shrink: 0;
+    color: #301212;
+    font-size: 14px;
+    line-height: normal;
+}
+
+.modal-content-list button{
+    width: 155px;
+    height: 42.273px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    background: #FFFBEB;
+    margin-top: 20px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.modal-content-list h3 {
+    width: 80%; /* Define a largura para preencher a largura do contêiner pai */
+    height: 40px;
+    border-radius: 3px;
+    background-color: #FFFBEB;
+    color: #301212;
+
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    padding-top: 10px; 
+}
+
+.container {
+    text-align: center;
+  }
+  
+.perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 30%;
+}
+
+.perfil-img {
+    width: 90%;
+    height: 90%;
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+}
+
+.perfil-img img{
+    width: 300px;
+
+}
+
+h3 {
+    width: 229px;
+    color: #412E27;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 10px; /* Ajuste o espaçamento conforme necessário */
+}
+
+.container-caixotes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.concluidos,
+.pag-lidas,
+.met-lei{
+    width: 200px;
+    height: 95px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    padding: 10px; /* Adiciona algum espaçamento interno dentro de cada caixote */
+    margin: 60px;
+}
+
+/* .pag-lidas{
+    width: 200px;
+    height: 111px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    padding: 10px; 
+    margin: 5px;
+}
+
+.met-lei{
+    width: 200px;
+    height: 111px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    padding: 10px; 
+    margin: 5px;
+} */
+
+.container-caixotes h5{
+    width: 193px;
+    height: 0px;
+    color: #412E27;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 17px;
+}
+
+.container-caixotes p{
+    width: 193px;
+    color: #412E27;
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.container-botoes-lista{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas com largura igual */
+    gap: 10px; /* Espaçamento entre as caixas */
+    margin-left: auto; /* Isso alinha o contêiner à direita da página */
+    max-width: 67%;
+  
+}
+
+.botao-lista{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    margin-top: 10px;
+}
+
+
+.botao-lista p{
+    margin-top: 15px;
+    font-size: 22px;
+}
+

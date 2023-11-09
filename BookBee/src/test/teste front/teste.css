@@ -1,25 +1,23 @@
-/* Estilos para o modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+.favoritos{
+    margin-top: 50px;
+    position: relative;
 }
 
-.modal-content {
-    background-color: #fff;
-    width: 300px;
-    margin: 100px auto;
+.resultfavoritos{
+    display: flex;
+    flex-wrap: wrap;
     padding: 20px;
-    border-radius: 5px;
-}
-
-.close {
-    float: right;
+    margin-left: 20%;
     cursor: pointer;
 }
 
-/* Outros estilos conforme necessário */
+.livrosFavoritosTodos{
+    width: 199px;
+    height: 300px;
+    margin: 20px 10px;
+}
+
+.livrosFavoritosTodos img{
+    width: 100%;
+    margin-left: 10px;
+}

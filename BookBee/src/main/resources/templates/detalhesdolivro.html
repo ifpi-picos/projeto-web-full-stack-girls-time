@@ -135,18 +135,32 @@
                 <a id="btn2" href="#"><img src="/BookBee/src/main/resources/static/img/more.png" alt="adc"></a>
             </button>
 
-            <!-- <div class="modal-lista">
-                <h3>Suas Listas de Livros</h3>
-                <ul id="userLists"></ul>
-                    <button id="openModalButton">Criar Nova Lista</button>
-                    <div id="modal" class="modal">
-                        <div class="modal-content">
-                            <span class="close" id="closeModalButton">&times;</span>
-                            <h2>Criar Nova Lista</h2>
-                            <input type="text" id="newListName" placeholder="Nome da Lista">
-                            <button id="createListButton">Criar Lista</button>
-                        </div>
-                    </div> -->
+        </div>
+        
+        <div class="lista">
+            <div id="modal-list" class="modal-list">
+                <div class="modal-content-list">
+                    <span class="close" id="closeModalButton">&times;</span>
+                    <h2>Criar Nova Lista</h2>
+                    <input type="text" id="newListName" placeholder="Nome da Lista">
+                    <button id="createListButton">Criar Lista</button>
+                    <h3>Listas Existentes</h3>
+                    <ul id="existingLists"></ul>
+                </div>
+            </div>
+            <ul id="userLists"></ul>
+                <button class="list" id="openModalButton">Criar Nova Lista
+                    <img src="/BookBee/src/main/resources/static/img/more.png" alt="adc">   
+                </button>
+                <div id="modal" class="modal-list">
+                    <div class="modal-content-list">
+                        <span class="close" id="closeModalButton">&times;</span>
+                        <h2>Criar Nova Lista</h2>
+                        <input type="text" id="newListName" placeholder="Nome da Lista">
+                        <button id="createListButton">Criar Lista
+                        </button>
+                    </div>
+                </div>  
         </div>
             
             
@@ -173,7 +187,7 @@
                 <!-- Modal 2 -->
           <div id="myModal2" class="modal-res">
             <div class="modal-content">
-              <span class="close">&times;</span>
+                <span class="close-res">&times;</span> 
               <div class="modal-body">
                 <div class="modal-capa">
                   <img id="img-capa-modal">
@@ -228,4 +242,5 @@
         <script src="/BookBee/src/main/resources/static/js/busca.js"></script>
         <script src="/BookBee/src/main/resources/static/js/detalhesdolivro.js"></script>
         <script src="/BookBee/src/main/resources/static/js/modal.js"></script>
+        <script src="/BookBee/src/main/resources/static/js/modalLista.js"></script>
     </main>

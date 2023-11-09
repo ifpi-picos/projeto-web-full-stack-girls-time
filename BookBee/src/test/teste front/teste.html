@@ -9,31 +9,28 @@
 <body>
 
 <!-- ... (resto do código HTML) -->
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModalButton">&times;</span>
-        <h2>Criar Nova Lista</h2>
-        <input type="text" id="newListName" placeholder="Nome da Lista">
-        <input type="text" id="newListName" placeholder="Nome dos Livros">
-        <button id="createListButton">Criar Lista</button>
-        <h3>Listas Existentes</h3>
-        <ul id="existingLists"></ul>
-    </div>
-</div>
-<h3>Suas Listas de Livros</h3>
-<ul id="userLists"></ul>
-<!-- ... (resto do código HTML) -->
-
-    <button id="openModalButton">Criar Nova Lista</button>
-    <div id="modal" class="modal">
-        <div class="modal-content">
+<div class="lista">
+    <div id="modal-list" class="modal-list">
+        <div class="modal-content-list">
             <span class="close" id="closeModalButton">&times;</span>
             <h2>Criar Nova Lista</h2>
             <input type="text" id="newListName" placeholder="Nome da Lista">
             <button id="createListButton">Criar Lista</button>
+            <h3>Listas Existentes</h3>
+            <ul id="existingLists"></ul>
         </div>
     </div>
-
+    <ul id="userLists"></ul>
+        <button id="openModalButton">Criar Nova Lista</button>
+        <div id="modal" class="modal-list">
+            <div class="modal-content-list">
+                <span class="close" id="closeModalButton">&times;</span>
+                <h2>Criar Nova Lista</h2>
+                <input type="text" id="newListName" placeholder="Nome da Lista">
+                <button id="createListButton">Criar Lista</button>
+            </div>
+        </div>
+</div>
     
     <script src="teste.js"></script>
 </body>

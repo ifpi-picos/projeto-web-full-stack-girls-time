@@ -5,7 +5,7 @@
     const openModalButton = document.getElementById("openModalButton");
 
     // Modal e elementos relacionados
-    const modal = document.getElementById("modal");
+    const modal = document.getElementById("modal-list");
     const closeModalButton = document.getElementById("closeModalButton");
     const createListButton = document.getElementById("createListButton");
     const newListName = document.getElementById("newListName");

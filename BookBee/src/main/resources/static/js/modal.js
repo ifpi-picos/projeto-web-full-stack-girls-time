@@ -7,7 +7,7 @@ var btn2 = document.getElementById("btn2");
 var btnSave1 = document.getElementById("btnSalvar1");
 var btnSave2 = document.getElementById("btnSalvar2");
 var span1 = document.getElementsByClassName("close-notas")[0];
-var span2 = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close-res")[0];
 let btnSalvaNota = document.getElementById("salarModalNotas");
 let arrayDeNotas = [];
 

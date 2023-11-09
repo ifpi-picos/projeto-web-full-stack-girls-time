@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <title>Inicial</title>
+    <title>Perfil</title>
 </head>
 <body>
     <div class="containerlogo">
@@ -67,17 +67,88 @@
     </aside>
 
     <main class="main">
-        <div class="usuario">
-            <a href="#"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
-            <p id="username">Nome do Usuário</p> 
-        </div>
 
         <div class="barradepes">
-            <input type="text" class="search-txt" placeholder="Encontre o livro que você gosta...">
-            <script src="/BookBee/src/main/resources/static/js/busca.js"></script>
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
                 <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
-                 
-            </a>
+            </button>
         </div>
+
+        <div class="container-perfil">
+            <div class="perfil">
+              <button class="perfil-img">
+                <a href="#"><img src="/BookBee/src/main/resources/static/img/perfil.png" alt=""></a>
+              </button>
+              <h3>Olá, Nome do Usuário!</h3>
+            </div>
+          </div>
+
+          <div class="container-caixotes">
+                <div class="concluidos">
+                        <h5>10</h5>
+                        <p>Concluídos</p>
+                </div>
+                <div class="pag-lidas">
+                    <h5>1047</h5>
+                    <p>Páginas Lidas</p>
+            </div>
+            <div class="met-lei">
+                <h5>0</h5>
+                <p>Metas de Leitura</p>
+            </div>
+          </div>
+
+          <div class="container-botoes-lista">
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Clarisse Lispector</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Harry Potter</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Hannibal Lecter</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Literatura Brasileira</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>O Povo do Ar</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Jogos Vorazes</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Percy Jackson</p>
+                </button>
+              </div>
+              <div class="botoes-lista">
+                <button class="botao-lista">
+                    <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                    <p>Ler mais tarde</p>
+                </button>
+              </div>
+              
+          </div>
     </main>
 </body>
