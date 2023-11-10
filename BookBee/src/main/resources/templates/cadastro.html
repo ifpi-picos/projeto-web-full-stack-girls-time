@@ -36,12 +36,10 @@
                     <ul>
                         <li>Já cadastrado? <a href="/login">Faça seu Login!</a></li> 
                     </ul>
+                    <p th:if="${erro != null}"
+                    th:text="${erro}"
+                    class="errp-login"></p>
                 </div>
-                
-                <p th:if="${erro != null}"
-                th:text="${erro}"
-                class="errp-login"></p>
-                
                 </div>
                 <div class="botaocadastro1">
                     <button type="submit"><a>Cadastrar</a></button>

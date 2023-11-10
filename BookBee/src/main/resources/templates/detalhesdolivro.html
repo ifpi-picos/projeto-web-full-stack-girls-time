@@ -68,7 +68,7 @@
 
     <main class="main">
         <div class="usuario">
-            <a href="#"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
+            <a href="/BookBee/src/main/resources/templates/usuario.html"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
             <p id="username">Nome do Usuário</p> 
         </div>
 
@@ -87,7 +87,7 @@
     
         <div class="container-detalhes">
             <div class="conteudo-detalhes">
-                    <img id="imgCapaLivro" th:src="${livro.linkImagens}" alt="">
+                    <img id="imgCapaLivro" th:src="${livro.linkImagem}" alt="">
                 <div class="tituloAutorResumo">
                     <h2 id="tituloLivro" th:text="${livro.titulo}"></h2>
                     <h4 id="autorLivro" th:text="${livro.autor}"></h4>
@@ -142,12 +142,25 @@
                 <div class="modal-content-list">
                     <span class="close" id="closeModalButton">&times;</span>
                     <h2>Criar Nova Lista</h2>
-                    <input type="text" id="newListName" placeholder="Nome da Lista">
-                    <button id="createListButton">Criar Lista</button>
+                    <form action="/listas/criarlista" method="post">
+                        <input type="hidden"  name="idLivros" th:value="${livros.idLivro}">
+                        <input type="hidden"  name="leitorId" th:value="${livro.leitor.id}">
+                        <input type="text" id="newListName" name="nomeLista" placeholder="Nome da Lista">
+                        <button type="submit" id="createListButton">Criar Lista</button>
+                    </form>
                     <h3>Listas Existentes</h3>
-                    <ul id="existingLists"></ul>
+                    
+                    <div class="lista-existente">
+                        <div class="botoes-lista">
+                            <button class="botao-lista">
+                                <a href="#"><img src="/BookBee/src/main/resources/static/img/botão-lista-verde.png" alt=""></a>
+                                <p>Clarisse Lispector</p>
+                            </button>
+                          </div>
+                    </div>
                 </div>
             </div>
+            
             <ul id="userLists"></ul>
                 <button class="list" id="openModalButton">Criar Nova Lista
                     <img src="/BookBee/src/main/resources/static/img/more.png" alt="adc">   
@@ -157,7 +170,7 @@
                         <span class="close" id="closeModalButton">&times;</span>
                         <h2>Criar Nova Lista</h2>
                         <input type="text" id="newListName" placeholder="Nome da Lista">
-                        <button id="createListButton">Criar Lista
+                        <button type="submit" id="createListButton">Criar Lista
                         </button>
                     </div>
                 </div>  
@@ -173,14 +186,24 @@
                               <img id="img-capa-modal-notas">
                             </div>
                             <div class="modal-notas">
-                                <h3 id="titulo-modal-notas"></h3>
-                                <div>
-                                    <textarea placeholder="Adicionar Notas" id="reviewTextArea" rows="4" cols="50"></textarea>
+                                <h3 id="titulo-modal-notas" th:text="${livro.titulo}"></h3>
+                                <form action="/notas/criarNotas" method="post">
+                                    <input type="hidden"  name="idLivros" th:value="${livros.idLivro}">
+                                    <input type="hidden"  name="leitorId" th:value="${livro.leitor.id}">
+                                    <div>
+                                        <textarea name="anotacaotxt" placeholder="Adicionar Notas" id="reviewTextArea" rows="4" cols="50"></textarea>
+                                    </div>
+                                    <div class="textNotasSalvas" id="textNotasSalvas">
+                                        <p class="nota" th:each="anotacao, iterStar:${anotacoes}"
+                                        th:if="${interStar.index < 3}" >
+                                        <span class="textnota" th:text="${anotacao.anotacao}"></span>
+                                        
+                                    </p>
                                 </div>
-                                <div class="textNotasSalvas" id="textNotasSalvas"></div>
                             </div>
                         </div>
-                        <button id="salarModalNotas">Salvar</button>
+                        <button id="salarModalNotas" type="submit">Salvar</button>
+                    </form>
                     </div>
                 </div>
                 
@@ -188,11 +211,13 @@
           <div id="myModal2" class="modal-res">
             <div class="modal-content">
                 <span class="close-res">&times;</span> 
-              <div class="modal-body">
-                <div class="modal-capa">
+              <form action="/resenha/criarResenha" method="post">
+
+                  <div class="modal-body">
+                      <div class="modal-capa">
                   <img id="img-capa-modal">
                   <div class="modal-exibirClassificacao">
-                    <ul onmouseenter="adicionarClassificacaoEstrela()">
+                      <ul onmouseenter="adicionarClassificacaoEstrela()">
                       <li><i class="bi bi-star"></i></li>
                       <li><i class="bi bi-star"></i></li>
                       <li><i class="bi bi-star"></i></li>
@@ -202,11 +227,14 @@
                   </div>
                 </div>
                 <div class="modal-resenha">
-                  <h3 id="titulo-modal"></h3>
-                  <textarea  placeholder="Escreva uma resenha sobre o livro..." name="" id="" cols="30" rows="10"></textarea>
+                  <h3 id="titulo-modal"  th:text="${livro.titulo}"></h3>
+                  <input type="hidden"  name="idLivros" th:value="${livros.idLivro}">
+                  <input type="hidden"  name="leitorId" th:value="${livro.leitor.id}">
+                  <textarea  placeholder="Escreva uma resenha sobre o livro..." name="resenhatxt" id="" cols="30" rows="10" th:text="${resenha.isPresent() ? resenha.get().textoResenha : ''}"></textarea>
                 </div>
-              </div>
-              <button>Salvar</button>
+            </div>
+            <button type="submit"> Salvar</button>
+        </form>
             </div>
           </div>
                 <div id="modalDescricaoLivro" class="modalDetalhes">
@@ -243,4 +271,5 @@
         <script src="/BookBee/src/main/resources/static/js/detalhesdolivro.js"></script>
         <script src="/BookBee/src/main/resources/static/js/modal.js"></script>
         <script src="/BookBee/src/main/resources/static/js/modalLista.js"></script>
+
     </main>

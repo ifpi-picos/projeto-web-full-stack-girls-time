@@ -289,6 +289,11 @@ body {
 }
 
 .cadastre {
+    width: 415px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: rgba(65, 46, 39, 0.80);
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.25);
     font-size: 13px;
@@ -310,6 +315,11 @@ body {
     line-height: normal;
 }
 
+.cadastre p{
+    color: #ff4400;
+    font-size: 17px;
+    margin-top: 10px;
+}
 
 .botaologin1{
     float: right;
@@ -507,13 +517,17 @@ body {
 }
 
 .logar {
+    width: 415px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: rgba(65, 46, 39, 0.80);
     text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.25);
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding-left: 130px;
 }
 
 .logar ul {
@@ -527,6 +541,13 @@ body {
     font-weight: 400;
     line-height: normal;
 }
+
+.logar p{
+    color: #ff4400;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
 
 .botaocadastro1{
     padding-left: 915px;
@@ -624,7 +645,7 @@ body {
     height: 800px;
     transform: rotate(-22deg);
     flex-shrink: 0;
-    background: #5D2410;
+    background: #412E27;
     box-shadow: 9px -9px 0px 0px #000 inset;
     float: right;
     margin-right: 61%;
@@ -1233,6 +1254,7 @@ body {
 }
 
 .exibirClassificacao ul {
+    padding: 0;
     color: #301212;
 }
 
@@ -1682,7 +1704,9 @@ body {
 }
 
 
+
 .modal-resenha h3 {
+    width: 589px;
     background-color: #FFFBEB;
     padding: 0.9rem;
     border-radius: 5px;
@@ -1709,8 +1733,9 @@ body {
 
 .modal-exibirClassificacao{
     color: #301212;
-    width: 110px;
+    width: 140px;
     height: 50px;
+    margin-top: -20px
 }
 
 .modal-exibirClassificacao ul{
@@ -1728,8 +1753,8 @@ body {
     position: absolute;
     width: 150px;
     height: 45px;
-    left: 65px;
-    top: 325px;
+    left: 75px;
+    top: 370px;
     font-size: 19px;
     background-color: transparent ;
     border: 1px solid rgba(0, 0, 0, 0.50);  
@@ -1773,6 +1798,7 @@ body {
 
 /* The Close Button */
 .close-notas {
+    
     color: #A7886C;
     position: absolute;
     background-color: #301212;
@@ -1838,11 +1864,17 @@ body {
 
 .textoNota{
     color: var(--third-color);
+    max-width: 100%; 
+    display: inline-block;
+    word-wrap: break-word;
 }
 
+
 .modal-notas h3 {
+    width: 640px;
     background-color: #FFFBEB;
     padding: 0.9rem;
+
     border-radius: 3px;
     font-size: 24px;
     color: #301212;
@@ -1868,7 +1900,7 @@ body {
     position: absolute;
     width: 150px;
     height: 45px;
-    left: 25px;
+    left: 41px;
     top: 335px;
     font-size: 19px;
     background-color: transparent ;
@@ -1898,7 +1930,7 @@ body {
     box-shadow: 5px 6px 10px 0px rgba(0, 0, 0, 0.25);
     margin-top: 50px;
     margin-left: 45%;
-
+    cursor: pointer;
 }
 
 .lista img{
