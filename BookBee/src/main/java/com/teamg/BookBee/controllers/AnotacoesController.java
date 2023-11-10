@@ -3,11 +3,12 @@ package com.teamg.BookBee.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamg.BookBee.configuracoes.TokenService;
@@ -21,6 +22,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Controller
+@RequestMapping("/notas")
 public class AnotacoesController {
 
     @Autowired
@@ -55,11 +58,12 @@ public class AnotacoesController {
     }
 
     @PostMapping("/criarNotas")
-    public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestBody Anotacao anotacaotxt, @RequestParam Long idLivros, @RequestParam Long idLeitor, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestParam String anotacaotxt, @RequestParam Long idLivros, @RequestParam Long leitorId, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
+                System.out.println("antes de criar a nota:" + anotacaotxt);
                 anotacaoGerenciador.criarNota(anotacaotxt, idLivros, subject);
                 return "redirect:/livros/" + idLivros;
             }

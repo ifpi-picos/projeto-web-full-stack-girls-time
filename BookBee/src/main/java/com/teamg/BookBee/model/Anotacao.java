@@ -29,18 +29,12 @@ public class Anotacao {
     @Column(name = "anotacao")
     private String anotacao;
 
-    @Column(name = "capitulo")
-    private String capitulo;
+    public Anotacao() {}
 
-    @Column(name = "pagina")
-    private int pagina;
-
-    public Anotacao(Leitor leitor, Livro livro, String anotacao, String capitulo, int pagina) {
+    public Anotacao(Leitor leitor, Livro livro, String anotacao) {
         this.leitor = leitor;
         this.livro = livro;
         this.anotacao = anotacao;
-        this.capitulo = capitulo;
-        this.pagina = pagina;
     }
 
     public Long getIdAnotacao() {
@@ -57,14 +51,6 @@ public class Anotacao {
 
     public String getAnotacao() {
         return anotacao;
-    }
-
-    public String getCapitulo() {
-        return capitulo;
-    }
-
-    public int getPagina() {
-        return pagina;
     }
 
 }
