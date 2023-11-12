@@ -2012,6 +2012,7 @@ body {
     text-align: center; /* Centraliza o texto horizontalmente */
     justify-content: center;
     padding-top: 10px; 
+    margin-bottom: -10px;
 }
 
 .modal-content-list input{
@@ -2034,7 +2035,7 @@ body {
     line-height: normal;
 }
 
-.modal-content-list button{
+.bnt-criaLista{
     width: 155px;
     height: 42.273px;
     border-radius: 5px;
@@ -2153,13 +2154,21 @@ h3 {
     font-weight: 400;
 }
 
-.container-botoes-lista{
+.container-botoes-lista {
+    display: flex;
+    flex-direction: column; /* Empilhar os elementos verticalmente */
+    align-items: center; /* Centralizar os elementos horizontalmente */
+    justify-content: center; /* Centralizar os elementos verticalmente */
+    height: 100vh; /* 100% da altura da viewport (tela) */
+}
+
+.lista-existente {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Duas colunas com largura igual */
-    gap: 10px; /* Espaçamento entre as caixas */
-    margin-left: auto; /* Isso alinha o contêiner à direita da página */
-    max-width: 67%;
-  
+    grid-template-columns: repeat(2, 1fr);
+
+    /* gap: 10px;
+    max-width: 67%; */
 }
 
 .botao-lista{
@@ -2173,6 +2182,7 @@ h3 {
 
 
 .botao-lista p{
+    color: 301212;
     margin-top: 15px;
     font-size: 22px;
 }
