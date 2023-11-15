@@ -44,18 +44,23 @@ public class SecurityConfiguration {
         new AntPathRequestMatcher("/swagger-ui/**"),
         new AntPathRequestMatcher("/swagger-ui.html")
     );
+    List<RequestMatcher> matchersControles = Arrays.asList(
+        new MvcRequestMatcher(null, "/notas/**"),
+        new MvcRequestMatcher(null, "/resenha/**"),
+        new MvcRequestMatcher(null, "/listas/**"),
+        new MvcRequestMatcher(null, "/livros/**")
+  
+    );
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        RequestMatcher mvcMATcher = new MvcRequestMatcher(null, "/livros/**");
-
         return httpSecurity
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
             .requestMatchers(matchers.toArray(new RequestMatcher[0])).permitAll()
             .requestMatchers(matchersDoc.toArray(new RequestMatcher[0])).permitAll()
-            .requestMatchers(mvcMATcher).authenticated().anyRequest().authenticated()
+            .requestMatchers(matchersControles.toArray(new RequestMatcher[0])).authenticated().anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
