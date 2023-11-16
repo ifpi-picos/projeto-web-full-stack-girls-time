@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <title>Meta de Leitura</title>
+    <title>Configurações</title>
 </head>
 <body>
     <div class="containerlogo">
@@ -54,8 +54,8 @@
     
             <button>
                 <span>
+                <a href="/BookBee/src/main/resources/templates/home.html"></a>
                     <img src="/BookBee/src/main/resources/static/img/Exit.png" alt="Sair">
-                    <a href="/BookBee/src/main/resources/templates/home.html"></a>
                     <span><a href="/BookBee/src/main/resources/templates/home.html">Sair</a></span>
                 </span>
             </button>
@@ -69,35 +69,35 @@
     </aside>
 
     <main class="main">
-        <div class="usuario">
-            <a href="#"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
-            <p id="username">Nome do Usuário</p> 
+        <div class="barradepes">
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
+                <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
+            </button>
+        </div>
+
+        <div class="container-perfil">
+            <div class="perfil">
+                <img class="perfilimg" src="/BookBee/src/main/resources/static/img/perfil.png" alt="">
+              <h3>Olá, Nome do Usuário!</h3>
+            </div>
+          </div>
+
+        
+        <div class="container-alterar">
+            <form class="alterar" action="#">
+                <label for="Nome">Altera Nome</label>
+                <input name="nome" type="text" id="nome" placeholder="Digite seu Nome" >
+                
+                <label for="E-mail">Alterar E-mail</label>
+                <input name="email" type="email" required id="email" placeholder="Insira seu E-mail">
+                
+                <label for="senha">Alterar Senha</label>
+                <input name="senha" type="password" required id="senha" placeholder="Insira sua Senha" >
+
+                <button class="salvar-alterar">Salvar</button>
+            </form>
         </div>
         
-        <div class="barradepes">
-            <input type="text" class="search-txt" placeholder="Encontre o livro que você gosta...">
-            <a href="#">
-                <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
-                 
-            </a>
-        </div>
-
-        <div class="container-favoritos" id="favoritos">
-            <div class="titulo-favoritos">
-                <p>Favoritos</p>
-            </div>
-        </div>
-    
-
-        <div class="adc-livro">
-            <a href="#">
-                <button>
-                    <img src="/BookBee/src/main/resources/static/img/adicionar.png" alt="Adicionar">
-                </button>
-            </a>
-            
-        </div>
-    
     </main>
-
 </body>

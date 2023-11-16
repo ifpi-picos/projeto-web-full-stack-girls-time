@@ -146,3 +146,9 @@ function resetarClassificacaoEstrela() {
     estrela.classList.add("bi-star");
   });
 }
+
+
+// function toggleFavorito() {
+//   var favoritoButton = document.getElementById("favorito");
+//   favoritoButton.classList.toggle("filled");
+// }

@@ -1,67 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal com Scroll</title>
+    <title>Document</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        label{ cursor: pointer;}
+        #coracao { display: none;}
+        #coracao:checked+label>svg {
+            animation: preencher;
+            animation-duration: .5s;
+            animation-fill-mode: forwards;
         }
-
-        /* Estilos para a modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-height: 80%; /* Defina uma altura máxima */
-            overflow-y: auto; /* Adiciona rolagem vertical se necessário */
-        }
-
-        /* Estilos para o botão de abrir a modal */
-        .open-modal-btn {
-            cursor: pointer;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
+        @keyframes preencher {
+            0% {
+                fill: transparent;
+            }
+            100% {
+                fill: #19b425;
+            }
         }
     </style>
 </head>
 <body>
-
-<!-- Botão para abrir a modal -->
-<button class="open-modal-btn" onclick="openModal()">Abrir Modal</button>
-
-<!-- A modal -->
-<div id="myModal" class="modal">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, iusto libero! Hic in neque exercitationem, necessitatibus quae delectus placeat alias ex aperiam molestiae iste unde inventore? Minus molestias quasi natus. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod molestiae adipisci quas, harum fuga illum aliquid quidem itaque iure? Nesciunt perferendis minus doloribus impedit, at eius blanditiis debitis suscipit! Nam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores reprehenderit perferendis commodi officia illum! Molestiae deleniti reiciendis ratione quasi modi adipisci veritatis libero illum esse assumenda, cumque officia. Aperiam, laudantium? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab inventore voluptatem dignissimos quasi maxime fuga aliquid tempore, veritatis accusamus, esse ut exercitationem eius adipisci eveniet impedit nobis omnis? Nesciunt, assumenda. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero doloremque optio dignissimos in quidem praesentium itaque. Nesciunt et voluptas modi neque ipsum? Velit repellendus quae repudiandae aspernatur eligendi corrupti esse. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum itaque vitae aut, incidunt doloribus dignissimos alias dolorem accusamus officia odit rem ea nulla quae. Consequuntur, eaque! Quaerat illo beatae eveniet? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum architecto impedit, corporis placeat ea dignissimos accusantium, dolorum rem cupiditate et officia alias sunt adipisci repellendus aspernatur. Nulla suscipit natus impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores ullam suscipit, provident qui ducimus illo recusandae maxime enim, minus, alias rerum ad quaerat. Dicta est aspernatur adipisci ad, sint ducimus. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita tempora fugit maiores enim fugiat? Neque laboriosam necessitatibus quis temporibus. Odit sequi accusantium dolorum. Expedita, obcaecati repellat architecto sequi tenetur asperiores?</p>
-    <!-- Adicione mais conteúdo conforme necessário -->
-</div>
-
-<script>
-    // Função para abrir a modal
-    function openModal() {
-        var modal = document.getElementById('myModal');
-        modal.style.display = 'block';
-    }
-
-    // Evento para fechar a modal se clicar fora dela
-    window.onclick = function(event) {
-        var modal = document.getElementById('myModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    }
-</script>
-
+    <input type="checkbox" id="coracao" />
+    <label for="coracao">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#19b425">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+    </label>
 </body>
 </html>
