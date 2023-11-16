@@ -37,7 +37,7 @@ public class AnotacoesController {
             @ApiResponse(responseCode = "200", description  = "Obtenção bem-sucedida das anotações"),
             @ApiResponse(responseCode = "403", description = "Acesso negado")
         })
-    @GetMapping("/anotacoes")
+    @GetMapping("/")
     public String index(Model model,
                         HttpServletRequest request,
                         HttpServletResponse response) throws Exception{
@@ -48,7 +48,7 @@ public class AnotacoesController {
             if(!subject.isEmpty()){
                 Map<String, Object> anotacoesModel = anotacaoGerenciador.findNotasByEmail(subject);
                 model.addAllAttributes(anotacoesModel);
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
                 return "anotacoes/index";
             }
@@ -66,6 +66,19 @@ public class AnotacoesController {
                 System.out.println("antes de criar a nota:" + anotacaotxt);
                 anotacaoGerenciador.criarNota(anotacaotxt, idLivros, subject);
                 return "redirect:/livros/" + idLivros;
+            }
+        }
+        return "redirect:/error/403";
+    }
+
+    @PostMapping("/deletarNota")
+    public String deletarAnotacao(@RequestParam Long idAnotacao, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                anotacaoGerenciador.deletarNota(idAnotacao, subject);
+                return "redirect:/livros";
             }
         }
         return "redirect:/error/403";

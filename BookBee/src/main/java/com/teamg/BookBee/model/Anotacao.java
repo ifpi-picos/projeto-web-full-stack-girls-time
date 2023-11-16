@@ -29,6 +29,9 @@ public class Anotacao {
     @Column(name = "anotacao")
     private String anotacao;
 
+    @Column(name = "deletado")
+    private boolean deletado = false;
+
     public Anotacao() {}
 
     public Anotacao(Leitor leitor, Livro livro, String anotacao) {
@@ -51,6 +54,10 @@ public class Anotacao {
 
     public String getAnotacao() {
         return anotacao;
+    }
+
+    public void setDeletado(boolean deletado) {
+        this.deletado = deletado;
     }
 
 }
