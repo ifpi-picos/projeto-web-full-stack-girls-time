@@ -31,7 +31,6 @@ public class ListaDeLeituraGerenciador {
 
     public ListaDeLeitura criarLista(String nomeLista, Long idLivro, String email) throws Exception {
         LOGGER.info("Criando lista de leitura com o nome: {} para o email: {}", nomeLista, email);
-        System.out.println(nomeLista);
 
          if(nomeLista == null || nomeLista.trim().isEmpty()){
             throw new IllegalArgumentException("Nome da lista de leitura é obrigatório");

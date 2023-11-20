@@ -62,7 +62,7 @@ public class LeitorGerenciador {
         LOGGER.info("Buscando leitor pello email: {}", email); 
         Leitor leitor = this.repo.findByEmail(email);
         if(leitor == null) {
-            throw new Exception("Usuario não encontrado" + email);
+            throw new IllegalArgumentException("Usuario não encontrado" + email);
         }
         LOGGER.info("Leitor encontrado com sucesso pelo email: {}", email);
         return leitor;
@@ -87,7 +87,6 @@ public class LeitorGerenciador {
         LocalDate dataDeInicio = livro.getDataDeIni();
         LocalDate dataFinal = LocalDate.now();
         if (livro.getDataDeFim() != null) {
-            System.out.println(" data null");
             dataFinal = livro.getDataDeFim();
         }
         long diferencaDias = ChronoUnit.DAYS.between(dataDeInicio, dataFinal);
@@ -101,7 +100,6 @@ public class LeitorGerenciador {
             velocidadeLeitura = (double) livro.getPgLidas() / diferencaDias;
         }
         if (!Double.isFinite(velocidadeLeitura)) {
-            System.out.println(velocidadeLeitura);
             LOGGER.error("Velocidade de leitura calculada é Infinity ou NaN para o usuário com o email: {}", email);
             return 0.0;
         }        

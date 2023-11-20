@@ -44,7 +44,7 @@ public class AnotacaoGerenciador {
 
     public void criarNota(String anotacaotxt, Long idLivros, String email) throws Exception {
         LOGGER.info("Criando nota para o livro com ID: {} e email: {}", idLivros, email);
-        if ( anotacaotxt == null || anotacaotxt.isEmpty()) {
+        if ( anotacaotxt == null || anotacaotxt.trim().isEmpty()) {
             throw new IllegalArgumentException("Os parâmetros não podem ser nulos ou vazios");
         }
         if(anotacaotxt.length() > 245){
@@ -69,7 +69,7 @@ public class AnotacaoGerenciador {
         LOGGER.info("Buscando notas do leitor pelo email: {} e livro id: {}", leitor.getEmail(), livro.getIdLivro());
         List<Anotacao> anotacao = repo.findByLeitorAndLivroAndDeletadoFalse(leitor, livro);
         if(anotacao == null) {
-            throw new Exception("anotacoes não encontrado para o email: " + leitor.getEmail());
+            throw new IllegalArgumentException("anotacoes não encontrado para o email: " + leitor.getEmail());
         }
         LOGGER.info("Anotacoes encontrada(s) com sucesso pelo email: {}", leitor.getEmail());
         return anotacao;
@@ -79,7 +79,7 @@ public class AnotacaoGerenciador {
         LOGGER.info("Buscando notas do leitor pelo email: {}", leitor.getEmail());
         List<Anotacao> anotacao = repo.findByLeitorAndDeletadoFalse(leitor);
         if(anotacao == null) {
-            throw new Exception("anotacoes não encontrado para o email: " + leitor.getEmail());
+            throw new IllegalArgumentException("anotacoes não encontrado para o email: " + leitor.getEmail());
         }
         LOGGER.info("Anotacoes encontrada(s) com sucesso pelo email: {}", leitor.getEmail());
         return anotacao;
@@ -90,11 +90,11 @@ public class AnotacaoGerenciador {
         Anotacao anotacao = repo.findByIdAnotacaoAndDeletadoFalse(idAnotacao);
         if(anotacao == null) {
             LOGGER.error("Anotação não encontrada para o id: {}", idAnotacao);
-            throw new Exception("Anotação não encontrada para o id: " + idAnotacao);
+            throw new IllegalArgumentException("Anotação não encontrada para o id: " + idAnotacao);
         }
         if(!anotacao.getLeitor().getEmail().equals(email)) {
             LOGGER.error("Usuário com email: {} tentou deletar uma anotação que não pertence a ele", email);
-            throw new Exception("Você não tem permissão para deletar esta anotação");
+            throw new IllegalArgumentException("Você não tem permissão para deletar esta anotação");
         }
         anotacao.setDeletado(true);
         repo.save(anotacao);

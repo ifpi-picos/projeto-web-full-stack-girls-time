@@ -58,14 +58,19 @@ public class AnotacoesController {
     }
 
     @PostMapping("/criarNotas")
-    public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestParam String anotacaotxt, @RequestParam Long idLivros, @RequestParam Long leitorId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestParam String anotacaotxt, @RequestParam Long idLivros, @RequestParam Long leitorId, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-                System.out.println("antes de criar a nota:" + anotacaotxt);
-                anotacaoGerenciador.criarNota(anotacaotxt, idLivros, subject);
-                return "redirect:/livros/" + idLivros;
+                try {
+                    anotacaoGerenciador.criarNota(anotacaotxt, idLivros, subject);
+                    return "redirect:/livros/" + idLivros; 
+                } catch (IllegalArgumentException e) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("erro", e.getMessage());
+                    return "/livros/error404";
+                }
             }
         }
         return "redirect:/error/403";

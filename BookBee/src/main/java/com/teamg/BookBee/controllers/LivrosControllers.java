@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamg.BookBee.configuracoes.TokenService;
+import com.teamg.BookBee.gerenciadores.LeitorGerenciador;
+import com.teamg.BookBee.gerenciadores.ListaDeLeituraGerenciador;
 import com.teamg.BookBee.gerenciadores.LivroGerenciador;
 import com.teamg.BookBee.model.Livro;
 import com.teamg.BookBee.service.CookieService;
@@ -31,7 +34,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class LivrosControllers {
     
     @Autowired
-    private LivroGerenciador livroGereciador;
+    private LivroGerenciador livroGerenciador;
+
+    @Autowired
+    private LeitorGerenciador leitorGerenciador;
+
+    @Autowired
+    private ListaDeLeituraGerenciador listaDeLeituraGerenciador;
 
     @Autowired
     private TokenService tokenService;
@@ -48,11 +57,10 @@ public class LivrosControllers {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
-            System.out.println(subject);
             if(!subject.isEmpty()){
-                Map<String, Object> livroModel = livroGereciador.getLivrosEAnotacoes(subject);
+                Map<String, Object> livroModel = livroGerenciador.getLivrosEAnotacoes(subject);
                 model.addAllAttributes(livroModel);
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
                 return   "livros/index";
             }
@@ -72,11 +80,11 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-                Map<String, Object> livroModel = livroGereciador.getTodosOsLivros(subject);
+                Map<String, Object> livroModel = livroGerenciador.getTodosOsLivros(subject);
                 model.addAllAttributes(livroModel);
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
-                return   "livros/lista*";
+                return   "livros/metas";
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -95,10 +103,16 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-                Map<String, Object> livroEAnotacaoModel = livroGereciador.getAnotacoesDoLivro(id, subject);
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
-                if(livroEAnotacaoModel.size() != 0){
-                    model.addAllAttributes(livroEAnotacaoModel);
+                Map<String, Object> livroNotaEResenhaModel = livroGerenciador.getNotasEResenhaDoLivro(id, subject);
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                Map<String, Object> listas = listaDeLeituraGerenciador.getListasDoUsuario(subject);
+                    double velocidadeLeitura = leitorGerenciador.calcularVelocidade(id, subject);
+                    model.addAttribute("velocidade", velocidadeLeitura );
+                if(livroNotaEResenhaModel.size() != 0){
+                    if(listas.size() != 0){
+                        model.addAllAttributes(listas);
+                    }
+                    model.addAllAttributes(livroNotaEResenhaModel);
                     response.setStatus(HttpServletResponse.SC_OK);
                     return  "livros/detalhesdolivro";
                 }
@@ -121,7 +135,7 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "nomeUsuario"));
+                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
                 return "livros/busca";
             }
@@ -140,8 +154,7 @@ public class LivrosControllers {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
-            System.out.println(subject);
-            livroGereciador.adicionar(livro, subject);
+            livroGerenciador.adicionar(livro, subject);
             response.setStatus(HttpServletResponse.SC_OK);
             return   "redirect:/livros";
         }
@@ -166,16 +179,16 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()) {
-                Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
+                Optional<Livro> optionalLivro = livroGerenciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataDeIni != null && !dataDeIni.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
-                    livroGereciador.atualizarDataIni(livro, dataDeIni, subject);
+                    livroGerenciador.atualizarDataIni(livro, dataDeIni, subject);
                     response.setStatus(HttpServletResponse.SC_OK);
                     return   "redirect:/livros/" + id;
                 }
                 else {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    return   "redirect:/livros/";
+                    return   "redirect:/livros/ ";
                 }
     
             }
@@ -200,10 +213,10 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()) {
-                Optional<Livro> optionalLivro = livroGereciador.getLivro(id);
+                Optional<Livro> optionalLivro = livroGerenciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataFim != null && !dataFim.isAfter(LocalDate.now()))){
                     Livro livro = optionalLivro.get();
-                    livroGereciador.atualizarDataFim(livro, dataFim, subject);
+                    livroGerenciador.atualizarDataFim(livro, dataFim, subject);
                       response.setStatus(HttpServletResponse.SC_OK);
                     return   "redirect:/livros/" + id ;
                 }
@@ -214,6 +227,26 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "redirect:/error/404";
+    }
+    
+    @PostMapping("/atualizarPosicaoLeitura")
+    public String atualizarPosicaoLeitura(Model model, @ModelAttribute Livro livro, @RequestParam String paginasLidas, HttpServletRequest request, HttpServletResponse response) {
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                try{
+                    int posicao = Integer.parseInt(paginasLidas);
+                    livroGerenciador.atualizarPossicaoDeLeitura(livro, posicao);
+                    return   "redirect:/livros/" + livro.getIdLivro();
+                } catch(Exception e) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("erro", e.getMessage());
+                    return "livros/error404";
+                    }
+                }
+            }
         return "redirect:/error/404";
     }
 }

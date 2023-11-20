@@ -14,4 +14,10 @@ public interface AnotacoesRepositorio extends CrudRepository<Anotacao, Long>{
 
     List<Anotacao> findByLeitorAndLivro(Leitor leitor, Livro livro);
 
+    Anotacao findByIdAnotacaoAndDeletadoFalse(Long idAnotacao);
+
+    List<Anotacao> findByLeitorAndLivroAndDeletadoFalse(Leitor leitor, Livro livro);
+
+    List<Anotacao> findByLeitorAndDeletadoFalse(Leitor leitor);
+
 }

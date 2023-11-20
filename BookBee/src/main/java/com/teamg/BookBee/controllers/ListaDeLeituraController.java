@@ -33,7 +33,6 @@ public class ListaDeLeituraController {
             String subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
                 try {
-                    System.out.println("Nome da lista no endpoint: " + nomeListatxt);
                     ListaDeLeitura novaLista = listaDeLeituraGerenciador.criarLista(nomeListatxt, idLivros, subject);
                     model.addAttribute("listaDeLivro", novaLista);
                     return "redirect:/livros/" + idLivros;

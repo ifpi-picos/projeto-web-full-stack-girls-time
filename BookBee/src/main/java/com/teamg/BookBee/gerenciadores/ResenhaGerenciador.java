@@ -28,7 +28,7 @@ public class ResenhaGerenciador {
 
    public void criarOuAtualizarResenha(String resenhaTxt, Long idLivro, String email) throws Exception {
         LOGGER.info("Criando ou atualizando resenha para livro com ID: {} e emmail: {}", idLivro, email);
-        if (resenhaTxt == null || resenhaTxt.isEmpty()) {
+        if (resenhaTxt == null || resenhaTxt.trim().isEmpty()) {
             throw new IllegalArgumentException("Os parâmetros não podem ser nulos ou vazios");
         }
 
@@ -67,10 +67,10 @@ public class ResenhaGerenciador {
     public void deletarResenha(Long idResenha, String email)throws Exception {
         Resenha resenha = repo.findByIdResenhaAndDeletadoFalse(idResenha);
         if(resenha == null) {
-            throw new Exception("Resenha não encontrada para o id: " + idResenha);
+            throw new IllegalArgumentException("Resenha não encontrada para o id: " + idResenha);
         }
         if(!resenha.getLeitor().getEmail().equals(email)) {
-            throw new Exception("Você não tem permissão para deletar esta resenha");
+            throw new IllegalArgumentException("Você não tem permissão para deletar esta resenha");
         }
         resenha.setDeletado(true);
         repo.save(resenha);
