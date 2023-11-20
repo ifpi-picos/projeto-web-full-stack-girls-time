@@ -39,6 +39,7 @@ body {
 }
 
 .titulo p{
+    display: flex;
     width: 20px;
     height: 30px;
     flex-shrink: 0;
@@ -71,6 +72,10 @@ body {
     font-weight: 400;
     line-height: normal;
     padding-left: 160px;
+}
+
+.text-mobile{
+    display: none;
 }
 
 .botoes{
@@ -210,6 +215,13 @@ body {
     padding-left: 50px;
 }
 
+.img-mobile{
+    display: none;
+}
+
+.img-mobile-logcas{
+    display: none;
+}
 
 .containerlogo{
     float: right;
@@ -221,6 +233,7 @@ body {
 }
 
 .titulogin  p {
+    display: flex;
     width: 20px;
     height: 30px;
     flex-shrink: 0;
@@ -322,8 +335,8 @@ body {
 }
 
 .botaologin1{
+    width: 81%;
     float: right;
-    margin-right: 350px;
     margin-top: 25px;
 }
 
@@ -347,6 +360,7 @@ body {
     color: #412E27;
 }
 
+
 .livro01{
     width: 130px;
     height: 800px;
@@ -357,7 +371,7 @@ body {
     float: right;
     margin-right: 90%;
     position: relative;
-    top: -610px;
+    top: -635px;
 }
 
 .livro01 p{
@@ -387,9 +401,9 @@ body {
     background: #7E5F43;
     box-shadow: 9px -9px 0px 0px #000 inset;
     float: right;
-    margin-right: 76%;
+    margin-right: 75%;
     position: relative;
-    top: -1348px;
+    top: -1401px;
 }
 
 
@@ -415,14 +429,14 @@ body {
 .livro03{
     width: 130px;
     height: 800px;
-    transform: rotate(-22deg);
+    transform: rotate(-25deg);
     flex-shrink: 0;
     background: #5D2410;
     box-shadow: 9px -9px 0px 0px #000 inset;
     float: right;
-    margin-right: 61%;
+    margin-right: 58%;
     position: relative;
-    top: -2103px;
+    top: -2175px;
 }
 
 .livro03 p{
@@ -456,6 +470,7 @@ body {
 }
 
 .titulocas p{
+    display: flex;
     width: 200px;
     height: 30px;
     flex-shrink: 0;
@@ -589,6 +604,7 @@ body {
 }
 
 .livro04 p{
+    display: flex;
     transform: rotate(-90deg);
     color: #FFFBEB;
     font-size: 30px;
@@ -2242,3 +2258,408 @@ h3 {
     cursor: pointer;
     font-size: 17px;
 }
+
+
+
+/* responsivo */
+
+@media only screen and (max-width: 1452px){
+    .container{
+        margin-left: -200px;
+    }
+}
+
+@media only screen and (max-width: 1252px){
+    .container{
+        margin-left: -300px;
+    }
+}
+
+@media only screen and (max-width: 1376px){
+    .livro02{
+        margin-right: 74%;
+    }
+
+    .livro03{
+        margin-right: 56%;
+    }
+}
+
+@media only screen and (max-width: 1300px){
+    .livro01{
+        margin-right: 89%;
+    }
+
+    .livro02{
+        margin-right: 72%;
+    }
+
+    .livro03{
+        margin-right: 53%;
+    }
+
+    .container-form-login{
+        margin-left: -60px;
+    }
+}
+
+@media only screen and (max-width: 1250px){
+    .livro01{
+        margin-top: 3%;
+    }
+
+    .logofixa{
+        margin-left: 30%;
+    }
+
+}
+
+
+@media only screen and (max-width: 1235px){
+    .livro01{
+        margin-right: 87%;
+    }
+    
+    .livro02{
+        margin-right: 70%;
+    }
+    
+    .livro03{
+        margin-right: 50%;
+    }
+    
+}
+
+
+@media screen and (max-width:1200px) {
+    .livro01{
+        margin-right: 87%;
+    }
+
+    .livro02{
+        margin-right: 69%;
+    }
+
+    .livro03{
+        margin-right: 48%;
+    }
+
+    .logofixa{
+        margin-left: 70%;
+    }
+}
+
+
+@media only screen and (max-width: 1195px){
+    .container-home{
+        margin-left: -80px;
+    }
+}
+
+@media only screen and (max-width: 1155px){
+    /* .formlogin input {
+        width: 371px;
+    } */
+
+    .container-form-login{
+        margin-left: -100px;
+    }
+}
+
+/* @media only screen and (max-width: 990px){
+    .container-home{
+        margin-left: -100px;
+    }
+} */
+@media only screen and (max-width: 1139px){
+    .container-form-login {
+        margin-left: -133px;
+    }
+}
+
+@media only screen and (max-width: 1116px){
+	.container-login{
+        display:none;
+    }
+
+    .container-form-login {
+        margin-left: -401px;
+        margin-top: 134px;
+    }
+    
+}
+
+
+@media only screen and (max-width: 1116px){
+    .container-home{
+        margin-left: 180px;
+    }
+
+    .container{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1023px){
+    .container-form-login {
+        margin-left: -445px;
+    }
+}
+
+
+@media only screen and (max-width: 990px){
+    .container-home{
+        margin-left: 117px;
+    }
+}
+
+@media only screen and (max-width: 960px){
+    .container-form-login {
+        margin-left: -485px;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+    .container-home{
+        margin-left: 70px;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .container-form-login {
+        margin-left: -520px;
+    }
+}
+
+@media only screen and (max-width: 760px){
+    .container-home{
+        margin-left: 15px;
+    }
+
+    .container-form-login {
+        margin-left: -570px;
+    }
+
+    .botaologin1 {
+        width: 73%;
+        float: right;
+        margin-top: 25px;
+    }
+}
+
+@media only screen and (max-width: 700px){
+
+    .container-form-login {
+        margin-left: -660px;
+    }
+
+    .botaologin1 {
+        width: 73%;
+        float: right;
+        margin-top: 25px;
+    }
+}
+
+
+@media only screen and (max-width: 685px){
+    .container-home{
+        margin-left: -30px;
+    }
+
+    .container-form-login {
+        margin-left: -700px;
+    }
+}
+
+@media only screen and (max-width: 660px){
+    .container-home{
+        margin-left: -50px;
+    }
+}
+
+
+@media only screen and (max-width: 500px){
+  
+  .logo{
+    width: 150%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  }
+
+  .logo img{
+    width: 190px;
+    height: 190px;
+  }
+  
+  .bemvindo{
+   display: none;
+  }
+
+  .container-home{
+    margin-left: -25px;
+  }
+
+    .cor1{
+    font-size: 150px;
+   }
+
+   .cor2{
+    font-size: 150px;
+   }
+
+   .text{
+    display: none;
+   }
+
+   .text-mobile{
+    display: block;
+    margin-left: 120px;
+    width: 370px;
+    font-size: 20px;
+   }
+
+.container-img-mobile{
+    width: 150%;
+    display: flex;
+    align-items: center; /* Alinha no centro verticalmente */
+    justify-content: center; /* Alinha no centro horizontalmente */
+    margin-top: 120px;
+}
+
+   .img-mobile{
+    display: block;
+
+   }
+
+   .container-img-mobile-logcas{
+    width: 126%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 135px;
+}
+
+   .img-mobile-logcas{
+    display: block;
+
+   }
+}
+
+@media only screen and (max-width: 513px){
+    .container-form-login {
+    margin-left: -718px;
+}
+}
+
+@media only screen and (max-width: 496px){
+.container-form-login {
+    margin-left: -737px;
+}
+}
+
+@media only screen and (max-width: 476px){
+    .formlogin form{
+        margin-left: 852px;
+    }
+
+    .formlogin i{
+        top: -43px;
+        margin-left: 98%;
+    }
+
+    .formlogin input {
+        width: 373px;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .formlogin form{
+        margin-left: 852px;
+    }
+
+    .formlogin i{
+        top: -43px;
+        margin-left: 98%;
+    }
+}
+
+@media only screen and (max-width: 455px){
+    .formlogin form{
+        margin-left: 852px;
+    }
+
+    .formlogin i{
+        top: -43px;
+        margin-left: 98%;
+    }
+
+
+}
+
+@media only screen and (max-width: 450px){
+    .formlogin form{
+        margin-left: 852px;
+    }
+
+    .formlogin i{
+        top: -43px;
+        margin-left: 103%;
+    }
+
+    .logofixa {
+        margin-left: 85%;
+    }
+    
+    .titulogin p {
+        display: flex;
+        width: 20px;
+        height: 30px;
+        flex-shrink: 0;
+        text-shadow: rgba(0, 0, 0, 0.13) 9px 6px 4px;
+        padding-left: 760px;
+        font-size: 150px;
+        margin-top: 181px;
+    }
+
+    
+}
+
+
+  @media only screen and (max-width: 430px){
+    .container-home{
+        margin-left: -55px;
+    }
+}
+
+    @media only screen and (max-width: 410px){
+        .container-home{
+            margin-left: -75px;
+        }
+
+        .container-img-mobile{
+            width: 64%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 120px;
+        }
+    }
+
+    @media only screen and (max-width: 370px){
+       .cor1{
+        font-size: 130px;
+       }
+
+       .cor2{
+        font-size: 130px;
+       }
+
+       .container-home{
+        margin-left: -78px;
+       }
+    }
+     
+
+
