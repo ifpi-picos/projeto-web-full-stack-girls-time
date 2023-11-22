@@ -1,5 +1,5 @@
-window.onload = function() {
-    document.getElementById(coracao).addEventListener(click, function(){
+document.addEventListener('DOMContentLoaded', (event) => 
+coracao.addEventListener('click', function(){
       var isChecked = $(this).is(':checked');
         const idLivro = document.querySelector("#idLivros").value;
         console.log(isChecked)
@@ -23,4 +23,6 @@ window.onload = function() {
             }
         });
     })
-  }
+);
+
+

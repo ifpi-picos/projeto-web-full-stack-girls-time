@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <title>Meta de Leitura</title>
+    <title th:text="${titulo}"></title>
 </head>
 
 <body>
@@ -33,15 +33,15 @@
             <button>
                 <span>
                     <img src="/img/Goal.png" alt="meta">
-                    <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
-                    <span><a href="#">Metas</a></span>
+                    <a href="/livros/meta-de-leitura"></a>
+                    <span><a href="/livros/meta-de-leitura">Metas</a></span>
                 </span>
             </button>
 
             <button>
                 <span>
                     <img src="/img/Favorites.png" alt="Favoritos">
-                    <span><a href="#">Favoritos</a></span>
+                    <span><a href="/livros/livros-favoritos">Favoritos</a></span>
                 </span>
             </button>
 
@@ -84,11 +84,14 @@
 
         <div class="container-metas" id="metaLeitura">
             <div class="titulo-metas">
-                <p>Metas de Leitura</p>
+                <p th:text="${titulo}"></p>
             </div>
         </div>
 
         <section class="favoritos">
+
+            <p th:if="${#strings.isEmpty(livros)}" th:text="${Exception}"></p>
+            
             <ul id="livros" class="resultfavoritos">
                 <li class="adc-livro">
                     <a href="#">

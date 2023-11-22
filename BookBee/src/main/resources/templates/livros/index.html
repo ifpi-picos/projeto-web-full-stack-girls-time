@@ -23,24 +23,24 @@
             <button>
                 <span>
                     <img src="/img/Home.png" alt="home">
-                    <a href="/livro/"></a>
-                    <span><a href="/livro/">Home</a></span>
+                    <a href="/livros/"></a>
+                    <span><a href="/livros/">Home</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/img/Goal.png" alt="meta">
-                    <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
-                    <span><a href="#">Metas</a></span>
+                    <a href="/livros/meta-de-leitura"></a>
+                    <span><a href="/livros/meta-de-leitura">Metas</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
                     <img src="/img/Favorites.png" alt="Favoritos">
-                    <a href="#"></a>
-                    <span><a href="#">Favoritos</a></span>
+                    <a href="/livros/livros-favoritos"></a>
+                    <span><a href="/livros/livros-favoritos">Favoritos</a></span>
                 </span>
             </button>
     
@@ -90,22 +90,22 @@
     </div>
     
     <ul class="estilizacaoLidos">
-        <li th:each="livro, star : ${livroR}" th:if="${stat.count < 5}">
-            <a th:href="@{/livros/{id}(id=${livro.idLivro})}"></a>
-            <img th:src="${livro.linkImagem}" alt="">
-            <div class="informacaoLivro">
-                <p class="paginasLidas"> <i class="bi bi-speedometer2"></i><span th:text=" ' ' + ${livro.pgLidas} + '/' + ${livro.paginas}"></span></p>
-                <p class="nomeLivro" th:text="${livro.titulo}"></p>
-            </div>
+        <li th:each="livro, stat : ${livrosR}" th:if="${stat.count < 5}">
+            <a th:href="@{/livros/{id}(id=${livro.idLivro})}">
+                <img th:src="${livro.linkImagem}" alt="">
+                <div class="informacaoLivro">
+                    <p class="paginasLidas"> <i class="bi bi-speedometer2"></i><span th:text=" ' ' + ${livro.pgLidas} + '/' + ${livro.paginas}"></span></p>
+                    <p class="nomeLivro" th:text="${livro.titulo}"></p>
+                </div>
+            </a>
         </li>
-       
-        </ul>
-    </div>
+    </ul>
+</div>
     
     <div class="container-metas" id="metaLeitura">
         <div class="titulo-metas">
             <p>Metas de Leitura</p>
-            <a href="#">Todas</a>
+            <a href="/livros/meta-de-leitura">Todas</a>
             <img class="todos-mais" src="/img/mais.png" alt="Mais">
         </div>
     </div>
@@ -123,7 +123,7 @@
                 <a th:href="@{/livros/{id}(id=${livro.idLivro})}">
                     <img class="item current-item" th:src="${livro.linkImagem}" alt="">
                 </a>
-            </div>
+                </div>
             </div>
         </div>
     </div>
@@ -131,7 +131,7 @@
     <div class="container-favoritos" id="favoritos">
         <div class="titulo-favoritos">
             <p>Favoritos</p>
-            <a href="/BookBee/src/main/resources/templates/favoritos.html">Todos</a>
+            <a href="/livros/livros-favoritos">Todos</a>
             <img class="todos-mais" src="/img/mais.png" alt="Mais">
         </div>
     </div>
@@ -145,15 +145,11 @@
         </button>
         <div class="carousel-wrapper">
             <div class="carousel-gallery">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=EwyvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                <img class="item current-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
-                
+                <div th:each="livro, stat : ${livrosF}" th:if="${stat.count < 10}">
+                    <a th:href="@{/livros/{id}(id=${livro.idLivro})}">
+                        <img class="item current-carousel-item" th:src="${livro.linkImagem}" alt="">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
