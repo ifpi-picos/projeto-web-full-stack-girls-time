@@ -69,7 +69,7 @@ public class AnotacoesController {
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
-                    return "/livros/error404";
+                    return "/erro/error404";
                 }
             }
         }
@@ -86,6 +86,6 @@ public class AnotacoesController {
                 return "redirect:/livros";
             }
         }
-        return "redirect:/error/403";
+        return "/error/403";
     }
 }

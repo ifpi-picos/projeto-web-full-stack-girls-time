@@ -61,7 +61,7 @@ public class AnotacaoGerenciador {
         
         Anotacao anotacao = new Anotacao(leitor, livro, anotacaotxt);
     
-        LOGGER.info("Nota criada com sucesso para o livro com ID: {} e email:", idLivros, email);
+        LOGGER.info("Nota criada com sucesso para o livro com ID: {} e email: {}", idLivros, email);
         repo.save(anotacao);
     }
 

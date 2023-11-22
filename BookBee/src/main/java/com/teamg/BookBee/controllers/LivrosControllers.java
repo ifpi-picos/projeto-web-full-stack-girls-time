@@ -66,7 +66,7 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "redirect:/error/403";
+        return "redirect:/erro/error404";
     }
 
     @Operation(summary = "Exibe todos os livros do usuário", method = "GET")
@@ -88,7 +88,7 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "redirect:/error/404";
+        return "/erro/error404";
     }
 
     @Operation(summary = "Exibe os detalhes de um livro especifico", method = "GET")
@@ -120,7 +120,7 @@ public class LivrosControllers {
         }
 
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "redirect:/error/404";
+        return "/erro/error404";
     }
 
     @Operation(summary = "Exibe a página de busca de livros", method = "GET")
@@ -141,7 +141,7 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "redirect:/error/403";
+        return "/erro/error404";
     }
 
     @Operation(summary = "Adiciona um novo livro", method = "POST")
@@ -159,7 +159,7 @@ public class LivrosControllers {
             return   "redirect:/livros";
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "redirect:/error/403";
+        return "/erro/error404";
     }
 
     @Operation(summary = "Atualiza a data de início de um livro específico", method = "POST")
@@ -172,7 +172,8 @@ public class LivrosControllers {
     public String atualizarDataInicio(@PathVariable Long id, 
                                         @RequestParam("dataDeIni") LocalDate dataDeIni, 
                                         HttpServletRequest request, 
-                                        HttpServletResponse response) throws Exception {
+                                        HttpServletResponse response,
+                                        Model model) throws Exception {
 
         String token = CookieService.getCookie(request, "token");
 
@@ -181,20 +182,22 @@ public class LivrosControllers {
             if(!subject.isEmpty()) {
                 Optional<Livro> optionalLivro = livroGerenciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataDeIni != null && !dataDeIni.isAfter(LocalDate.now()))){
-                    Livro livro = optionalLivro.get();
-                    livroGerenciador.atualizarDataIni(livro, dataDeIni, subject);
-                    response.setStatus(HttpServletResponse.SC_OK);
-                    return   "redirect:/livros/" + id;
+                    try {
+                        Livro livro = optionalLivro.get();
+                        livroGerenciador.atualizarDataIni(livro, dataDeIni, subject);
+                        response.setStatus(HttpServletResponse.SC_OK);
+                        return   "redirect:/livros/" + id;
+                        
+                    } catch (IllegalArgumentException e) {
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        model.addAttribute("erro", e.getMessage());
+                        return "erro/error404";
+                    }
                 }
-                else {
-                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    return   "redirect:/livros/ ";
-                }
-    
             }
         }
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "redirect:/error/404";
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "/erro/error404";
     }
 
     @Operation(summary = "Atualiza a data de fim de um livro específico", method = "POST")
@@ -207,7 +210,7 @@ public class LivrosControllers {
     public String atualizarDataFim(@PathVariable Long id, 
                                     @RequestParam("dataDeFim") LocalDate dataFim,
                                     HttpServletRequest request,
-                                    HttpServletResponse response) throws Exception {
+                                    HttpServletResponse response, Model model) throws Exception {
         String token = CookieService.getCookie(request, "token");
 
         if(token != null){
@@ -215,23 +218,26 @@ public class LivrosControllers {
             if(!subject.isEmpty()) {
                 Optional<Livro> optionalLivro = livroGerenciador.getLivro(id);
                 if(optionalLivro.isPresent() && (dataFim != null && !dataFim.isAfter(LocalDate.now()))){
-                    Livro livro = optionalLivro.get();
-                    livroGerenciador.atualizarDataFim(livro, dataFim, subject);
-                      response.setStatus(HttpServletResponse.SC_OK);
-                    return   "redirect:/livros/" + id ;
-                }
-                else {
-                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    return   "redirect:/livros/";
+                    try {
+                        Livro livro = optionalLivro.get();
+                        livroGerenciador.atualizarDataFim(livro, dataFim, subject);
+                        response.setStatus(HttpServletResponse.SC_OK);
+                        return   "redirect:/livros/" + id ;
+                    } catch (IllegalArgumentException e) {
+                        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        model.addAttribute("erro", e.getMessage());
+                        return   "/erro/error404";
+                        
+                    }
                 }
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "redirect:/error/404";
+        return "/erro/error404";
     }
     
     @PostMapping("/atualizarPosicaoLeitura")
-    public String atualizarPosicaoLeitura(Model model, @ModelAttribute Livro livro, @RequestParam String paginasLidas, HttpServletRequest request, HttpServletResponse response) {
+    public String atualizarPosicaoLeitura(Model model, @ModelAttribute Livro livro, @RequestParam String paginasLidas, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
@@ -240,13 +246,58 @@ public class LivrosControllers {
                     int posicao = Integer.parseInt(paginasLidas);
                     livroGerenciador.atualizarPossicaoDeLeitura(livro, posicao);
                     return   "redirect:/livros/" + livro.getIdLivro();
-                } catch(Exception e) {
+                } catch(IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
-                    return "livros/error404";
+                    return "erro/error404";
                     }
                 }
             }
-        return "redirect:/error/404";
+        return "redirect:/erro/error404";
     }
+
+    @PostMapping("/atualizar-classificacao")
+    public String atualizarCLassificacao(Model model, @ModelAttribute Livro livro, @RequestBody Map<String, String> requestBody, HttpServletRequest request, HttpServletResponse response){
+        String token = CookieService.getCookie(request, "token");
+        String idlivroString = requestBody.get("idLivro");
+        Long idlivro = Long.parseLong(idlivroString);
+
+        if(token != null){
+            String subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                try {
+                    livroGerenciador.atualizarClassificacao(idlivro, requestBody.get("classificacao"));
+                    return "redirect:/livros/" + idlivro;
+                } catch (IllegalArgumentException e) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("erro", e.getMessage());
+                    return "erro/error404";
+                }
+            }
+        }
+        return "erro/erro404";
+    }
+
+    @PostMapping("/adiciona-favorito")
+    public String atualizarFavorito(Model model, @ModelAttribute Livro livro, @RequestBody Map<String, String> requestBody, HttpServletRequest request, HttpServletResponse response){
+        String token = CookieService.getCookie(request, "token");
+        String idlivroString = requestBody.get("idLivro");
+        Long idlivro = Long.parseLong(idlivroString);
+        
+        if(token != null){
+            String subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                try {
+                    livroGerenciador.atualizarFavorito(idlivro, requestBody.get("favorito"));
+                    return "redirect:/livros/" + livro.getIdLivro();
+                } catch (IllegalArgumentException e) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("erro", e.getMessage());
+                    return "erro/error404";
+                }
+            }
+        }
+        return "erro/erro404";
+    }
+
 }

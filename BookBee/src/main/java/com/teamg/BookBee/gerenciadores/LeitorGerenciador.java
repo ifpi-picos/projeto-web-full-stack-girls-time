@@ -34,7 +34,7 @@ public class LeitorGerenciador {
         String email = leitor.getEmail();
         String senha = leitor.getPassword();
         int pos = email.indexOf("@");
-        String checarEmail = email.substring(pos, email.length() -1);
+        String checarEmail = email.substring(pos, email.length());
         if(nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome não podem ser vazio");
         }

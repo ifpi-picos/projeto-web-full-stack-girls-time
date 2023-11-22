@@ -48,6 +48,7 @@ public class SecurityConfiguration {
         new MvcRequestMatcher(null, "/notas/**"),
         new MvcRequestMatcher(null, "/resenha/**"),
         new MvcRequestMatcher(null, "/listas/**"),
+        new MvcRequestMatcher(null, "/erro/**"),
         new MvcRequestMatcher(null, "/livros/**")
   
     );

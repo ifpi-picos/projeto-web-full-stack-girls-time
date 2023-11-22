@@ -56,7 +56,7 @@ public class Livro {
     private boolean favorito;
 
     @Column(name= "classificacao")
-    private Float classificacao;
+    private int classificacao;
 
     @Column(name = "data_de_ini")
     private LocalDate dataDeIni;
@@ -155,11 +155,11 @@ public class Livro {
         this.favorito = favorito;
     }
 
-    public Float getClassificacao() {
+    public int getClassificacao() {
         return classificacao;
     }
 
-    public void setClassificacao(Float classificacao) {
+    public void setClassificacao(int classificacao) {
         this.classificacao = classificacao;
     }
 

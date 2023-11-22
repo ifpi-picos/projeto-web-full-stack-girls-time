@@ -181,6 +181,40 @@ public class LivroGerenciador {
         return model;
     }
 
+    public void atualizarClassificacao(Long id, String classificacao) {
+
+        int classificacaoInt = Integer.parseInt(classificacao);
+  
+        Optional<Livro> livroExistente = livroRepo.findById(id);
+        if (!livroExistente.isPresent()) {
+            throw new IllegalArgumentException("Livro não encontrado");
+        }
+        Livro livro = livroExistente.get();
+        if (classificacaoInt < 1 || classificacaoInt > 5) {
+            throw new IllegalArgumentException("Classificação inválida");
+        }
+        livro.setDataDeAtualizacao(LocalDateTime.now());
+        livro.setClassificacao(classificacaoInt);
+        livroRepo.save(livro);
+    }
+
+    public void atualizarFavorito(Long id, String favoritoString) {
+        boolean favorito = Boolean.parseBoolean(favoritoString);
+
+        Optional<Livro> livroExistente = livroRepo.findById(id);
+        if (!livroExistente.isPresent()) {
+            throw new IllegalArgumentException("Livro não encontrado");
+        }
+        
+        Livro livro = livroExistente.get();
+    
+        livro.setDataDeAtualizacao(LocalDateTime.now());
+        livro.setFavorito(favorito);
+        livroRepo.save(livro);
+       
+    
+    }
+    
     
 
 }

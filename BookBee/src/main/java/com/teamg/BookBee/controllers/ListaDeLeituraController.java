@@ -39,7 +39,7 @@ public class ListaDeLeituraController {
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
-                    return "/livros/error404";
+                    return "/erro/error404";
                 }
             }
         }
@@ -58,7 +58,7 @@ public class ListaDeLeituraController {
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
-                    return "/livros/error404";
+                    return "/erro/error404";
                 }
             }
         }
