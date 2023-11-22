@@ -20,18 +20,23 @@ public interface LivroRepositorio extends CrudRepository<Livro, Long>{
 
     @Transactional
     @Modifying
-    @Query("update Livro l set l.dataDeIni = :dataDeIni where l.id = :id")
+    @Query("update Livro l set l.dataDeIni = :dataDeIni, l.dataDeAtualizacao = CURRENT_TIMESTAMP where l.id = :id")
     void atualizarDataDeInicio(@Param("id") Long id, @Param("dataDeIni") LocalDate dataDeIni);
-    
+
     @Transactional
     @Modifying
-    @Query("update Livro l set l.dataDeFim = :dataDeFim where l.id = :id")
+    @Query("update Livro l set l.dataDeFim = :dataDeFim, l.dataDeAtualizacao = CURRENT_TIMESTAMP where l.id = :id")
     void atualizarDataDeFim(@Param("id")Long id,@Param("dataDeFim") LocalDate dataFim);
 
     @Transactional
     @Modifying
-    @Query("update Livro l set l.pgLidas = :novasPaginasLidas where l.id = :idLivro")
+    @Query("update Livro l set l.pgLidas = :novasPaginasLidas, l.dataDeAtualizacao = CURRENT_TIMESTAMP where l.id = :idLivro")
     void atualizaPgLidas(@Param("idLivro") Long idLivro, @Param("novasPaginasLidas") int novasPaginasLidas);
+
+    List<Livro> findByLeitorAndFavorito(Leitor leitor, boolean b);
+
+    @Query("SELECT l FROM Livro l WHERE l.leitor = :leitor AND l.pgLidas != l.paginas")
+    List<Livro> findByLeitorAndPgLidasNotEqualPaginas(Leitor leitor);
 
     
 }

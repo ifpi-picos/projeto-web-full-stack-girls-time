@@ -44,7 +44,9 @@ public class LivroGerenciador {
             List<Livro> livros = (List<Livro>)livroRepo.findByLeitor(leitor);
             List<Livro> livrosRecentes = (List<Livro>)livroRepo.findByLeitorOrderByDataDeAtualizacaoDesc(leitor);
             List<Anotacao> listaDeAnotacoes = (List<Anotacao>)anotacaoGerenciador.encontrarAnotacoesPorLeitor(leitor);
-        
+            List<Livro> livrosFavoritoList = (List<Livro>)livroRepo.findByLeitorAndFavorito(leitor, true);
+                
+            model.put("livrosF", livrosFavoritoList);
             model.put("livros", livros);
             model.put("livrosR", livrosRecentes);
             model.put("anotacoes", listaDeAnotacoes);
@@ -67,7 +69,7 @@ public class LivroGerenciador {
                 List<Anotacao> anotacoes = 
                 (List<Anotacao>)anotacaoGerenciador.encontrarAnotacoesPorLeitorELivro(leitorParam, livro);
                 Optional<Resenha> resenha = resenhaGerenciador.encontrarResenhaPorLeitorELivro(leitorParam, livro);
-
+                
                 model.put("livro", livro);
                 model.put("anotacoes", anotacoes);
                 model.put("resenha", resenha);
@@ -176,6 +178,9 @@ public class LivroGerenciador {
         Map<String, Object> model = new HashMap<>();
         Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
         List<Livro> livros = (List<Livro>)livroRepo.findByLeitor(leitor);
+        if (livros.isEmpty()) {
+            throw new Exception("Nenhum livro encontrado");
+        }
         model.put("livros", livros);
         LOGGER.info("Todos os livros obtidos com sucesso para o assunto: {}", subject);
         return model;
@@ -200,7 +205,11 @@ public class LivroGerenciador {
 
     public void atualizarFavorito(Long id, String favoritoString) {
         boolean favorito = Boolean.parseBoolean(favoritoString);
+        System.out.println(favorito);
 
+        if (id == null) {
+            throw new IllegalArgumentException("ID não pode ser nulo");
+        }
         Optional<Livro> livroExistente = livroRepo.findById(id);
         if (!livroExistente.isPresent()) {
             throw new IllegalArgumentException("Livro não encontrado");
@@ -212,9 +221,32 @@ public class LivroGerenciador {
         livro.setFavorito(favorito);
         livroRepo.save(livro);
        
-    
     }
-    
-    
+
+    public Map<String, Object> getLivrosFavoritos(String subject) throws Exception {
+        LOGGER.info("Obtendo todos os livros favoritos para o usuario: {}", subject);
+        Map<String, Object> model = new HashMap<>();
+        Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
+        List<Livro> livros = (List<Livro>)livroRepo.findByLeitorAndFavorito(leitor, true);
+        if (livros.isEmpty()) {
+            throw new Exception("Nenhum livro favorito encontrado");
+        }
+        model.put("livros", livros);
+        LOGGER.info("Todos os livros favoritos obtidos com sucesso para o assunto: {}", subject);
+        return model;
+    }
+
+    public Map<String, Object> getLivrosEmProgresso(String subject) throws Exception {
+        LOGGER.info("Obtendo todos os livros em progresso para o usuario: {}", subject);
+        Map<String, Object> model = new HashMap<>();
+        Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
+        List<Livro> livros = (List<Livro>)livroRepo.findByLeitorAndPgLidasNotEqualPaginas(leitor);
+        if (livros.isEmpty()) {
+            throw new Exception("Nenhum livro encontrado");
+        }
+        model.put("livros", livros);
+        LOGGER.info("Todos os livros em progresso obtidos com sucesso para o assunto: {}", subject);
+        return model;
+    }
 
 }

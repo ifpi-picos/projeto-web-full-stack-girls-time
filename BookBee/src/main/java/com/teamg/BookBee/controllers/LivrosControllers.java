@@ -80,11 +80,18 @@ public class LivrosControllers {
         if(token != null){
             var subject = tokenService.validateToken(token);
             if(!subject.isEmpty()){
-                Map<String, Object> livroModel = livroGerenciador.getTodosOsLivros(subject);
-                model.addAllAttributes(livroModel);
-                model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
-                response.setStatus(HttpServletResponse.SC_OK);
-                return   "livros/metas";
+                try {
+                    Map<String, Object> livroModel = livroGerenciador.getTodosOsLivros(subject);
+                    model.addAllAttributes(livroModel);
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                    model.addAttribute("titulo", "Todos Os Livros");
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    return "livros/metas"; 
+                } catch (Exception e) {
+                    model.addAttribute("titulo", "Todos Os Livros");
+                    model.addAttribute("Exception", e.getMessage());
+                    return "livros/metas";
+                }
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -283,6 +290,7 @@ public class LivrosControllers {
         String token = CookieService.getCookie(request, "token");
         String idlivroString = requestBody.get("idLivro");
         Long idlivro = Long.parseLong(idlivroString);
+        System.out.println(idlivro);
         
         if(token != null){
             String subject = tokenService.validateToken(token);
@@ -298,6 +306,55 @@ public class LivrosControllers {
             }
         }
         return "erro/erro404";
+    }
+
+    @GetMapping("/livros-favoritos")
+    public String exibirLivrosFavoritos(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                try {
+                    Map<String, Object> livroModel = livroGerenciador.getLivrosFavoritos(subject);
+                    model.addAllAttributes(livroModel);
+                    model.addAttribute("titulo", "Livros Favoritos");
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    return "livros/metas";
+                } catch (Exception e) {
+                      model.addAttribute("titulo", "Livros Favoritos");
+                      model.addAttribute("Exception", e.getMessage());
+                      return "livros/metas";
+                }
+               
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "/erro/error404";
+    }
+
+    @GetMapping("/meta-de-leitura")
+    public String exibirLivrosEmProgresso(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                try {
+                    Map<String, Object> livroModel = livroGerenciador.getLivrosEmProgresso(subject);
+                    model.addAllAttributes(livroModel);
+                    model.addAttribute("titulo", "Meta de leitura");
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    return "livros/metas";
+                } catch (Exception e) {
+                    model.addAttribute("titulo", "Meta de leitura");
+                    model.addAttribute("Exception", e.getMessage());
+                    return "livros/metas";
+                }
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "/erro/error404";
     }
 
 }
