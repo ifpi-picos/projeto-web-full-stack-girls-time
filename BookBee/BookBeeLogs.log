@@ -1,0 +1,11 @@
+2023-11-21T20:45:05.588-03:00  INFO 26652 --- [main] c.t.B.g.LivroGerenciadorTest             : Starting LivroGerenciadorTest using Java 19.0.2 with PID 26652 (started by debor in C:\Users\debor\OneDrive\Documentos\Projeto Front-End\projeto-web-full-stack-girls-time\BookBee)
+2023-11-21T20:45:05.590-03:00  INFO 26652 --- [main] c.t.B.g.LivroGerenciadorTest             : No active profile set, falling back to 1 default profile: "default"
+2023-11-21T20:45:07.057-03:00  INFO 26652 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-21T20:45:07.163-03:00  INFO 26652 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 89 ms. Found 5 JPA repository interfaces.
+2023-11-21T20:45:07.903-03:00  INFO 26652 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-21T20:45:08.026-03:00  INFO 26652 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+2023-11-21T20:45:08.029-03:00  INFO 26652 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-11-21T20:45:08.556-03:00  INFO 26652 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-21T20:45:08.617-03:00  INFO 26652 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-11-21T20:45:09.152-03:00  INFO 26652 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@483b7dc4
+2023-11-21T20:45:09.156-03:00  INFO 26652 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
