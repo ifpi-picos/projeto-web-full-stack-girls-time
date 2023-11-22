@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <title>Inicial</title>
+</head>
+<body>
+    <div class="containerlogo">
+        <div class="logofixamain">
+            <img src="/img/logo.png" alt="logo">
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <img class="hexagomenu" src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">
+        </header>
+        <nav>
+            <button>
+                <span>
+                    <img src="/img/Home.png" alt="home">
+                    <a href="/livro/"></a>
+                    <span><a href="/livro/">Home</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <img src="/img/Goal.png" alt="meta">
+                    <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
+                    <span><a href="#">Metas</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <img src="/img/Favorites.png" alt="Favoritos">
+                    <a href="#"></a>
+                    <span><a href="#">Favoritos</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <img src="/img/Quote.png" alt="Citações">
+                    <a href="/notas/"></a>
+                    <span><a href="/notas/">Anotações</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                <a href="/logout"></a>
+                    <img src="/img/Exit.png" alt="Sair">
+                    <span><a href="/logout">Sair</a></span>
+                </span>
+            </button>
+            
+            <div class="logomenu">
+                <img src="/img/logomenu.png" alt="">
+            </div>
+
+            <div class="linha"></div>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <div class="usuario">
+            <a href="/BookBee/src/main/resources/templates/usuario.html"><img src="/img/user.png" alt="Foto do Usuário"></a>
+            <p id="username" th:text="${nomeUsuario}"></p> 
+        </div>
+
+        <div class="barradepes">
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
+                <img src="/img/lupa.png" alt="Lupa">
+            </button>
+        </div>
+    
+    <div class="container-lidos-recentes">
+        <div class="titulo-lidos-recentes">
+            <p>Lidos Recentes</p>
+            <a href="/livros/todos-os-livros">Todos</a>
+            <img class="todos-mais" src="/img/mais.png" alt="Mais">
+        </div>
+    </div>
+    
+    <ul class="estilizacaoLidos">
+        <li th:each="livro, star : ${livroR}" th:if="${stat.count < 5}">
+            <a th:href="@{/livros/{id}(id=${livro.idLivro})}"></a>
+            <img th:src="${livro.linkImagem}" alt="">
+            <div class="informacaoLivro">
+                <p class="paginasLidas"> <i class="bi bi-speedometer2"></i><span th:text=" ' ' + ${livro.pgLidas} + '/' + ${livro.paginas}"></span></p>
+                <p class="nomeLivro" th:text="${livro.titulo}"></p>
+            </div>
+        </li>
+       
+        </ul>
+    </div>
+    
+    <div class="container-metas" id="metaLeitura">
+        <div class="titulo-metas">
+            <p>Metas de Leitura</p>
+            <a href="#">Todas</a>
+            <img class="todos-mais" src="/img/mais.png" alt="Mais">
+        </div>
+    </div>
+
+    <div class="container-carrossel">
+        <button class="arrow-left" aria-label="previuos-image" onclick="left()"> 
+            <img src="/img/ordenar-para-esquerda.png" alt="" onmouseover="this.src='/img/ordenar-para-esquerda-preenchido.png'" onmouseout="this.src='/img/ordenar-para-esquerda.png'">
+        </button>
+        <button class="arrow-rigth" aria-label="next-image" onclick="right()">
+            <img src="/img/ordenar-para-a-direita.png" alt="" onmouseover="this. src='/img/ordenar-para-a-direita-preenchido.png'" onmouseout="this.src='/img/ordenar-para-a-direita.png'">    
+        </button>
+        <div class="gallery-wrapper">
+            <div class="gallery">
+                <div th:each="livro, stat : ${livros}" th:if="${stat.count < 10}">
+                <a th:href="@{/livros/{id}(id=${livro.idLivro})}">
+                    <img class="item current-item" th:src="${livro.linkImagem}" alt="">
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-favoritos" id="favoritos">
+        <div class="titulo-favoritos">
+            <p>Favoritos</p>
+            <a href="/BookBee/src/main/resources/templates/favoritos.html">Todos</a>
+            <img class="todos-mais" src="/img/mais.png" alt="Mais">
+        </div>
+    </div>
+
+    <div class="carousel-container">
+        <button class="carousel-arrow-left" aria-label="previous-image" onclick="moveCarouselLeft()"> 
+            <img src="/BookBee/src/main/resources/static/img/ordenar-para-esquerda.png" alt="" onmouseover="this.src='/BookBee/src/main/resources/static/img/ordenar-para-esquerda-preenchido.png'" onmouseout="this.src='/BookBee/src/main/resources/static/img/ordenar-para-esquerda.png'">
+        </button>
+        <button class="carousel-arrow-right" aria-label="next-image" onclick="moveCarouselRight()">
+            <img src="/BookBee/src/main/resources/static/img/ordenar-para-a-direita.png" alt="" onmouseover="this.src='/BookBee/src/main/resources/static/img/ordenar-para-a-direita-preenchido.png'" onmouseout="this.src='/BookBee/src/main/resources/static/img/ordenar-para-a-direita.png'">    
+        </button>
+        <div class="carousel-wrapper">
+            <div class="carousel-gallery">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=ud06EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=EwyvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-carousel-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=8hJfEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                <img class="item current-item" src="https://books.google.com/books/content?id=i-xtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="">
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-citacao" id="citacao">
+        <div class="titulo-citacao">
+            <p>Notas Pessoais</p>
+            <a href="/notas/">Todas</a>
+        </div>
+    </div>
+
+    <div class="meu-carrossel-container">
+        <button class="meu-carousel-arrow-esquerda" aria-label="imagem-anterior" onclick="moverCarrosselEsquerda()"> 
+            <img src="/img/ordenar-para-esquerda.png" alt=""
+            onmouseover="this.src='/img/ordenar-para-esquerda-preenchido.png'"
+            onmouseout="this.src='/img/ordenar-para-esquerda.png'">
+        </button>
+        <button class="meu-carousel-arrow-direita" aria-label="próxima-imagem" onclick="moverCarrosselDireita()">
+            <img src="/img/ordenar-para-a-direita.png" alt=""
+            onmouseover="this.src='/img/ordenar-para-a-direita-preenchido.png'"
+            onmouseout="this.src='/img/ordenar-para-a-direita.png'">
+        </button>
+        <div class="meu-carousel-wrapper">
+            <div class="meu-carousel-gallery">
+                <div th:each="anotacao : ${anotacoes}" class="caixa-notas">
+                    <img class="meu-item carousel-item-atual" th:src="${anotacao.livro.linkImagem}" alt="">
+                    <div class="conteudo">
+                        <h5 th:text="${anotacao.livro.titulo}"></h5>
+                        <p th:text="${anotacao.anotacao}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="/js/carrossel.js"></script>
+<script src="/js/busca.js"></script>
+</body>
+</html>

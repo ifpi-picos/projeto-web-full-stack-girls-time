@@ -14,39 +14,9 @@ let arrayDeNotas = [];
 // Função para abrir o modal 1
 function abrirModal1() {
   modal1.style.display = "block";
-  const imgmodal = parametrosURL.get('imagem');
-  document.querySelector("#img-capa-modal-notas").setAttribute('src', imgmodal);
-  document.querySelector("#titulo-modal-notas").textContent = livro.titulo;
+  document.querySelector("#img-capa-modal-notas");
+  document.querySelector("#titulo-modal-notas");
 }
-
-
-btnSalvaNota.addEventListener('click', function () {
-  let reviewTexArea = document.getElementById('reviewTextArea');
-  let textNota = reviewTexArea.value;
-
-  arrayDeNotas.push(textNota);
-  if(arrayDeNotas.length > 3){
-    arrayDeNotas = arrayDeNotas.slice(arrayDeNotas.length - 3);
-  }
-
-  let areaNotasSalvas = document.getElementById("textNotasSalvas");
-  areaNotasSalvas.innerHTML = "";
-
-  for(let i = 0; i < arrayDeNotas.length; i++){
-  
-    let novoParagrafo = document.createElement('p');
-    novoParagrafo.classList.add('nota');
-    let textoNota = document.createElement('span')
-    textoNota.classList.add('textoNota');
-    textoNota.textContent = arrayDeNotas[i];
-    novoParagrafo.appendChild(textoNota);
-    areaNotasSalvas.appendChild(novoParagrafo);
-  }
-
-  reviewTexArea.value = ""
-
-  console.log(arrayDeNotas)
-})
 
 // Função para fechar o modal 1
 function fecharModal1() {
@@ -56,9 +26,8 @@ function fecharModal1() {
 // Função para abrir o modal 2
 function abrirModal2() {
   modal2.style.display = "block";
-  const imgmodal = parametrosURL.get('imagem');
-  document.querySelector("#img-capa-modal").setAttribute('src', imgmodal);
-  document.querySelector("#titulo-modal").textContent = livro.titulo;
+  document.querySelector("#img-capa-modal");
+  document.querySelector("#titulo-modal");
 }
 
 // Função para fechar o modal 2
@@ -107,22 +76,6 @@ window.onclick = function(event) {
   }
 }
 
-
-const livro ={
-  id: parametrosURL.get('id'),
-  titulo: parametrosURL.get('titulo'),
-  autor: parametrosURL.get('autor'),
-  descricao: parametrosURL.get('descricao'),
-  paginas: parametrosURL.get('paginas'),
-  imagem: parametrosURL.get('imagem')
-};
-
-document.querySelector("#tituloLivro").textContent = livro.titulo;
-document.querySelector("#autorLivro").textContent = livro.autor;
-document.querySelector("#descricaoLivro").textContent = formatarDescricao(livro.descricao);
-document.querySelector("#numPagina").textContent = livro.paginas;
-document.querySelector("#imgCapaLivro").setAttribute('src', livro.imagem);
-
 function adicionarClassificacaoEstrela() {
   const estrelas = document.querySelectorAll(".exibirClassificacao li i");
 
@@ -135,7 +88,44 @@ function adicionarClassificacaoEstrela() {
         estrelas[i].classList.add("bi-star-fill");
       }
     });
+    
+    estrela.addEventListener("click", () => {
+      const idLivro = document.querySelector("#idLivros").value;
+      enviarClassificacaoParaBackend(idLivro, index + 1); 
+    });
+    
   });
+}
+function enviarClassificacaoParaBackend(idLivro, classificacao) {
+  const url = "http://localhost:9090/livros/atualizar-classificacao";
+  const data = { "idLivro": idLivro,
+            "classificacao": classificacao };
+
+  fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch((error) => {
+      console.error('Error:', error);
+  });
+}
+
+const classificacao = document.querySelector("#classificacao").value;
+window.onload = function() {
+  const classificacao = document.querySelector("#classificacao").value;
+  exibirClassificacao(classificacao);
+}
+
+function exibirClassificacao(classificacao) {
+  const estrelas = document.querySelectorAll(".exibirClassificacao li i");
+
+  for (let i = 0; i < classificacao; i++) {
+    estrelas[i].classList.remove("bi-star");
+    estrelas[i].classList.add("bi-star-fill");
+  }
 }
 
 function resetarClassificacaoEstrela() {
@@ -146,9 +136,3 @@ function resetarClassificacaoEstrela() {
     estrela.classList.add("bi-star");
   });
 }
-
-
-// function toggleFavorito() {
-//   var favoritoButton = document.getElementById("favorito");
-//   favoritoButton.classList.toggle("filled");
-// }

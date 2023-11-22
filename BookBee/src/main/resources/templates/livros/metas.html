@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <title>Meta de Leitura</title>
+</head>
+
+<body>
+    <div class="containerlogo">
+        <div class="logofixamain">
+            <img src="/img/logo.png" alt="logo">
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <img class="hexagomenu" src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">
+        </header>
+        <nav>
+            <button>
+                <span>
+                    <img src="/img/Home.png" alt="home">
+                    <a href="/livros/"></a>
+                    <span><a href="/livros/">Home</a></span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <img src="/img/Goal.png" alt="meta">
+                    <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
+                    <span><a href="#">Metas</a></span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <img src="/img/Favorites.png" alt="Favoritos">
+                    <span><a href="#">Favoritos</a></span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <img src="/img/Quote.png" alt="Citações">
+                    <a href="/notas/"></a>
+                    <span><a href="/notas/">Anotações</a></span>
+                </span>
+            </button>
+
+            <button>
+                <span>
+                    <a href="/logout"></a>
+                    <img src="/img/Exit.png" alt="Sair">
+                    <span><a href="/logout">Sair</a></span>
+                </span>
+            </button>
+
+            <div class="logomenu">
+                <img src="/img/logomenu.png" alt="">
+            </div>
+
+            <div class="linha"></div>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <div class="usuario">
+            <a href="#"><img class="image" src="/img/user.png" alt="Foto do Usuário"></a>
+            <p id="username" th:text="${nomeUsuario}">/p>
+        </div>
+
+        <div class="barradepes">
+            <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
+            <button id="btnBuscar" type="button">
+                <img src="/img/lupa.png" alt="Lupa">
+            </button>
+        </div>
+
+        <div class="container-metas" id="metaLeitura">
+            <div class="titulo-metas">
+                <p>Metas de Leitura</p>
+            </div>
+        </div>
+
+        <section class="favoritos">
+            <ul id="livros" class="resultfavoritos">
+                <li class="adc-livro">
+                    <a href="#">
+                        <button>
+                            <img src="/img/adicionar.png" alt="Adicionar">
+                        </button>
+                    </a>
+                </li>
+                <li th:each="livro : ${livros}" class="livrosFavoritosTodos">
+                    <a th:href="@{/livros/{id}(id=${livro.idLivro})}">
+                        <img th:src="${livro.linkImagem}" alt="imagem da capa">
+                    </a>
+                </li>
+
+            </ul>
+        </section>
+    </main>
+
+</body>

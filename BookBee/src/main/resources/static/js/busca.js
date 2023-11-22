@@ -1,4 +1,3 @@
-
 // Adicionar livros; 
 const btnBusca = document.getElementById('btnBuscar')
 const busca = document.getElementById('search-txt')
@@ -18,12 +17,11 @@ const hadleEvent = async (event) => {
     if(!dados.items || dados.items.length === 0){
      // criar algo para informa que o resultado não foi encontrado
     }else{
-      if(location.href != 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html'){
-        // if(location.href != 'http://localhost:9090/livros/busca'){
+        if(location.href != 'http://localhost:9090/livros/busca'){
       console.log('na condição')
         localStorage.setItem('searchResults', JSON.stringify(dados.items));
-        // location.href = '/livros/pagina-de-busca';
-        location.href = 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html';
+        location.href = '/livros/pagina-de-busca';
+        
       }else{
         livros.innerHTML = '';
         
@@ -48,13 +46,11 @@ const hadleEvent = async (event) => {
   }
 }
 
-// txtprocura.addEventListener('keydown', hadleEvent);
 btnBusca.addEventListener('click', hadleEvent);
   
 window.addEventListener('load', () => {
   console.log('dentro do load')
-  if(window.location.href == 'http://127.0.0.1:5500/BookBee/src/main/resources/templates/busca.html'){
-    // if(location.href != 'http://localhost:9090/livros/busca'){
+    if(location.href != 'http://localhost:9090/livros/busca'){
 
     console.log('depois do load')
     const livros = document.getElementById('livros');
@@ -120,30 +116,3 @@ function adicionaLivro(id) {
   })
 }
 
-// const searchIcon = document.querySelector('.iconeBusca');
-// const searchInput = document.querySelector('input');
-// const searchButton = document.querySelector('.barraDeBusca button');
-// const searchSpace = document.querySelector('.barraDeBusca');
-
-
-// searchIcon.addEventListener('click', () => {
-
-//   if(window.innerWidth <= 950){
-//     if (searchInput.style.display === 'none') {
-//         searchInput.style.display = 'inline-block';
-//         searchButton.style.display = 'flex';
-//         searchButton.style.justifyContent = 'center';
-//         searchButton.style. alignItems= 'center';
-//         searchSpace.style.width = '150%';
-//         searchSpace.style.height = 'auto';
-//         searchSpace.style.borderRadius = '0';
-//     } else {
-//         searchInput.style.display = 'none';
-//         searchButton.style.display = 'none';
-//         searchSpace.style.width = '40px';
-//         searchSpace.style.height = '40px';
-//         searchSpace.style.borderRadius = '50%';
-//   }
-    
-//   }
-// });

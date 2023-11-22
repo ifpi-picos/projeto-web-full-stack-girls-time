@@ -16,55 +16,64 @@
     <aside>
         <div class="containerlogo">
             <div class="logofixa">
-            <img src="img/logo.png" alt="logo">
+            <img src="/img/logo.png" alt="logo">
         </div>
     </aside>
     <main>
+
         
-        <div class="titulogin">
-            <p><span class="cor01">Book</span><span class="cor02">Bee</span></p>
+        <div class="container-form-login">
+            <div class="titulogin">
+                <p><span class="cor01">Book</span><span class="cor02">Bee</span></p>
+            </div>
+            <div class="formlogin">
+                <form method="post" action="/logar">
+        
+                    <label for="E-mail">E-mail</label>
+                    <input type="email" name="email" placeholder="Insira seu E-mail" id="email" required>
+                    
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Insira sua Senha" required>
+                    <i class="bi bi-eye-fill" id="botao-senha" onclick="mostrarSenha()"></i>
+        
+                    <div class="cadastre">
+                        <ul>
+                            <li>
+                                <span class="cores">Não Cadastrado? </span>
+                                <a href="/cadastro">
+                                    Crie sua conta!</a>
+                                </li>
+                        </ul>
+                        <p th:if="${erro != null}"
+                        th:text="${erro}"
+                        class="errp-login"></p>
+                    </div>
+                    <div class="botaologin1">
+                        <button type="submit"><a>Login</a></button>
+                        </a>
+                    </div>
+                </form>
+             </div>
+
+        </div>
+
+        <div class="container-img-mobile-logcas">
+            <div class="img-mobile-logcas">
+                <img src="/img/homeMobile.png" alt="">
+            </div>
         </div>
     
-        <div class="formlogin">
-            <form method="post" action="/logar">
-    
-                <label for="E-mail">E-mail</label>
-                <input type="email" name="email" placeholder="Insira seu E-mail" id="email" required>
-                
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Insira sua Senha" required>
-                <i class="bi bi-eye-fill" id="botao-senha" onclick="mostrarSenha()"></i>
-    
-                <div class="cadastre">
-                    <ul>
-                        <li>
-                            <span class="cores">Não Cadastrado? </span>
-                            <a href="/cadastro">
-                                Crie sua conta!</a>
-                            </li>
-                    </ul>
-                    <p th:if="${erro != null}"
-                    th:text="${erro}"
-                    class="errp-login"></p>
-                </div>
-                <div class="botaologin1">
-                    <button type="submit"><a>Login</a></button>
-                    </a>
-                </div>
-            </form>
-         </div>
-    
-    <div class="container">
+    <div class="container-login">
         <div class="livro01">
-            <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos">    
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">    
             <p>Contos</p>
         </div>
         <div class="livro02">
-            <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos">    
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">   
             <p>Poesias</p>
         </div>
         <div class="livro03">
-            <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos">    
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">    
             <p>Não-Ficção</p>
         </div>
     </div>

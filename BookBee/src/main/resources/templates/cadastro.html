@@ -11,55 +11,65 @@
 
 <body>
     <main>
-        <div class="containerlogocas">
-            <div class="logofixacas">
-                    <img src="img/logo.png" alt="logo">
+
+        <div class="container-form-cadas">
+            <div class="containerlogocas">
+                <div class="logofixacas">
+                    <img src="/img/logo.png" alt="logo">
+                </div>
             </div>
-        </div>
+            
+            <div class="titulocas">
+                <p><span class="cor01">Criar</span><span class="cor02">Conta</span></p>
+            </div>
         
-        <div class="titulocas">
-            <p><span class="cor01">Criar</span><span class="cor02">Conta</span></p>
-        </div>
-    
-        <div class="formcadastro">
-            <form action="/cadastra" method="post">
-                
-                <label for="Nome">Nome</label>
-                <input name="nome" type="text" id="nome" placeholder="Digite seu Nome" >
-                
-                <label for="E-mail">E-mail</label>
-                <input name="email" type="email" required id="email" placeholder="Insira seu E-mail">
-                
-                <label for="senha">Senha</label>
-                <input name="senha" type="password" required id="senha" placeholder="Insira sua Senha" >
-                <div class="logar">
-                    <ul>
-                        <li>Já cadastrado? <a href="/login">Faça seu Login!</a></li> 
-                    </ul>
-                    <p th:if="${erro != null}"
-                    th:text="${erro}"
-                    class="errp-login"></p>
-                </div>
-                </div>
-                <div class="botaocadastro1">
-                    <button type="submit"><a>Cadastrar</a></button>
-                    </a>
-                </div>
+            <div class="formcadastro">
+                <form action="/cadastra" method="post">
+                    
+                    <label for="Nome">Nome</label>
+                    <input name="nome" type="text" id="nome" placeholder="Digite seu Nome" >
+                    
+                    <label for="E-mail">E-mail</label>
+                    <input name="email" type="email" required id="email" placeholder="Insira seu E-mail">
+                    
+                    <label for="senha">Senha</label>
+                    <input name="senha" type="password" required id="senha" placeholder="Insira sua Senha" >
+                    <div class="logar">
+                        <ul>
+                            <li>Já cadastrado? <a href="/login">Faça seu Login!</a></li> 
+                        </ul>
+                        <p th:if="${erro != null}"
+                        th:text="${erro}"
+                        class="errp-login"></p>
+                    </div>
+                    </div>
+                    <div class="botaocadastro1">
+                        <button type="submit"><a>Cadastrar</a></button>
+                        </a>
+                    </div>
                 </form>
+            </div>
+
+        </div>
+
+            <div class="container-img-mobile-cas">
+                <div class="img-mobile-cas">
+                    <img src="/img/homeMobile.png" alt="">
+                </div>
             </div>
     
 
-    <div class="container">
+    <div class="container-cadastro">
         <div class="livro04">
-        <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos">    
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">    
         <p>Terror/Horror</p>
         </div>
         <div class="livro05">
-         <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos"> 
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">
         <p>Aventura</p>
         </div>
         <div class="livro06" >
-            <img src="img/icons8-favos-de-mel-48.png" alt="hexagonos">    
+            <img src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">    
             <p>Fantasia</p>
         </div>
     </div>

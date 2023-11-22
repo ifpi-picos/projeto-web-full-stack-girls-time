@@ -19,6 +19,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background: #FFFBEB;
+
 }
 
 .logo img{
@@ -661,7 +662,7 @@ body {
     height: 800px;
     transform: rotate(-22deg);
     flex-shrink: 0;
-    background: #412E27;
+    background: #5D2410;
     box-shadow: 9px -9px 0px 0px #000 inset;
     float: right;
     margin-right: 61%;
@@ -692,6 +693,10 @@ body {
 
 .logofixamain{
     margin-top: -73px;
+}
+
+.container-img-mobile-cas{
+    display: none;
 }
 
 .sidebar{
@@ -867,7 +872,7 @@ body {
     
 }
 
-.estilizacaoLidos li {
+.estilizacaoLidos li a{
     position: relative;
     display: flex;
     justify-content: space-around;
@@ -965,8 +970,8 @@ body {
 }
 
 .gallery img{
-    width: 500px;
-    height: 250px;
+    width: 200px;
+    height: 240px;
     padding: 0px;
     border-radius: 5px;
 }
@@ -1266,7 +1271,7 @@ body {
 
 .descricaoLivroP{
     width: 310px;
-    height: 188px;
+    height: 18px;
     flex-shrink: 0;
     color: #301212;
     text-align: justify;
@@ -1935,7 +1940,7 @@ label{ cursor: pointer;}
     color: #301212;
 }
 
-.modal-content-notas button{
+.botao-salva{
     position: absolute;
     width: 150px;
     height: 45px;
@@ -1949,6 +1954,33 @@ label{ cursor: pointer;}
     cursor: pointer;
 }
 
+/* .excluirNotaBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.excluirNotaBtn img {
+    width: 20px; 
+    height: 20px; 
+} */
+
+.textNotasSalvas .nota {
+    position: relative;
+}
+
+.textNotasSalvas .delete-nota {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #A7886C;
+    font-size: 18px;
+}
 .modalDetalhes {
     display: none;
 }
@@ -2000,6 +2032,21 @@ label{ cursor: pointer;}
     /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
     /* Black w/ opacity */
+}
+
+.excluirNotaBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilo para a imagem da lixeira dentro do botão de excluir */
+.excluirNotaBtn img {
+    width: 20px; /* Ajuste conforme necessário */
+    height: 20px; /* Ajuste conforme necessário */
 }
 
 
@@ -2267,13 +2314,53 @@ h3 {
     .container{
         margin-left: -200px;
     }
+
+    .livro05{
+        margin-right: 74%;
+    }
+
+    .livro06{
+        margin-right: 57%;
+    }
+}
+
+@media only screen and (max-width: 1310px){
+    .livro04{
+        margin-right: 89%;
+    }
+
+    .livro05{
+        margin-right: 72%;
+    }
+
+    .livro06{
+        margin-right: 54%;
+    }
+}
+
+
+@media only screen and (max-width: 1340px){
+    .logofixacas{
+        margin-left: 22%;
+    }
+}
+
+@media only screen and (max-width: 1290px){
+    .logofixacas{
+        margin-left: 45%;
+    }
 }
 
 @media only screen and (max-width: 1252px){
     .container{
         margin-left: -300px;
     }
+
+    .logofixacas{
+        margin-left: 75%;
+    }
 }
+
 
 @media only screen and (max-width: 1376px){
     .livro02{
@@ -2354,6 +2441,23 @@ h3 {
     .container-home{
         margin-left: -80px;
     }
+
+    .logofixacas{
+        margin-left: 100%;
+    }
+
+    .livro04{
+        margin-right: 88%;
+    }
+
+    .livro05{
+        margin-right: 70%;
+    }
+
+    .livro06{
+        margin-right: 51%;
+    }
+    
 }
 
 @media only screen and (max-width: 1155px){
@@ -2363,6 +2467,23 @@ h3 {
 
     .container-form-login{
         margin-left: -100px;
+    }
+
+    .logofixacas{
+        margin-left: 120%;
+    }
+
+    .livro04{
+        margin-right: 88%;
+        margin-top: 4%;
+    }
+
+    .livro05{
+        margin-right: 69%;
+    }
+
+    .livro06{
+        margin-right: 49%;
     }
 }
 
@@ -2387,22 +2508,112 @@ h3 {
         margin-top: 134px;
     }
     
-}
-
-
-@media only screen and (max-width: 1116px){
     .container-home{
         margin-left: 180px;
     }
-
+    
     .container{
         display: none;
     }
+
+    .container-cadastro{
+        display: none;
+    }
+
+    .container-form-cadas{
+        margin-left: -33%;
+    }
+}
+
+
+
+@media only screen and (max-width: 1103px){
+    .container-home{
+        margin-left: -80px;
+    }
+    
+    .logofixacas{
+        margin-left: 100%;
+    }
+    
+    .livro04 {
+        margin-right: 87%;
+    }
+    
+    .livro05 {
+        margin-right: 67%;
+    }
+    
+    .livro06 {
+        margin-right: 46%;
+    }
+    
+    /* .logofixacas {
+        margin-top: -14%;
+    } */
+    
+    
+}
+
+@media only screen and (max-width: 1070px){
+    /* .logofixacas {
+        margin-left: 147%;
+        margin-top: -14%;
+    } */
+    
+    .livro04 {
+        margin-right: 87%;
+      
+}
+}
+
+@media only screen and (max-width: 1050px){
+    .livro04 {
+        height: 814px;
+        margin-right: 87%;
+        margin-top: 1%;
+    }
+    
+    .livro05 {
+        margin-right: 66%;
+    }
+    
+    .livro06 {
+        margin-right: 44%;
+    }
+    
+    /* .logofixacas {
+        margin-left: 165%;
+        margin-top: -14%;
+    } */
 }
 
 @media only screen and (max-width: 1023px){
     .container-form-login {
         margin-left: -445px;
+    }
+
+    .livro04 {
+        height: 840px;
+        margin-right: 86%;
+        margin-top: 1%;
+    }
+    
+    .livro05 {
+        margin-right: 65%;
+    }
+    
+    .livro06 {
+        margin-right: 42%;
+    }
+    
+    /* .logofixacas {
+        margin-left: 173%;
+        margin-top: -14%;
+    } */
+
+    .container-form-cadas{
+        margin-left: -41%;
     }
 }
 
@@ -2411,11 +2622,15 @@ h3 {
     .container-home{
         margin-left: 117px;
     }
+
+    .container-form-cadas{
+        margin-left: -44%;
+    }
 }
 
 @media only screen and (max-width: 960px){
     .container-form-login {
-        margin-left: -485px;
+        margin-left: -47%;
     }
 }
 
@@ -2424,11 +2639,25 @@ h3 {
     .container-home{
         margin-left: 70px;
     }
+    
+    .container-form-cadas{
+        margin-left: -51%;
+    }
 }
 
 @media only screen and (max-width: 850px){
     .container-form-login {
         margin-left: -520px;
+    }
+
+    .container-form-cadas{
+        margin-left: -61%;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .container-form-cadas{
+        margin-left: -68%;
     }
 }
 
@@ -2446,6 +2675,10 @@ h3 {
         float: right;
         margin-top: 25px;
     }
+
+    .container-form-cadas{
+        margin-left: -74%;
+    }
 }
 
 @media only screen and (max-width: 700px){
@@ -2459,6 +2692,10 @@ h3 {
         float: right;
         margin-top: 25px;
     }
+
+    .container-form-cadas{
+        margin-left: -82%;
+    }
 }
 
 
@@ -2470,14 +2707,69 @@ h3 {
     .container-form-login {
         margin-left: -700px;
     }
+
+    .container-form-cadas{
+        margin-left: -82%;
+    }
 }
 
 @media only screen and (max-width: 660px){
     .container-home{
         margin-left: -50px;
     }
+
+    .container-form-cadas {
+        margin-left: -90%;
+    }
 }
 
+@media only screen and (max-width: 660px){
+   .container-form-cadas {
+        margin-left: -90%;
+    }
+}
+
+@media only screen and (max-width: 630px){
+    .container-form-cadas {
+         margin-left: -96%;
+     }
+ }
+
+ @media only screen and (max-width: 610px){
+    .container-form-cadas {
+         margin-left: -102%;
+     }
+ }
+
+@media only screen and (max-width: 590px){
+    .container-form-cadas {
+        margin-left: -108%;
+    }
+}
+
+ @media only screen and (max-width: 575px){
+    .container-form-cadas {
+         margin-left: -114%;
+     }
+ }
+
+ @media only screen and (max-width: 555px){
+    .container-form-cadas {
+         margin-left: -118%;
+     }
+ }
+
+ @media only screen and (max-width: 545px){
+    .container-form-cadas {
+         margin-left: -120%;
+     }
+ }
+
+ @media only screen and (max-width: 545px){
+    .container-form-cadas {
+         margin-left: -125%;
+     }
+ }
 
 @media only screen and (max-width: 500px){
   
@@ -2542,20 +2834,35 @@ h3 {
 }
 
    .img-mobile-logcas{
-    display: block;
+        display: block;
 
    }
+
+   .botaologin1 {
+        width: 68%;
+        float: right;
+        margin-top: 25px;
+}
+
+.container-form-cadas {
+    margin-left: -134%;
+}
+
+.container-img-mobile-cas{
+    display: block;
+    width: 20%;
+}
 }
 
 @media only screen and (max-width: 513px){
     .container-form-login {
-    margin-left: -718px;
+        margin-left: -718px;
 }
 }
 
 @media only screen and (max-width: 496px){
-.container-form-login {
-    margin-left: -737px;
+    .container-form-login {
+        margin-left: -737px;
 }
 }
 
@@ -2574,16 +2881,6 @@ h3 {
     }
 }
 
-@media only screen and (max-width: 450px){
-    .formlogin form{
-        margin-left: 852px;
-    }
-
-    .formlogin i{
-        top: -43px;
-        margin-left: 98%;
-    }
-}
 
 @media only screen and (max-width: 455px){
     .formlogin form{
@@ -2623,7 +2920,19 @@ h3 {
         margin-top: 181px;
     }
 
+    .botaologin1 {
+        width: 64%;
+        float: right;
+        margin-top: 25px;
+    }
     
+    .container-img-mobile-logcas {
+        width: 144%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 152px;
+    }
 }
 
 
@@ -2631,6 +2940,19 @@ h3 {
     .container-home{
         margin-left: -55px;
     }
+
+    .formlogin i{
+        margin-left: 114%;
+    }
+
+    .botaologin1 {
+        width: 59%;
+    }
+
+    .container-img-mobile-logcas {
+        width: 152%;
+    }
+
 }
 
     @media only screen and (max-width: 410px){
@@ -2645,7 +2967,37 @@ h3 {
             justify-content: center;
             margin-top: 120px;
         }
+
+        .formlogin i{
+            margin-left: 119%;
+        }
+
+        .container-form-login {
+            margin-left: -737px;
+            margin-top: 65%;
+        }
+        
+        .logofixa {
+            margin-left: 97%;
+            margin-top: -123%;
+        }
     }
+
+    @media only screen and (max-width: 390px){
+        .formlogin i{
+            margin-left: 128%;
+        }
+
+        .botaologin1 {
+            width: 54%;
+        }
+    
+        .container-img-mobile-logcas {
+            margin-top: 54%;
+            width: 169%;
+        }
+
+     }
 
     @media only screen and (max-width: 370px){
        .cor1{
@@ -2659,7 +3011,34 @@ h3 {
        .container-home{
         margin-left: -78px;
        }
+
+       .container-img-mobile-logcas {
+        width: 174%;
     }
+
+    .formlogin form {
+        margin-left: 852px;
+        margin-top: 15%;
+    }
+    
+    .formlogin label {
+        font-size: 20px;
+    }
+    
+    
+    .formlogin i {
+        margin-left: 137%;
+    }
+    
+    .logofixa {
+        margin-left: 115%;
+        margin-top: -123%;
+    }
+    
+}
      
-
-
+@media only screen and (max-width: 370px){
+    .formlogin i {
+        margin-left: 146%;
+    }
+}

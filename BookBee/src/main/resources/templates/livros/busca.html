@@ -1,65 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>Busca</title>
 </head>
+
 <body>
     <div class="containerlogo">
         <div class="logofixamain">
-            <img src="/BookBee/src/main/resources/static/img/logo.png" alt="logo">
+            <img src="/img/logo.png" alt="logo">
         </div>
     </div>
 
     <aside class="sidebar">
         <header class="sidebar-header">
-            <img class="hexagomenu" src="/BookBee/src/main/resources/static/img/icons8-favos-de-mel-48.png" alt="hexagonos">
+            <img class="hexagomenu" src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">
         </header>
         <nav>
             <button>
                 <span>
-                    <img src="/BookBee/src/main/resources/static/img/Home.png" alt="home">
-                    <a href="/BookBee/src/main/resources/templates/main.html"></a>
-                    <span><a href="/BookBee/src/main/resources/templates/main.html">Home</a></span>
+                    <img src="/img/Home.png" alt="home">
+                    <a href="/livros/"></a>
+                    <span><a href="/livros/">Home</a></span>
                 </span>
             </button>
-    
+
             <button>
                 <span>
-                    <img src="/BookBee/src/main/resources/static/img/Goal.png" alt="meta">
+                    <img src="/img/Goal.png" alt="meta">
                     <a href="/BookBee/src/main/resources/templates/main.html#metaLeitura"></a>
                     <span><a href="#">Metas</a></span>
                 </span>
             </button>
-    
+
             <button>
                 <span>
-                    <img src="/BookBee/src/main/resources/static/img/Favorites.png" alt="Favoritos">
+                    <img src="/img/Favorites.png" alt="Favoritos">
                     <span><a href="#">Favoritos</a></span>
                 </span>
             </button>
-    
+
             <button>
                 <span>
-                    <img src="/BookBee/src/main/resources/static/img/Quote.png" alt="Citações">
+                    <img src="/img/Quote.png" alt="Citações">
                     <span><a href="#">Anotações</a></span>
                 </span>
             </button>
-    
+
             <button>
                 <span>
-                <a href="/BookBee/src/main/resources/templates/home.html"></a>
-                    <img src="/BookBee/src/main/resources/static/img/Exit.png" alt="Sair">
-                    <span><a href="/BookBee/src/main/resources/templates/home.html">Sair</a></span>
+                    <a href="/logout"></a>
+                    <img src="/img/Exit.png" alt="Sair">
+                    <span><a href="/logout">Sair</a></span>
                 </span>
             </button>
-            
+
             <div class="logomenu">
-                <img src="/BookBee/src/main/resources/static/img/logomenu.png" alt="">
+                <img src="/img/logomenu.png" alt="">
             </div>
 
             <div class="linha"></div>
@@ -68,17 +71,17 @@
 
     <main class="main">
         <div class="usuario">
-            <a href="#"><img src="/BookBee/src/main/resources/static/img/user.png" alt="Foto do Usuário"></a>
-            <p id="username">Nome do Usuário</p> 
+            <a href="#"><img src="/img/user.png" alt="Foto do Usuário"></a>
+            <p id="username" th:text="${nomeUsuario}"></p>
         </div>
-        
+
         <div class="barradepes">
             <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
             <button id="btnBuscar" type="button">
-                <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
+                <img src="/img/lupa.png" alt="Lupa">
             </button>
         </div>
-        
+
         <div class="resultadoPesquisa">
             <ul id="livros" class="resultGrid">
 
@@ -86,5 +89,5 @@
         </div>
 
     </main>
-    <script src="/BookBee/src/main/resources/static/js/busca.js"></script>
+    <script src="/js/busca.js"></script>
 </body>
