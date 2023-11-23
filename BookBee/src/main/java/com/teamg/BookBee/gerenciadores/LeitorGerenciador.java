@@ -4,8 +4,12 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +31,9 @@ public class LeitorGerenciador {
 
     @Autowired
     private LivroGerenciador livroGerenciador;
+
+    @Autowired 
+    private ListaDeLeituraGerenciador listaDeLeituraGerenciador;
 
     public void cadastra(Leitor leitor){
         LOGGER.info("Cadastrando Leitor com o email: {}", leitor.getEmail());
@@ -108,5 +115,47 @@ public class LeitorGerenciador {
         LOGGER.info("Velocidade de leitura calculada com sucesso para o usuario com o email: {}", email);
         return velocidadeLeitura;
     }
+
+    public Map<String, Object>  getDadosDoUsuario(String subject) throws Exception {
+        Map<String, Object> model = new HashMap<>();
+        Leitor leitor = repo.findByEmail(subject);
+        Map<String, Object> listaDeLeitura = listaDeLeituraGerenciador.getListasDoUsuario(subject);
+        model.put("totalPgLidas", getTotalPaginasLidas(subject));
+        model.put("totalLivrosLidos", getTotalLivrosTerminados(subject));
+        model.put("totalListas", getTotalListasDeLeitura(subject));
+        model.put("leitor", leitor);
+        model.putAll(listaDeLeitura);
+        return model;
+    }
+
+    public int getTotalPaginasLidas(String subject) throws Exception {
+        Leitor leitor = findLeitorByEmail(subject);
+        Set<Integer> paginasLidas = new HashSet<>();
+        for (Livro livro : leitor.getLivros()) {
+            paginasLidas.add(livro.getPgLidas());
+        }
+        int total = 0;
+        for (int paginas : paginasLidas) {
+            total += paginas;
+        }
+        return total;
+    }
+
+    public int getTotalLivrosTerminados(String subject) throws Exception {
+        Leitor leitor = findLeitorByEmail(subject);
+        int total = 0;
+        for (Livro livro : leitor.getLivros()) {
+            if (livro.getPgLidas() == livro.getPaginas()) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    public int getTotalListasDeLeitura(String subject) throws Exception {
+        Leitor leitor = findLeitorByEmail(subject);
+        return leitor.getListaDeLeituras().size();
+    }
+    
 
 }

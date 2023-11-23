@@ -1,6 +1,7 @@
 package com.teamg.BookBee.controllers;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 
+import com.teamg.BookBee.configuracoes.TokenService;
 import com.teamg.BookBee.gerenciadores.LeitorGerenciador;
 import com.teamg.BookBee.model.Leitor;
+import com.teamg.BookBee.service.CookieService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
@@ -24,6 +28,9 @@ public class LeitoresController {
 
     @Autowired
     private LeitorGerenciador leitorGerenciador;
+
+    @Autowired
+    private TokenService tokenService;
 
     @Operation(summary = "Exibir a pagina de cadastro", method = "GET")
     @GetMapping("/cadastro")
@@ -57,5 +64,24 @@ public class LeitoresController {
         response.setStatus(HttpServletResponse.SC_CREATED);
         return"redirect:/login";
     }
+
+    @GetMapping("usuario/pagina-do-usuario")
+    public String exibirPaginaDoUsuario(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                Map<String, Object> leitorModel = 
+                    leitorGerenciador.getDadosDoUsuario(subject);
+                    model.addAllAttributes(leitorModel);
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                response.setStatus(HttpServletResponse.SC_OK);
+                return "/usuario/index";
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "/erro/error404";
+    }
+
 
 }

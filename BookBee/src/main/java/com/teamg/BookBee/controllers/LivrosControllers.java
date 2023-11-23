@@ -88,6 +88,7 @@ public class LivrosControllers {
                     response.setStatus(HttpServletResponse.SC_OK);
                     return "livros/metas"; 
                 } catch (Exception e) {
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                     model.addAttribute("titulo", "Todos Os Livros");
                     model.addAttribute("Exception", e.getMessage());
                     return "livros/metas";
@@ -322,9 +323,10 @@ public class LivrosControllers {
                     response.setStatus(HttpServletResponse.SC_OK);
                     return "livros/metas";
                 } catch (Exception e) {
-                      model.addAttribute("titulo", "Livros Favoritos");
-                      model.addAttribute("Exception", e.getMessage());
-                      return "livros/metas";
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                    model.addAttribute("titulo", "Livros Favoritos");
+                    model.addAttribute("Exception", e.getMessage());
+                    return "livros/metas";
                 }
                
             }
@@ -347,6 +349,7 @@ public class LivrosControllers {
                     response.setStatus(HttpServletResponse.SC_OK);
                     return "livros/metas";
                 } catch (Exception e) {
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                     model.addAttribute("titulo", "Meta de leitura");
                     model.addAttribute("Exception", e.getMessage());
                     return "livros/metas";

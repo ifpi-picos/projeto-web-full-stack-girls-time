@@ -47,6 +47,7 @@ public class SecurityConfiguration {
     List<RequestMatcher> matchersControles = Arrays.asList(
         new MvcRequestMatcher(null, "/notas/**"),
         new MvcRequestMatcher(null, "/resenha/**"),
+        new MvcRequestMatcher(null, "/usuario/**"),
         new MvcRequestMatcher(null, "/listas/**"),
         new MvcRequestMatcher(null, "/erro/**"),
         new MvcRequestMatcher(null, "/livros/**")

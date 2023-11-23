@@ -40,29 +40,14 @@ public class Leitor implements UserDetails{
     @Column(name= "senha")
     private String senha;
 
-    @Column(name= "total_pg_lidas")
-    private int totalPgLidas;
-
-    @Column(name= "total_livros_lidos")
-    private int totalLivrosLidos;
-
     @OneToMany(mappedBy = "leitor", cascade = CascadeType.ALL)
     private Set<Livro> livros;
 
     @OneToMany(mappedBy = "leitor")
     private Set<Anotacao> anotacoes;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Set<Anotacao> getAnotacoes() {
-        return anotacoes;
-    }
-
-    public void setAnotacoes(Set<Anotacao> anotacoes) {
-        this.anotacoes = anotacoes;
-    }
+    @OneToMany(mappedBy = "leitor")
+    private Set<ListaDeLeitura> listaDeLeituras;
 
     public long getId() {
         return id;
@@ -100,28 +85,28 @@ public class Leitor implements UserDetails{
         this.senha = senha;
     }
 
-    public int getTotalPgLidas() {
-        return totalPgLidas;
-    }
-
-    public void setTotalPgLidas(int totalPgLidas) {
-        this.totalPgLidas = totalPgLidas;
-    }
-
-    public int getTotalLivrosLidos() {
-        return totalLivrosLidos;
-    }
-
-    public void setTotalLivrosLidos(int totalLivrosLidos) {
-        this.totalLivrosLidos = totalLivrosLidos;
-    }
-
     public Set<Livro> getLivros() {
         return livros;
     }
 
     public void setLivros(Set<Livro> livros) {
         this.livros = livros;
+    }
+
+      public Set<Anotacao> getAnotacoes() {
+        return anotacoes;
+    }
+
+    public void setAnotacoes(Set<Anotacao> anotacoes) {
+        this.anotacoes = anotacoes;
+    }
+
+    public Set<ListaDeLeitura> getListaDeLeituras() {
+        return listaDeLeituras;
+    }
+
+    public void setListaDeLeituras(Set<ListaDeLeitura> listaDeLeituras) {
+        this.listaDeLeituras = listaDeLeituras;
     }
 
     @Override
