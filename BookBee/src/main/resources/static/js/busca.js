@@ -17,8 +17,8 @@ const hadleEvent = async (event) => {
     if(!dados.items || dados.items.length === 0){
      // criar algo para informa que o resultado não foi encontrado
     }else{
-        if(location.href != 'http://localhost:9090/livros/busca'){
-      console.log('na condição')
+      if(location.href != 'http://localhost:9090/livros/pagina-de-busca'){
+        console.log('na condição')
         localStorage.setItem('searchResults', JSON.stringify(dados.items));
         location.href = '/livros/pagina-de-busca';
         
@@ -50,7 +50,7 @@ btnBusca.addEventListener('click', hadleEvent);
   
 window.addEventListener('load', () => {
   console.log('dentro do load')
-    if(location.href != 'http://localhost:9090/livros/busca'){
+    if(location.href === 'http://localhost:9090/livros/pagina-de-busca'){
 
     console.log('depois do load')
     const livros = document.getElementById('livros');
@@ -77,8 +77,6 @@ window.addEventListener('load', () => {
   } 
 });
 
-
-
 function adicionaLivro(id) {
   alert(id)
 
@@ -91,12 +89,11 @@ function adicionaLivro(id) {
       contentType: 'application/json',
       data: JSON.stringify({
         'titulo': data.volumeInfo.title,
-        'linkImagens': data.volumeInfo.imageLinks && data.volumeInfo.imageLinks.thumbnail ? data.volumeInfo.imageLinks.thumbnail : '/img/1682512674678.png',
+        'linkImagem': data.volumeInfo.imageLinks && data.volumeInfo.imageLinks.thumbnail ? data.volumeInfo.imageLinks.thumbnail : '/img/1682512674678.png',
         'autor': data.volumeInfo.authors ? data.volumeInfo.authors.join(', ') : 'não definido',
-        'editora': data.volumeInfo.publisher,
         'genero': data.volumeInfo.categories ? data.volumeInfo.categories.join(', ') : 'não definido',
-        'pagina': data.volumeInfo.pageCount,
-        'pglidas': 0,
+        'paginas': data.volumeInfo.pageCount,
+        'pgLidas': 0,
         'favorito': false,
         'classificacao': 0,
         'dataDeIni': null,
@@ -108,8 +105,6 @@ function adicionaLivro(id) {
       error: function(xhr, status, error) {
         if(error === 'MethodArgumentTypeMismatchException'){
           location.replace("redirect:/livros");
-        }else{
-          location.replace(":/404");
         }
       }
     });
