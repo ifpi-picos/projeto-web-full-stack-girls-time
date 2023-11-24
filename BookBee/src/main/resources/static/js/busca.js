@@ -47,6 +47,7 @@ const hadleEvent = async (event) => {
 }
 
 btnBusca.addEventListener('click', hadleEvent);
+busca.addEventListener('keydown', hadleEvent);
   
 window.addEventListener('load', () => {
   console.log('dentro do load')

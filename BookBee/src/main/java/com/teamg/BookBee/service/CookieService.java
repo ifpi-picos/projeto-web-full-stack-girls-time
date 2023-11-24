@@ -1,5 +1,8 @@
 package com.teamg.BookBee.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -18,17 +21,32 @@ public class CookieService {
 
     public static void setCookie(HttpServletResponse response, String key, String valor) {
         LOGGER.info("Configurando cookie para a chave: {}", key);
+        try {
+            valor = URLEncoder.encode(valor, "UTF-8"); // Codificar o valor
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         Cookie cookie = new Cookie(key, valor);
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
+        LOGGER.info("Configurando cookie para a chave: {} finalizado", key);
     }
 
     public static String getCookie(HttpServletRequest request, String key) {
         LOGGER.info("Obtendo cookie para a chave: {}", key);
-        return Optional.ofNullable(request.getCookies())
+         return Optional.ofNullable(request.getCookies())
         .flatMap(cookies -> Arrays.stream(cookies)
         .filter(cookie -> key.equals(cookie.getName()))
-        .findAny()).map(e -> e.getValue())
+        .findAny()).map(e -> {
+            try {
+                LOGGER.info("Obtendo cookie para a chave: {} Finalizada", key);
+                return URLDecoder.decode(e.getValue(), "UTF-8"); // Decodificar o valor
+            } catch (UnsupportedEncodingException ex) {
+                ex.printStackTrace();
+                LOGGER.info("Obtendo cookie para a chave: {} Finalizada", key);
+                return null;
+            }
+        })
         .orElse(null);
     }
 

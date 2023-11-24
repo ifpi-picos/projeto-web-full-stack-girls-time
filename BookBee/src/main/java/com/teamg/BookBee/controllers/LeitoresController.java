@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.teamg.BookBee.configuracoes.TokenService;
@@ -81,6 +82,46 @@ public class LeitoresController {
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         return "/erro/error404";
+    }
+
+    @GetMapping("usuario/configuracoes")
+    public String exibirConfiguracoes(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String token = CookieService.getCookie(request, "token");
+        if(token != null){
+            var subject = tokenService.validateToken(token);
+            if(!subject.isEmpty()){
+                Map<String, Object> leitorModel = 
+                    leitorGerenciador.getDadosDoUsuario(subject);
+                    model.addAllAttributes(leitorModel);
+                    model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
+                response.setStatus(HttpServletResponse.SC_OK);
+                return "/usuario/confUsuario";
+            }
+        }
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        return "/erro/error404";
+    }
+
+    @PostMapping("usuario/atualiza")
+    public String atualiza(@ModelAttribute Leitor leitor, 
+                        @RequestParam String emailAtual,
+                        BindingResult bindingResult,
+                        Model model,
+                        HttpServletResponse response) throws IOException {
+        if(bindingResult.hasErrors()){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            model.addAttribute("erro", "Erro de Validação");
+            return "/usuario/confUsuario";
+        }
+        try {
+            leitorGerenciador.atualiza(leitor, emailAtual);
+        } catch (IllegalArgumentException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            model.addAttribute("erro", e.getMessage());
+            return "/usuario/confUsuario";
+        }
+        response.setStatus(HttpServletResponse.SC_OK);
+        return "redirect:/usuario/configuracoes";
     }
 
 

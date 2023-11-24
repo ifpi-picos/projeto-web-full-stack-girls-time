@@ -65,6 +65,51 @@ public class LeitorGerenciador {
         LOGGER.info("Leitor cadastrado com sucesso com o email: {}", leitor.getUsername());
     } 
 
+    public void atualiza(Leitor leitor, String emailAtual){
+        LOGGER.info("Atualizando Leitor com o email: {}", leitor.getEmail());
+        String nome = leitor.getNome();
+        String email = leitor.getEmail();
+        String senha = leitor.getPassword();
+        int pos = email.indexOf("@");
+        String checarEmail = email.substring(pos, email.length());
+        if(nome != null && !nome.trim().isEmpty()) {
+            if(nome.trim().isEmpty()) {
+                throw new IllegalArgumentException("Nome não podem ser vazio");
+            }
+        }
+        if(email != null && !email.trim().isEmpty()) {
+            if(!checarEmail.equals("@gmail.com")){
+                throw new IllegalArgumentException("enderço de email é invalido");
+            }
+        }
+        if(senha != null && !senha.trim().isEmpty()){
+            if(senha.trim().isEmpty()){
+                throw new IllegalArgumentException("Senha não pode estar vazia");
+            }
+            if(senha.length() < 7){
+                throw new IllegalArgumentException("Senha não pode ser curta");
+            }
+        }
+        Leitor leitorExiste = repo.findByEmail(emailAtual);
+        if(leitorExiste != null) {
+            if(nome != null && !nome.trim().isEmpty()) {
+                leitorExiste.setNome(leitor.getNome());
+            }
+            if(email != null && !email.trim().isEmpty()) {
+                leitorExiste.setEmail(leitor.getEmail());
+            }
+            if(senha != null && !senha.trim().isEmpty()){
+                String encryptedPassword = new BCryptPasswordEncoder().encode(leitor.getPassword());
+                leitorExiste.setSenha(encryptedPassword);
+            }
+        } else {
+            throw new IllegalArgumentException("Email não existe");
+        }
+        repo.save(leitorExiste);
+        LOGGER.info("Leitor atualizado com sucesso com o email: {}", leitor.getUsername());
+    }
+    
+
     public Leitor findLeitorByEmail(String email) throws Exception{
         LOGGER.info("Buscando leitor pello email: {}", email); 
         Leitor leitor = this.repo.findByEmail(email);
