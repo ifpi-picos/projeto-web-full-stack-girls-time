@@ -227,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" id="salarModalNotas">Salvar</button>
+                <button class="botao-salva" type="submit" id="salarModalNotas">Salvar</button>
             </form>
             </div>
         </div>
@@ -242,9 +242,6 @@
                         <img id="img-capa-modal" th:src="${livro.linkImagem}"/>
                         <div class="modal-exibirClassificacao">
                             <ul>
-                                <li th:each="i : ${#numbers.sequence(1, livro.classificacao != null ? livro.classificacao : 0)}">
-                                    <i class="bi bi-star-fill"></i>
-                                </li>
                                 <li th:each="i : ${#numbers.sequence((livro.classificacao != null ? livro.classificacao : 0) + 1, 5)}">
                                     <i class="bi bi-star"></i>
                                 </li>

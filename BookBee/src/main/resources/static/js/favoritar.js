@@ -26,3 +26,9 @@ coracao.addEventListener('click', function(){
 );
 
 
+
+
+// scroll
+
+document.body.style.overflowY = 'hidden';
+

@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <title>Error</title>
 </head>
 <body>
-    <div><p th:if="${erro != null}" th:text="${erro}"></p></div>
+    <div class="container-error" style="margin-top:5%">
+        <div class="container-livro">
+            <div class="livro">
+                <img src="/img/livro.png" alt="" class="livro">
+            </div>
+    
+        </div>
+    
+        <div class="container-titulo-error">
+            <div class="titulo-error">
+                <p><span class="cor1">Error</span><span class="cor2">404</span></p>
+            </div>
+        </div>
+        <div class="error"><p th:if="${erro != null}" th:text="${erro}">Erro na Rota</p></div>
+        
+        <div class="container-img">
+            <div class="img-mobile-error">
+                <img src="/img/homeMobile.png" alt="">
+            </div>
+        </div>
+    
+    </div>
 </body>
 
 </html>
