@@ -739,7 +739,7 @@ body {
     margin-left: 10px;
 }
 
-.sidebar button span a{
+.nomes a{
     color: #412E27;
     font-size: 25px;
 }
@@ -2414,6 +2414,9 @@ h3 {
     .logofixacas{
         margin-left: 45%;
     }
+    .containerlogo{
+        margin-right: -12%;
+    }
 }
 
 @media only screen and (max-width: 1252px){
@@ -2423,6 +2426,10 @@ h3 {
 
     .logofixacas{
         margin-left: 75%;
+    }
+
+    .containerlogo{
+        margin-right: -17%;
     }
 }
 
@@ -2550,6 +2557,39 @@ h3 {
     .livro06{
         margin-right: 49%;
     }
+
+    .containerlogo{
+        margin-right: -24%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -8%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -9%;
+    }
+
+    .titulo-metas a{
+        margin-right: -7%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -8%;
+    }
+    
+
+    .titulo-favoritos a{
+        margin-right: -8%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -9%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -8%;
+    }
 }
 
 /* @media only screen and (max-width: 990px){
@@ -2617,7 +2657,38 @@ h3 {
         margin-top: -14%;
     } */
     
+    .containerlogo{
+        margin-right: -32%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -16%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -17%;
+    }
+
+    .titulo-metas a{
+        margin-right: -15%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -16%;
+    }
     
+
+    .titulo-favoritos a{
+        margin-right: -15%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -16%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -15%;
+    }
 }
 
 @media only screen and (max-width: 1070px){
@@ -2680,6 +2751,39 @@ h3 {
     .container-form-cadas{
         margin-left: -41%;
     }
+
+    .containerlogo{
+        margin-right: -42%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -26%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -27%;
+    }
+
+    .titulo-metas a{
+        margin-right: -25%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -26%;
+    }
+    
+
+    .titulo-favoritos a{
+        margin-right: -25%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -26%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -25%;
+    }
 }
 
 
@@ -2697,6 +2801,39 @@ h3 {
     .container-form-login {
         margin-left: -47%;
     }
+
+    .containerlogo{
+        margin-right: -52%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -36%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -37%;
+    }
+
+    .titulo-metas a{
+        margin-right: -35%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -36%;
+    }
+    
+
+    .titulo-favoritos a{
+        margin-right: -35%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -36%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -35%;
+    }
 }
 
 
@@ -2708,6 +2845,39 @@ h3 {
     .container-form-cadas{
         margin-left: -51%;
     }
+
+    .containerlogo{
+        margin-right: -62%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -46%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -47%;
+    }
+
+    .titulo-metas a{
+        margin-right: -45%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -46%;
+    }
+    
+
+    .titulo-favoritos a{
+        margin-right: -45%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -46%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -45%;
+    }
 }
 
 @media only screen and (max-width: 850px){
@@ -2718,8 +2888,84 @@ h3 {
     .container-form-cadas{
         margin-left: -61%;
     }
+
+    .containerlogo{
+        margin-right: -60%;
+    }
+
+    .titulo-lidos-recentes a{
+        margin-right: -56%;
+    }
+
+    .titulo-lidos-recentes img{
+        margin-right: -57%;
+    }
+
+    .titulo-metas a{
+        margin-right: -55%;
+    }
+
+    .titulo-metas img{ 
+        margin-right: -56%;
+    }
+    
+
+    .titulo-favoritos a{
+        margin-right: -55%;
+    }
+
+    .titulo-favoritos img{
+        margin-right: -56%;
+    }
+
+    .titulo-citacao a{
+        margin-right: -55%;
+    }
+
+    .sidebar{
+        width: 100px;
+    }
+
+    .main{
+        margin-left: -7%;
+    }
+    
+    .nomes a{
+        display: none;
+    }
+
+    nav{
+        height: 52%;
+    }
+
+    .logomenu img {
+        width: 124px;
+        margin-top: 245%;
+        margin-left: -11px;
+    }
+
+    .sidebar-header {
+        width: 100%;
+        margin-left: 26px;
+        margin-bottom: 30%;
+    }
+
+.sidebar button{
+    height: 52px;
+    margin-top: 26px;
 }
 
+    .sidebar button img {
+        height: 40px;
+        margin-left: 36%;
+    }
+
+    .container-carrossel {
+        width: 115%;
+    }
+
+
+}
 @media only screen and (max-width: 850px){
     .container-form-cadas{
         margin-left: -68%;
