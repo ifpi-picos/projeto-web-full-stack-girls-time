@@ -602,7 +602,7 @@ body {
     float: right;
     margin-right: 90%;
     position: relative;
-    top: -663px;
+    top: -650px;
 }
 
 .livro04 p{
@@ -3104,12 +3104,15 @@ h3 {
     margin-left: -25px;
   }
 
+  .titulo{
+    margin-left: 12%;
+  }
     .cor1{
-    font-size: 150px;
+    font-size: 110px;
    }
 
    .cor2{
-    font-size: 150px;
+    font-size: 110px;
    }
 
    .text{
@@ -3118,18 +3121,22 @@ h3 {
 
    .text-mobile{
     display: block;
-    margin-left: 120px;
+    margin-left: 172px;
     width: 370px;
-    font-size: 20px;
+    font-size: 18px;
    }
 
 .container-img-mobile{
-    width: 150%;
+    width: 106%;
     display: flex;
     align-items: center; /* Alinha no centro verticalmente */
     justify-content: center; /* Alinha no centro horizontalmente */
-    margin-top: 120px;
+    margin-top: -6px;
 }
+
+ .container-img-mobile img{
+    width: 80%;
+    }
 
    .img-mobile{
     display: block;
@@ -3142,7 +3149,7 @@ h3 {
     align-items: center;
     justify-content: center;
     margin-top: 135px;
-}
+    }
 
    .img-mobile-logcas{
         display: block;
@@ -3153,19 +3160,76 @@ h3 {
         width: 68%;
         float: right;
         margin-top: 25px;
-}
+    }
 
-.container-form-cadas {
-    margin-left: -134%;
-}
+    .container-form-cadas {
+        margin-left: -134%;
+    }
 
-.container-img-mobile-cas{
-    display: block;
-    width: 20%;
-}
+    .container-img-mobile-cas{
+        display: block;
+        width: 20%;
+    }
+
+    .home{
+        margin-left: -2%;
+    }
+
+    .titulogin p {
+        display: flex;
+        width: 20px;
+        height: 30px;
+        flex-shrink: 0;
+        text-shadow: 9px 6px 4px rgba(0, 0, 0, 0.13);
+        padding-left: 760px;
+        font-size: 100px;
+        margin-top: 130px;
+        margin-left: 6%;
+    }
+    
+    .formlogin{
+        margin-left: -2%;
+
+    }
+    
+    .cadastre {
+        padding-left: 50px;
+    }
+    
+    .containerlogo {
+        margin-right: 12%;
+    }
+
+    .formlogin input {
+        width: 332px;
+        height: 50px;
+    }
+
+    .formlogin i {
+        top: -40px;
+        margin-left: 94%;
+    }
+
+    .titulocas p {
+        display: flex;
+        width: 123px;
+        height: 30px;
+        flex-shrink: 0;
+        font-size: 97px;
+        text-shadow: 9px 6px 4px rgba(0, 0, 0, 0.13);
+        padding-left: 65%;
+        margin-top: 90px;
+    }
+
+    .formcadastro form {
+        margin-left: 790px;
+        margin-top: 80px;
+    }
+    
 }
 
 @media only screen and (max-width: 513px){
+
     .container-form-login {
         margin-left: -718px;
 }
@@ -3183,13 +3247,22 @@ h3 {
     }
 
     .formlogin i{
-        top: -43px;
-        margin-left: 98%;
+        margin-left: 107%;
     }
 
     .formlogin input {
         width: 373px;
     }
+
+    .formcadastro form {
+        margin-left: 761px;
+        margin-top: 80px;
+    }
+
+    .botaocadastro1 {
+        padding-left: 878px;
+    }
+
 }
 
 
@@ -3203,7 +3276,14 @@ h3 {
         margin-left: 98%;
     }
 
+    .formcadastro form {
+        margin-left: 733px;
+        margin-top: 80px;
+    }
 
+    .botaocadastro1 {
+        padding-left: 856px;
+    }
 }
 
 @media only screen and (max-width: 450px){
@@ -3220,7 +3300,7 @@ h3 {
         margin-left: 85%;
     }
     
-    .titulogin p {
+    /* .titulogin p {
         display: flex;
         width: 20px;
         height: 30px;
@@ -3229,7 +3309,7 @@ h3 {
         padding-left: 760px;
         font-size: 150px;
         margin-top: 181px;
-    }
+    } */
 
     .botaologin1 {
         width: 64%;
@@ -3247,7 +3327,7 @@ h3 {
 }
 
 
-  @media only screen and (max-width: 430px){
+  @media only screen and (max-width: 431px){
     .container-home{
         margin-left: -55px;
     }
@@ -3262,6 +3342,15 @@ h3 {
 
     .container-img-mobile-logcas {
         width: 152%;
+    }
+
+    .formcadastro form {
+        margin-left: 690px;
+        margin-top: 80px;
+    }
+
+    .botaocadastro1 {
+        padding-left: 813px;
     }
 
 }
