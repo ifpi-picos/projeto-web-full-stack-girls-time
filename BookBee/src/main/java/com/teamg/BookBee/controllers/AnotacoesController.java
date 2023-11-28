@@ -54,9 +54,15 @@ public class AnotacoesController {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "redirect:/error/403";
+        return "redirect:/error/error404";
     }
 
+    @Operation(summary = "Cria uma nova anotação", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Anotação criada com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @PostMapping("/criarNotas")
     public String salvarAotacao(@ModelAttribute Anotacao anotacao, @RequestParam String anotacaotxt, @RequestParam Long idLivros, @RequestParam Long leitorId, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         String token = CookieService.getCookie(request, "token");
@@ -68,24 +74,14 @@ public class AnotacoesController {
                     return "redirect:/livros/" + idLivros; 
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
-                    return "/erro/error404";
+                    return "erro/error404";
                 }
             }
         }
-        return "redirect:/error/403";
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "redirect:/error/error404";
     }
 
-    @PostMapping("/deletarNota")
-    public String deletarAnotacao(@RequestParam Long idAnotacao, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String token = CookieService.getCookie(request, "token");
-        if(token != null){
-            var subject = tokenService.validateToken(token);
-            if(!subject.isEmpty()){
-                anotacaoGerenciador.deletarNota(idAnotacao, subject);
-                return "redirect:/livros";
-            }
-        }
-        return "/error/403";
-    }
 }

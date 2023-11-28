@@ -45,7 +45,7 @@ public class LivrosControllers {
     @Autowired
     private TokenService tokenService;
 
-    @Operation(summary = "Obtém todos os livros e anotações do usuário", method = "GET")
+    @Operation(summary = "Obtém todos os livros e anotações do usuário para a pagina inicial", method = "GET")
         @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description  = "Obtenção bem-sucedida dos livros e anotações"),
             @ApiResponse(responseCode = "403", description = "Acesso negado")
@@ -66,13 +66,14 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "redirect:/erro/error404";
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
     @Operation(summary = "Exibe todos os livros do usuário", method = "GET")
         @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida de todos os livros"),
-            @ApiResponse(responseCode = "404", description = "Livros não encontrados")
+            @ApiResponse(responseCode = "403", description = "Acesso negado")
         })
     @GetMapping("/todos-os-livros")
     public String exibirTodosOslivros(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -95,14 +96,15 @@ public class LivrosControllers {
                 }
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
     @Operation(summary = "Exibe os detalhes de um livro especifico", method = "GET")
         @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description  = "Exibição bem-sucedida dos detalhes do livros"),
-            @ApiResponse(responseCode = "404", description = "Livros não encontrados")
+            @ApiResponse(responseCode = "403", description = "Acesso negado")
         })
     @GetMapping("/{id}")
     public String detalhe(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -126,9 +128,9 @@ public class LivrosControllers {
                 }
             }
         }
-
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
     @Operation(summary = "Exibe a página de busca de livros", method = "GET")
@@ -149,7 +151,8 @@ public class LivrosControllers {
             }
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "/erro/error404";
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
     @Operation(summary = "Adiciona um novo livro", method = "POST")
@@ -158,7 +161,7 @@ public class LivrosControllers {
         @ApiResponse(responseCode = "403", description = "Acesso negado")
     })
     @PostMapping("/adicionar")
-    public String adicionar(@RequestBody Livro livro, HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public String adicionar(@RequestBody Livro livro, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception{
         String token = CookieService.getCookie(request, "token");
         if(token != null){
             var subject = tokenService.validateToken(token);
@@ -167,14 +170,15 @@ public class LivrosControllers {
             return   "redirect:/livros";
         }
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        return "/erro/error404";
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
     @Operation(summary = "Atualiza a data de início de um livro específico", method = "POST")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description  = "Atualização bem-sucedida da data de início do livro"),
         @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
-        @ApiResponse(responseCode = "404", description = "Livro não encontrado")
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
     })
     @PostMapping("/{id}/atualizar-data-ini")
     public String atualizarDataInicio(@PathVariable Long id, 
@@ -198,13 +202,15 @@ public class LivrosControllers {
                         
                     } catch (IllegalArgumentException e) {
                         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                         model.addAttribute("erro", e.getMessage());
                         return "erro/error404";
                     }
                 }
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
         return "/erro/error404";
     }
 
@@ -212,7 +218,7 @@ public class LivrosControllers {
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description  = "Atualização bem-sucedida da data de fim do livro"),
         @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
-        @ApiResponse(responseCode = "404", description = "Livro não encontrado")
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
     })
     @PostMapping("/{id}/atualizar-data-fim")
     public String atualizarDataFim(@PathVariable Long id, 
@@ -233,18 +239,25 @@ public class LivrosControllers {
                         return   "redirect:/livros/" + id ;
                     } catch (IllegalArgumentException e) {
                         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                        model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                         model.addAttribute("erro", e.getMessage());
-                        return   "/erro/error404";
-                        
+                        return   "erro/error404"; 
                     }
                 }
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
     
-    @PostMapping("/atualizarPosicaoLeitura")
+    @Operation(summary = "Atualiza a posição de leitura de um livro", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Posição de leitura atualizada com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
+    @PostMapping("/atualizar-posicao-leitura")
     public String atualizarPosicaoLeitura(Model model, @ModelAttribute Livro livro, @RequestParam String paginasLidas, HttpServletRequest request, HttpServletResponse response) throws Exception {
         String token = CookieService.getCookie(request, "token");
         if(token != null){
@@ -256,14 +269,23 @@ public class LivrosControllers {
                     return   "redirect:/livros/" + livro.getIdLivro();
                 } catch(IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
                     return "erro/error404";
                     }
                 }
             }
-        return "redirect:/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
+    @Operation(summary = "Atualiza a classificação de um livro", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Classificação do livro atualizada com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @PostMapping("/atualizar-classificacao")
     public String atualizarCLassificacao(Model model, @ModelAttribute Livro livro, @RequestBody Map<String, String> requestBody, HttpServletRequest request, HttpServletResponse response){
         String token = CookieService.getCookie(request, "token");
@@ -278,14 +300,23 @@ public class LivrosControllers {
                     return "redirect:/livros/" + idlivro;
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
                     return "erro/error404";
                 }
             }
         }
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
         return "erro/erro404";
     }
 
+    @Operation(summary = "Atualiza o status de favorito de um livro", method = "POST")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Status de favorito do livro atualizado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @PostMapping("/adiciona-favorito")
     public String atualizarFavorito(Model model, @ModelAttribute Livro livro, @RequestBody Map<String, String> requestBody, HttpServletRequest request, HttpServletResponse response){
         String token = CookieService.getCookie(request, "token");
@@ -301,14 +332,22 @@ public class LivrosControllers {
                     return "redirect:/livros/" + livro.getIdLivro();
                 } catch (IllegalArgumentException e) {
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
                     model.addAttribute("erro", e.getMessage());
                     return "erro/error404";
                 }
             }
         }
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
         return "erro/erro404";
     }
 
+    @Operation(summary = "Exibe os livros marcado com favoritos do usuário", method = "GET")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Livros favoritos exibidos com sucesso"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @GetMapping("/livros-favoritos")
     public String exibirLivrosFavoritos(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token = CookieService.getCookie(request, "token");
@@ -331,10 +370,16 @@ public class LivrosControllers {
                
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
+    @Operation(summary = "Exibe os livros que nao foram concluidos ou iniciados do usuário", method = "GET")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Livros em progresso exibidos com sucesso"),
+        @ApiResponse(responseCode = "403", description = "Acesso negado")
+    })
     @GetMapping("/meta-de-leitura")
     public String exibirLivrosEmProgresso(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token = CookieService.getCookie(request, "token");
@@ -356,8 +401,9 @@ public class LivrosControllers {
                 }
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_FORBIDDEN);
+        return "erro/error404";
     }
 
 }

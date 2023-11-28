@@ -52,7 +52,7 @@ public class LeitoresController {
         if(bindingResult.hasErrors()){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             model.addAttribute("erro", "Erro de Validação");
-            return "/cadastro";
+            return "cadastro";
         
         }
         try {
@@ -60,12 +60,17 @@ public class LeitoresController {
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             model.addAttribute("erro", e.getMessage());
-            return "/cadastro";
+            return "cadastro";
         }
         response.setStatus(HttpServletResponse.SC_CREATED);
-        return"redirect:/login";
+        return "redirect:/login";
     }
 
+    @Operation(summary = "Exibe a página do usuário", method = "GET")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Página do usuário exibida com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Página do usuário não encontrada")
+    })
     @GetMapping("usuario/pagina-do-usuario")
     public String exibirPaginaDoUsuario(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token = CookieService.getCookie(request, "token");
@@ -77,13 +82,19 @@ public class LeitoresController {
                     model.addAllAttributes(leitorModel);
                     model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
-                return "/usuario/index";
+                return "usuario/index";
             }
         }
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        model.addAttribute("codigoErro", HttpServletResponse.SC_NOT_FOUND);
+        return "erro/error404";
     }
 
+    @Operation(summary = "Exibe a pagina de configurações do usuário", method = "GET")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Configurações do usuário exibidas com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida")
+    })
     @GetMapping("usuario/configuracoes")
     public String exibirConfiguracoes(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
     String token = CookieService.getCookie(request, "token");
@@ -95,13 +106,19 @@ public class LeitoresController {
                     model.addAllAttributes(leitorModel);
                     model.addAttribute("nomeUsuario", CookieService.getCookie(request, "usuarioNome"));
                 response.setStatus(HttpServletResponse.SC_OK);
-                return "/usuario/confUsuario";
+                return "usuario/confUsuario";
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return "/erro/error404";
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
+        return "erro/error404";
     }
 
+    @Operation(summary = "Atualiza as informações do usuário", method = "GET")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description  = "Configurações do usuário exibidas com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Solicitação inválida")
+    })
     @PostMapping("usuario/atualiza")
     public String atualiza(@ModelAttribute Leitor leitor, 
                         @RequestParam String emailAtual,
@@ -110,19 +127,20 @@ public class LeitoresController {
                         HttpServletResponse response) throws IOException {
         if(bindingResult.hasErrors()){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
             model.addAttribute("erro", "Erro de Validação");
-            return "/usuario/confUsuario";
+            return "usuario/confUsuario";
         }
         try {
             leitorGerenciador.atualiza(leitor, emailAtual);
         } catch (IllegalArgumentException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            model.addAttribute("codigoErro", HttpServletResponse.SC_BAD_REQUEST);
             model.addAttribute("erro", e.getMessage());
-            return "/usuario/confUsuario";
+            return "usuario/confUsuario";
         }
         response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/usuario/configuracoes";
     }
-
 
 }

@@ -1,7 +1,5 @@
 package com.teamg.BookBee.controllers;
 
-import java.io.IOException;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,16 +50,14 @@ public class LoginController {
     @PostMapping("/logar")
     public String logar(Model model, 
                         @ModelAttribute Leitor leitorParam, 
-                        HttpServletResponse response) throws IOException {
+                        HttpServletResponse response) throws Exception {
         authenticationManeger = context.getBean(AuthenticationManager.class);
         try {
             var usernamePassword = new UsernamePasswordAuthenticationToken(leitorParam.getUsername(), leitorParam.getPassword());
             var auth = this.authenticationManeger.authenticate(usernamePassword);
             String token = (String) tokenService.generateToken((Leitor) auth.getPrincipal());
-
             String subject = tokenService.validateToken(token);
      
-
             if(!subject.isEmpty()){
                 Leitor leitor = this.leitorGerenciador.findLeitorByEmail(subject);
 
@@ -75,14 +71,13 @@ public class LoginController {
 
                 model.addAttribute("erro", "Ocorreu erro ao validar o usuario");
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                return "/login";
+                return "login";
             }
 
-        
         } catch(Exception e){
             model.addAttribute("erro", "Usuario ou senha invalidos");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return  "/login";
+            return  "login";
 
         }
 
