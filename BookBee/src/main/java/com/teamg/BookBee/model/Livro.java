@@ -37,13 +37,13 @@ public class Livro {
     @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "link_imagens")
+    @Column(name = "link_imagens", length = 500)
     private String linkImagem;
 
     @Column(name = "autor")
     private String autor;
 
-    @Column(name = "genero")
+    @Column(name = "genero", length = 455)
     private String genero;
 
     @Column(name = "paginas")

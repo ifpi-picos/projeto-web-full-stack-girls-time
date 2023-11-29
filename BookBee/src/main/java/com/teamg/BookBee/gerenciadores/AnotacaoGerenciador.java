@@ -34,6 +34,7 @@ public class AnotacaoGerenciador {
         Map<String, Object> model = new HashMap<>();
         Leitor leitor = leitorGerenciador.findLeitorByEmail(email);
         if(leitor == null) {
+            LOGGER.warn("O usuario nao foi encontrado {}", email);
             throw new Exception("Usuario Nao encontrado" + email);
         }
         List<Anotacao> anotacoes = repo.findByLeitor(leitor);
@@ -45,9 +46,11 @@ public class AnotacaoGerenciador {
     public void criarNota(String anotacaotxt, Long idLivros, String email) throws Exception {
         LOGGER.info("Criando nota para o livro com ID: {} e email: {}", idLivros, email);
         if ( anotacaotxt == null || anotacaotxt.trim().isEmpty()) {
+            LOGGER.warn("Os parametros inserido sao nulos");
             throw new IllegalArgumentException("Os parâmetros não podem ser nulos ou vazios");
         }
         if(anotacaotxt.length() > 245){
+            LOGGER.warn("A notas ultrapassa o limite de caracteres");
             throw new IllegalArgumentException("Texto da nota não aceito por ser muito grande");
         }
         
@@ -55,6 +58,7 @@ public class AnotacaoGerenciador {
         Optional<Livro> livroOptional = livroGerenciador.getLivro(idLivros);
 
         if(!livroOptional.isPresent()){
+            LOGGER.error("Nem um livro esta presente");
             throw new IllegalArgumentException("As notacoes devem ter um livro");
         }
         Livro livro = livroOptional.get();
@@ -69,6 +73,7 @@ public class AnotacaoGerenciador {
         LOGGER.info("Buscando notas do leitor pelo email: {} e livro id: {}", leitor.getEmail(), livro.getIdLivro());
         List<Anotacao> anotacao = repo.findByLeitorAndLivroAndDeletadoFalse(leitor, livro);
         if(anotacao == null) {
+            LOGGER.warn("Nem uma anotacao foi encontrada para o email: {}", leitor.getEmail());
             throw new IllegalArgumentException("anotacoes não encontrado para o email: " + leitor.getEmail());
         }
         LOGGER.info("Anotacoes encontrada(s) com sucesso pelo email: {}", leitor.getEmail());
@@ -79,6 +84,7 @@ public class AnotacaoGerenciador {
         LOGGER.info("Buscando notas do leitor pelo email: {}", leitor.getEmail());
         List<Anotacao> anotacao = repo.findByLeitorAndDeletadoFalse(leitor);
         if(anotacao == null) {
+            LOGGER.warn("Nem uma anotacao foi encontrada para o email: {}", leitor.getEmail());
             throw new IllegalArgumentException("anotacoes não encontrado para o email: " + leitor.getEmail());
         }
         LOGGER.info("Anotacoes encontrada(s) com sucesso pelo email: {}", leitor.getEmail());
@@ -89,7 +95,7 @@ public class AnotacaoGerenciador {
         LOGGER.info("Tentando deletar a anotação com id: {}", idAnotacao);
         Anotacao anotacao = repo.findByIdAnotacaoAndDeletadoFalse(idAnotacao);
         if(anotacao == null) {
-            LOGGER.error("Anotação não encontrada para o id: {}", idAnotacao);
+            LOGGER.warn("Anotação não encontrada para o id: {}", idAnotacao);
             throw new IllegalArgumentException("Anotação não encontrada para o id: " + idAnotacao);
         }
         if(!anotacao.getLeitor().getEmail().equals(email)) {

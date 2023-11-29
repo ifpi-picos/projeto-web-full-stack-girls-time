@@ -43,19 +43,24 @@ public class LeitorGerenciador {
         int pos = email.indexOf("@");
         String checarEmail = email.substring(pos, email.length());
         if(nome.trim().isEmpty()) {
+            LOGGER.warn("Nem um nome foi inserido no campo");
             throw new IllegalArgumentException("Nome não podem ser vazio");
         }
         if(!checarEmail.equals("@gmail.com")){
+            LOGGER.warn("O endereco de email nao e valido");
             throw new IllegalArgumentException("enderço de email é invalido");
         }
         if(senha.trim().isEmpty()){
+            LOGGER.warn("Nem um valor foi inserido na senha");
             throw new IllegalArgumentException("Senha não pode estar vazia");
         }
         if(senha.length() < 7){
+            LOGGER.warn("A senha nao corresponde ao numero de caracteres minimo");
             throw new IllegalArgumentException("Senha não pode ser curta");
         }
         Leitor leitorExiste = repo.findByEmail(leitor.getUsername());
         if(leitorExiste != null) {
+            LOGGER.warn("O endereco de email ja existe no banco de dados");
             throw new IllegalArgumentException("Email já existe");
         }
 
@@ -74,19 +79,23 @@ public class LeitorGerenciador {
         String checarEmail = email.substring(pos, email.length());
         if(nome != null && !nome.trim().isEmpty()) {
             if(nome.trim().isEmpty()) {
+                LOGGER.warn("Nem um nome foi inserido no campo");
                 throw new IllegalArgumentException("Nome não podem ser vazio");
             }
         }
         if(email != null && !email.trim().isEmpty()) {
             if(!checarEmail.equals("@gmail.com")){
+                LOGGER.warn("O endereco de email nao e valido");
                 throw new IllegalArgumentException("enderço de email é invalido");
             }
         }
         if(senha != null && !senha.trim().isEmpty()){
             if(senha.trim().isEmpty()){
+                LOGGER.warn("Nem um valor foi inserido na senha");
                 throw new IllegalArgumentException("Senha não pode estar vazia");
             }
             if(senha.length() < 7){
+                LOGGER.warn("A senha nao corresponde ao numero de caracteres minimo");
                 throw new IllegalArgumentException("Senha não pode ser curta");
             }
         }
@@ -103,6 +112,7 @@ public class LeitorGerenciador {
                 leitorExiste.setSenha(encryptedPassword);
             }
         } else {
+            LOGGER.error("O usuario: {} tentou altera dados mais o seu email anterior nao consta no banco de dados", emailAtual);
             throw new IllegalArgumentException("Email não existe");
         }
         repo.save(leitorExiste);
@@ -110,20 +120,22 @@ public class LeitorGerenciador {
     }
     
 
-    public Leitor findLeitorByEmail(String email) throws Exception{
+    public Leitor findLeitorByEmail(String email) throws Exception {
         LOGGER.info("Buscando leitor pello email: {}", email); 
         Leitor leitor = this.repo.findByEmail(email);
         if(leitor == null) {
-            throw new IllegalArgumentException("Usuario não encontrado" + email);
+            LOGGER.warn("O usuario nao foi encontrado: {}", email);
+            throw new IllegalArgumentException("Usuario não encontrado " + email);
         }
         LOGGER.info("Leitor encontrado com sucesso pelo email: {}", email);
         return leitor;
     }
-
+    
     public double calcularVelocidade(Long idLivro, String email) throws Exception {
         LOGGER.info("Calculando velocidade do leitor com o email: {}", email);
         Leitor leitor = this.repo.findByEmail(email);
-         if(leitor == null) {
+        if(leitor == null) {
+            LOGGER.error("O usuario nao foi encontrado: {}", email);
             throw new Exception("Usuario não encontrado" + email);
         }
 
@@ -152,7 +164,7 @@ public class LeitorGerenciador {
             velocidadeLeitura = (double) livro.getPgLidas() / diferencaDias;
         }
         if (!Double.isFinite(velocidadeLeitura)) {
-            LOGGER.error("Velocidade de leitura calculada é Infinity ou NaN para o usuário com o email: {}", email);
+            LOGGER.warn("Velocidade de leitura calculada é Infinity ou NaN para o usuário com o email: {}", email);
             return 0.0;
         }        
         
@@ -162,6 +174,7 @@ public class LeitorGerenciador {
     }
 
     public Map<String, Object>  getDadosDoUsuario(String subject) throws Exception {
+        LOGGER.info("Obtendo as informacoes do usuario: {}", subject);
         Map<String, Object> model = new HashMap<>();
         Leitor leitor = repo.findByEmail(subject);
         Map<String, Object> listaDeLeitura = listaDeLeituraGerenciador.getListasDoUsuario(subject);
@@ -174,6 +187,7 @@ public class LeitorGerenciador {
     }
 
     public int getTotalPaginasLidas(String subject) throws Exception {
+        LOGGER.info("Calculando o total de paginas lidas pelo leitor: {}", subject);
         Leitor leitor = findLeitorByEmail(subject);
         Set<Integer> paginasLidas = new HashSet<>();
         for (Livro livro : leitor.getLivros()) {
@@ -183,10 +197,12 @@ public class LeitorGerenciador {
         for (int paginas : paginasLidas) {
             total += paginas;
         }
+        LOGGER.info("Total de paginas calculado com sucesso");
         return total;
     }
 
     public int getTotalLivrosTerminados(String subject) throws Exception {
+        LOGGER.info("Calculando o total de livros lido para o leito: {}", subject);
         Leitor leitor = findLeitorByEmail(subject);
         int total = 0;
         for (Livro livro : leitor.getLivros()) {
@@ -194,10 +210,12 @@ public class LeitorGerenciador {
                 total++;
             }
         }
+        LOGGER.info("Total de livros calculado com sucesso");
         return total;
     }
 
     public int getTotalListasDeLeitura(String subject) throws Exception {
+        LOGGER.info("Calculando o total de lista do usuario");
         Leitor leitor = findLeitorByEmail(subject);
         return leitor.getListaDeLeituras().size();
     }

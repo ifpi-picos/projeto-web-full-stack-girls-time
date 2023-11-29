@@ -27,7 +27,7 @@ public class AuthorizeService implements UserDetailsService{
             leitor = leitorGerenciador.findLeitorByEmail(email);
             return leitor;
         } catch (Exception e) {
-            LOGGER.error("Erro ao carregar usuario pelo email: {}", email, e);
+            LOGGER.error("Erro ao carregar usuario pelo email: {}", email);
             throw new UsernameNotFoundException(email + "Nao encontrado");
         }
     }

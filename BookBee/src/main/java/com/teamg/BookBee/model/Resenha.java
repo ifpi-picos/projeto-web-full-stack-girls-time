@@ -28,7 +28,7 @@ public class Resenha {
     @JoinColumn(name = "id_livro", referencedColumnName="id_livro")
     private Livro livro;
     
-    @Column(name = "texto_resenha")
+    @Column(name = "texto_resenha", length = 5000)
     private String textoResenha;
 
     @Column(name = "deletado")
