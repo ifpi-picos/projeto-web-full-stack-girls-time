@@ -3492,10 +3492,106 @@ h3 {
         width: 152%;
     }
 
-   
-
     .botaocadastro1 {
         padding-left: 813px;
+    }
+
+    .main.detalhes {
+        margin-left: 0;
+        width: 400px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+    }
+    
+    .detalhes {
+        margin-left: 0;
+    }
+
+    .container-detalhes {
+        width: 350px;
+        height: 305px;
+        margin-left: 40px;
+    }
+
+    .container-detalhes img {
+        width: 150px;
+        height: auto;
+        margin-top: 16px;
+        margin-left: -18px;
+        border-radius: 5px;
+    }
+
+    .tituloAutorResumo {
+        margin-left: 150px;
+    }
+
+    .datas {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        width: 350px;
+        margin-left: 90px;
+    }
+
+    .datas form{
+        width: 90px;
+    }
+
+    .ini, .fim {
+        margin: 0;
+        width: fit-content;
+        margin-top: 0;
+    }
+
+    .check-ini {
+        margin-left: 190px;
+        margin-top: -90px;
+    }
+    
+    .check-fim {
+        margin-left: 190px;
+        margin-top: -90px;
+    }
+
+    .modal {
+        flex-direction: column;
+        margin-left: 50px;
+    }
+
+    .resenha {
+        margin-left: 0;
+        margin-top: 50px;
+    }
+
+    .list {
+        margin-left: 7%;
+    }
+
+    .detalhePosicao {
+        margin-left: 20px;
+        width: 380px;
+    }
+
+    .detalhePosicao ul li {
+        margin: 0 45px;
+    }
+
+    .detalhePosicao ul li:first-child{
+        margin: 0px 45px 0 30px;
+    }
+    .detalhePosicao ul li:last-child{
+        margin: 0px 30px 0 45px;
+    }
+
+    .adc-livro button {
+        width: 150px;
+        height: 222px;
+    }
+
+    .livrosFavoritosTodos {
+        width: 150px;
+        height: auto;
     }
 
 }

@@ -97,7 +97,7 @@ function adicionarClassificacaoEstrela() {
   });
 }
 function enviarClassificacaoParaBackend(idLivro, classificacao) {
-  const url = "http://localhost:9090/livros/atualizar-classificacao";
+  const url = "/livros/atualizar-classificacao";
   const data = { "idLivro": idLivro,
             "classificacao": classificacao };
 

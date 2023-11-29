@@ -142,20 +142,20 @@
         </button>
     </nav>
 
-    <main class="main">
-        <div class="usuario">
+    <main class="main detalhes">
+        <div class="usuario detalhes">
             <a href="/usuario/pagina-do-usuario"><img src="/img/user.png" alt="Foto do Usuário" /></a>
             <p id="username" th:text="${nomeUsuario}"></p>
         </div>
 
-        <div class="barradepes">
+        <div class="barradepes detalhes">
             <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta..." />
             <button id="btnBuscar" type="button">
                 <img src="/img/lupa.png" alt="Lupa" />
             </button>
         </div>
 
-        <div class="container-lidos-recentes">
+        <div class="container-lidos-recentes detalhes">
             <div class="titulo-lidos-recentes">
                 <p>Detalhes do Livro</p>
             </div>
@@ -300,7 +300,7 @@
         <div id="myModal2" class="modal-res">
             <div class="modal-content">
                 <span class="close-res">&times;</span>
-                <form action="/resenha/criarResenha" method="post">
+                <form action="/resenha/criar-resenha" method="post">
                 <div class="modal-body">
                     <div class="modal-capa">
                         <img id="img-capa-modal" th:src="${livro.linkImagem}"/>
@@ -331,7 +331,7 @@
             </div>
         </div>
         <div class="detalhePosicao">
-            <form action="/livros/atualizarPosicaoLeitura" method="post">
+            <form action="/livros/atualizar-posicao-leitura" method="post">
                 <input type="hidden" name="idLivro" th:value="${livro.idLivro}">
                 <input type="hidden" name="idLeitor" th:value="${livro.leitor.id}">
             <input type="hidden" name="paginasLidas" id="paginasLidasInput">

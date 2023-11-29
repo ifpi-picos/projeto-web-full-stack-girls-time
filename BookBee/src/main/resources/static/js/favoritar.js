@@ -7,7 +7,7 @@ coracao.addEventListener('click', function(){
         // Enviar requisição para o backend
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:9090/livros/adiciona-favorito',
+            url: '/livros/adiciona-favorito',
             contentType: 'application/json',
             data: JSON.stringify({
                 idLivro: idLivro,

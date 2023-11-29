@@ -19,7 +19,7 @@
     
         <div class="container-titulo-error">
             <div class="titulo-error">
-                <p><span class="cor1">Error</span><span class="cor2">404</span></p>
+                <p><span class="cor1">Error</span><span class="cor2" th:text="${codigoErro}"></span></p>
             </div>
         </div>
         <div class="error"><p th:if="${erro != null}" th:text="${erro}">Erro na Rota</p></div>

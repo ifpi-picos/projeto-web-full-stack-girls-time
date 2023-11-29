@@ -17,31 +17,31 @@ const hadleEvent = async (event) => {
     if(!dados.items || dados.items.length === 0){
      // criar algo para informa que o resultado não foi encontrado
     }else{
-      if(location.href != 'http://localhost:9090/livros/pagina-de-busca'){
+      if(location.pathname != '/livros/pagina-de-busca'){
         console.log('na condição')
         localStorage.setItem('searchResults', JSON.stringify(dados.items));
         location.href = '/livros/pagina-de-busca';
         
-      }else{
-        livros.innerHTML = '';
-        
-        dados.items.forEach(item => {
-          let capaImagem;
-          if (item && item.volumeInfo && item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail) {
-            capaImagem = item.volumeInfo.imageLinks.thumbnail;
-          } else {
-            capaImagem = '/img/1682512674678.png';
-          }
+        }else{
+          livros.innerHTML = '';
+          
+          dados.items.forEach(item => {
+            let capaImagem;
+            if (item && item.volumeInfo && item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail) {
+              capaImagem = item.volumeInfo.imageLinks.thumbnail;
+            } else {
+              capaImagem = '/img/1682512674678.png';
+            }
 
-          livros.innerHTML = livros.innerHTML + 
-          `<div class="conteudoLivros">
-            <img src="${capaImagem}" >
-            <li> ${item.volumeInfo.title} Pag: ${item.volumeInfo.pageCount}- ${item.volumeInfo.authors}
-              <button onclick="adicionaLivro('${item.id}')" >+</button>
-            </li>
-          </div>`; 
-        });
-      } 
+            livros.innerHTML = livros.innerHTML + 
+            `<div class="conteudoLivros">
+              <img src="${capaImagem}" >
+              <li> ${item.volumeInfo.title} Pag: ${item.volumeInfo.pageCount}- ${item.volumeInfo.authors}
+                <button onclick="adicionaLivro('${item.id}')" >+</button>
+              </li>
+            </div>`; 
+          });
+        } 
     }
   }
 }
@@ -51,7 +51,7 @@ busca.addEventListener('keydown', hadleEvent);
   
 window.addEventListener('load', () => {
   console.log('dentro do load')
-    if(location.href === 'http://localhost:9090/livros/pagina-de-busca'){
+    if(location.pathname === '/livros/pagina-de-busca'){
 
     console.log('depois do load')
     const livros = document.getElementById('livros');
