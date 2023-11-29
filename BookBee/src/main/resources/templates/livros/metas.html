@@ -11,10 +11,69 @@
 </head>
 
 <body>
-    <div class="containerlogo">
-        <div class="logofixamain">
-            <img src="/img/logo.png" alt="logo">
+  <div class="gambiarra">
+        <div class="containerlogo">
+            <div class="logofixamain">
+                <img src="/img/logo.png" alt="logo">
+            </div>
         </div>
+        
+        <button class="button-mobile" onclick="toggleMenu()">
+            <i class="material-symbols"> <img src="/img/menu.png" alt=""> </i>
+        </button>
+
+        <nav class="menu-mobile" id="menu-mobile">
+            <button onclick="toggleMenu()">
+                <span>
+                    <i class="material-symbols"> X </i>
+                </span>
+            </button>
+    
+            <button >
+                <span>
+                    <a href="/livros/">
+                        <img src="/img/Home.png" alt="home">
+                    </a>
+                    <span class="nomes-mobile"><a href="/livros/">Home</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <a href="/livros/meta-de-leitura">
+                        <img src="/img/Goal.png" alt="meta">
+                    </a>
+                    <span class="nomes-mobile"><a href="/livros/meta-de-leitura">Metas</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <a href="/livros/livros-favoritos">
+                        <img src="/img/Favorites.png" alt="Favoritos">
+                    </a>
+                    <span class="nomes-mobile"><a href="/livros/livros-favoritos">Favoritos</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                    <a href="/notas/">
+                        <img src="/img/Quote.png" alt="Citações">
+                    </a>
+                    <span class="nomes-mobile"><a href="/notas/">Anotações</a></span>
+                </span>
+            </button>
+    
+            <button>
+                <span>
+                <a href="/logout">
+                    <img src="/img/Exit.png" alt="Sair">
+                </a>
+                    <span class="nomes-mobile"><a href="/logout">Sair</a></span>
+                </span>
+            </button>
+        </nav>
     </div>
 
     <aside class="sidebar">
@@ -118,4 +177,5 @@
 
 </body>
 <script src="/js/busca.js"></script>
+<script src="/js/menuBolha.js"></script>
 </html>

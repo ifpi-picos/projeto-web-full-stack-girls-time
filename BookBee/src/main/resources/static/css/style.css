@@ -3278,9 +3278,9 @@ h3 {
         float: none;
     }
     
-    .containerlogo {
+    /* .containerlogo {
         margin-right: 42%;
-    }
+    } */
 
     .formlogin input {
         width: 332px;
@@ -3354,8 +3354,8 @@ h3 {
     }
 
     .menu-mobile-active {
-        width: 264vw;
-        height: 267vh;
+        width: 176vw;
+        height: 176vh;
     }
 
     .button-mobile{
@@ -3366,7 +3366,238 @@ h3 {
         z-index: 0;
     }
 
+.estilizacaoLidos {
+    color: #412E27;
+    display: flex;
+    width: 1150px;
+    list-style: none;
+    padding: 0;
+    margin-left: 227px;
+    margin-top: 50px;
+}
+
+    .main {
+        width: 238%;
+        margin-left: -29%;
+    }
     
+    .container-lidos-recentes {
+        margin-left: 186px;
+        margin-top: 70px;
+    }
+    
+    
+    .titulo-lidos-recentes p {
+        font-size: 50px;
+    }
+    
+    .titulo-lidos-recentes a {
+        margin-right: 32%;
+        font-size: 34px;
+        margin-top: -10%;
+    }
+    
+    .titulo-lidos-recentes img {
+        margin-right: 27%;
+        margin-top: -9%;
+    }
+    
+
+.container-metas {
+    margin-left: 189px;
+    margin-top: 70px;
+    text-shadow: 5px 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+    .titulo-metas p {
+        font-size: 50px;
+    }
+    
+    .titulo-metas a {
+        margin-right: 32%;
+        font-size: 34px;
+        margin-top: -10%;
+    }
+    
+    .titulo-metas img {
+        margin-right: 27%;
+        margin-top: -9%;
+    }
+    
+    .container-carrossel {
+        width: 59%;
+        position: relative;
+        padding: 15px;
+        max-width: 970px;
+        margin-left: 204px;
+        
+    }
+    
+    .gambirra{
+        margin-top: 12%;
+    }
+        
+
+    .arrow-rigth {
+        position: absolute;
+        margin-top: 129px;
+        margin-left: 671px;
+    }
+    
+    .arrow-left {
+        position: absolute;
+        margin-top: 129px;
+        margin-left: -70px;
+    }
+    
+    .gallery img {
+        width: 230px;
+        height: 345px;
+        padding: 3px;
+        border-radius: 5px;
+    }
+    
+    .titulo-favoritos p {
+        font-size: 50px;
+    }
+    
+    .titulo-favoritos a {
+        margin-right: 31%;
+        font-size: 34px;
+        margin-top: -10%;
+    }
+    
+    .titulo-favoritos img {
+        margin-right: 26%;
+        margin-top: -9%;
+    }
+    
+    .carousel-container {
+        position: relative;
+        padding: 15px;
+        max-width: 731px;
+        margin-left: 190px;
+    }
+    
+    .carousel-gallery img {
+        width: 230px;
+        height: 345px;
+        padding: 0px;
+        border-radius: 5px;
+    }
+    
+    .titulo-citacao p {
+        font-size: 50px;
+    }
+    
+    .container-citacao {
+        margin-left: 208px;
+    }
+    
+    
+    .titulo-citacao a {
+        margin-right: 30%;
+        font-size: 34px;
+        margin-top: -10%;
+    }
+    
+    .meu-carrossel-container {
+        max-width: 691px;
+        margin-left: 198px;
+    }
+    
+    .meu-carousel-arrow-direita {
+        position: absolute;
+        margin-top: 40px;
+        margin-left: 673px;
+    }
+    
+    .caixa-notas img {
+        width: 127px;
+        height: 185px;
+    }
+    
+    .conteudo h5, p {
+        font-size: 17px;
+    }
+    
+    .usuario a img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .usuario p {
+        font-size: 30px;
+    }
+
+    .containerlogo {
+        margin-right: -27%;
+    }
+
+    .barradepes {
+        width: 420px;
+        margin-left: 178px;
+        margin-top: 35px;
+    }
+
+    .usuario {
+        display: flex;
+        align-items: center;
+        margin-top: 40px;
+        color: rgba(0, 0, 0, 0.60);
+        margin-left: 179px;
+    }
+
+    .resultfavoritos {
+        display: flex;
+        width: 40%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 12%;
+        cursor: pointer;
+    }
+    
+
+    .container-caixas {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin-left: 11%;
+        max-width: 10%;
+        margin-top: -4%;
+    }
+
+    .resultGrid {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 80px 90px;
+        padding: 0;
+        margin-left: -14%;
+    }
+
+    .conteudoLivros {
+        width: 462px;
+        height: 190px;
+        background-color: #878C69;
+        border-radius: 5px;
+        color: #3E4320;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .conteudoLivros li {
+        width: 358px;
+        height: 20px;
+        flex-shrink: 0;
+        margin-bottom: 100px;
+        color: #30351B;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
 }
 
 @media only screen and (max-width: 513px){
@@ -3592,6 +3823,18 @@ h3 {
     .livrosFavoritosTodos {
         width: 150px;
         height: auto;
+    }
+
+    .logofixamain {
+        margin-left: 0%;
+    }
+
+    .containerlogo {
+        margin-right: 7%;
+    }
+
+    .usuario.detalhes a{
+        margin-left: -77%;
     }
 
 }
