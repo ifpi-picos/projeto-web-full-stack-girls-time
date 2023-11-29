@@ -22,6 +22,7 @@ body {
     overflow-x: hidden;
 }
 
+
 .logo img{
     width: 200px;
     height: 200px;
@@ -373,7 +374,7 @@ body {
     float: right;
     margin-right: 90%;
     position: relative;
-    top: -635px;
+    top: -612px;
 }
 
 .livro01 p{
@@ -2358,6 +2359,72 @@ h3 {
     color: #ff0000;
 }
 
+.button-mobile{
+    display: none;
+    align-items: flex-start;
+    align-items: center;
+    margin: 16px;
+    background: transparent;
+    color: #412E27;
+    border: 0;
+}
+
+.button-mobile span{
+    font-size: 50px;
+    margin-left: 10px;
+}
+
+.menu-mobile{
+    display: none;
+}
+
+.menu-mobile-active{
+    width: 100vw;
+    height: 100vh;
+    background-color: #A7886C;
+    color: #412E27;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.menu-mobile-active button{
+    background: transparent;
+    border: 0;
+    color: #412E27;
+    margin-bottom: 16px;
+}
+
+.menu-mobile-active button > span{
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu-text{
+    font-size: 22px;
+    margin-left: 8px;
+}
+
+.menu-mobile-active button img{
+    height: 90px;
+    margin-right: 12px;
+
+}
+
+.nomes-mobile a{
+    color: #412E27;
+    font-size: 50px;
+}
+
+.material-symbols{
+    font-size: 50px;
+}
 /* responsivo */
 
 @media only screen and (max-width: 1452px){
@@ -3085,7 +3152,7 @@ h3 {
 @media only screen and (max-width: 500px){
   
   .logo{
-    width: 150%;
+    width: 110%;
     display: flex;
     align-items: end;
     justify-content: end;
@@ -3101,7 +3168,7 @@ h3 {
   }
 
   .container-home{
-    margin-left: -25px;
+    margin-left: -75px;
   }
 
   .titulo{
@@ -3156,14 +3223,14 @@ h3 {
 
    }
 
-   .botaologin1 {
+   /* .botaologin1 {
         width: 68%;
         float: right;
         margin-top: 25px;
-    }
+    } */
 
     .container-form-cadas {
-        margin-left: -134%;
+        margin-left: -169%;
     }
 
     .container-img-mobile-cas{
@@ -3181,7 +3248,7 @@ h3 {
         height: 30px;
         flex-shrink: 0;
         text-shadow: 9px 6px 4px rgba(0, 0, 0, 0.13);
-        padding-left: 760px;
+        padding-left: 726px;
         font-size: 100px;
         margin-top: 130px;
         margin-left: 6%;
@@ -3207,7 +3274,7 @@ h3 {
 
     .formlogin i {
         top: -40px;
-        margin-left: 94%;
+        margin-left: 78%;
     }
 
     .titulocas p {
@@ -3222,9 +3289,68 @@ h3 {
     }
 
     .formcadastro form {
-        margin-left: 790px;
+        margin-left: 906px;
         margin-top: 80px;
     }
+    
+
+    .logofixa {
+        margin-left: 30%;
+    }
+
+    .formlogin form {
+        margin-left: 830px;
+        margin-top: 108px;
+    }
+
+    .botaologin1 {
+        width: 77%;
+        float: right;
+        margin-top: 25px;
+    }
+
+
+    .logofixacas {
+        margin-left: 36%;
+        margin-top: -74%;
+    }
+    
+    .botaocadastro1 {
+        padding-left: 1027px;
+    }
+
+    .containerlogocas {
+        float: right;
+        margin-right: 3%;
+        margin-top: -1%;
+    }
+
+    .titulocas{
+        margin-top: 10%;
+    }
+
+    .sidebar{
+        display: none;
+    }
+
+
+    .main{
+        margin-left:-35%;
+    }
+
+    .menu-mobile-active {
+        width: 264vw;
+        height: 267vh;
+    }
+
+    .button-mobile{
+        display: flex;
+    }
+
+    .estilizacaoLidos li img {
+        z-index: 0;
+    }
+
     
 }
 
@@ -3365,7 +3491,6 @@ h3 {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 120px;
         }
 
         .formlogin i{
@@ -3396,6 +3521,44 @@ h3 {
             margin-top: 54%;
             width: 169%;
         }
+
+        .logo {
+            width: 101%;
+            display: flex;
+            align-items: end;
+            justify-content: end;
+        }
+
+        .cor1 {
+            font-size: 103px;
+        }
+
+        .cor2 {
+            font-size: 103px;
+        }
+
+        .text-mobile {
+            display: block;
+            margin-left: 172px;
+            width: 370px;
+            font-size: 18px;
+            margin-top: -10%;
+        }
+
+        .botoes {
+            display: flex;
+            padding-left: 179px;
+            margin-top: 50px;
+        }
+
+        .botaologin a button {
+            margin-right: 20px;
+        }
+
+        .container-home {
+        margin-left: -154px;
+    }
+
 
      }
 

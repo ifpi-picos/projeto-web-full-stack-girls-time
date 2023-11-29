@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+  />
 
     <title>Inicial</title>
 </head>
@@ -46,7 +50,6 @@
                     <span class="nomes"><a href="/livros/livros-favoritos">Favoritos</a></span>
                 </span>
             </button>
-    
             <button>
                 <span>
                     <a href="/notas/">
@@ -73,6 +76,67 @@
         </nav>
     </aside>
 
+    <button class="button-mobile" onclick="toggleMenu()">
+        <i class="material-symbols"> menu </i>
+        <span>Menu</span>
+    </button>
+
+    <nav class="menu-mobile" id="menu-mobile">
+        <button onclick="toggleMenu()">
+            <span>
+                <i class="material-symbols"> X </i>
+            </span>
+        </button>
+
+        <button >
+            <span>
+                <a href="/livros/">
+                    <img src="/img/Home.png" alt="home">
+                </a>
+                <span class="nomes-mobile"><a href="/livros/">Home</a></span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <a href="/livros/meta-de-leitura">
+                    <img src="/img/Goal.png" alt="meta">
+                </a>
+                <span class="nomes-mobile"><a href="/livros/meta-de-leitura">Metas</a></span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <a href="/livros/livros-favoritos">
+                    <img src="/img/Favorites.png" alt="Favoritos">
+                </a>
+                <span class="nomes-mobile"><a href="/livros/livros-favoritos">Favoritos</a></span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+                <a href="/notas/">
+                    <img src="/img/Quote.png" alt="Citações">
+                </a>
+                <span class="nomes-mobile"><a href="/notas/">Anotações</a></span>
+            </span>
+        </button>
+
+        <button>
+            <span>
+            <a href="/logout">
+                <img src="/img/Exit.png" alt="Sair">
+            </a>
+                <span class="nomes-mobile"><a href="/logout">Sair</a></span>
+            </span>
+        </button>
+    </nav>
+    
+
+
+    
     <main class="main">
         <div class="usuario">
             <a href="/usuario/pagina-do-usuario"><img src="/img/user.png" alt="Foto do Usuário"></a>
@@ -194,5 +258,6 @@
 
 <script src="/js/carrossel.js"></script>
 <script src="/js/busca.js"></script>
+<script src="/js/menuBolha.js"></script>
 </body>
 </html>
