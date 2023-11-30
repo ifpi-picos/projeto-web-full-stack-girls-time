@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/BookBee/src/main/resources/static/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <title>Configurações</title>
@@ -74,54 +74,48 @@
         </nav>
     </div>
 
-
     <aside class="sidebar">
         <header class="sidebar-header">
-            <img class="hexagomenu" src="/BookBee/src/main/resources/static/img/icons8-favos-de-mel-48.png" alt="hexagonos">
+            <img class="hexagomenu" src="/img/icons8-favos-de-mel-48.png" alt="hexagonos">
         </header>
         <nav>
             <button>
                 <span>
-                    <a href="/livros/">
-                        <img src="/img/Home.png" alt="home">
-                    </a>
-                    <span class="nomes"><a href="/livros/">Home</a></span>
+                    <img src="/img/Home.png" alt="home">
+                    <a href="/livros/"></a>
+                    <span><a href="/livros/">Home</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
-                    <a href="/livros/meta-de-leitura">
-                        <img src="/img/Goal.png" alt="meta">
-                    </a>
-                    <span class="nomes"><a href="/livros/meta-de-leitura">Metas</a></span>
+                    <img src="/img/Goal.png" alt="meta">
+                    <a href="/livros/meta-de-leitura"></a>
+                    <span><a href="/livros/meta-de-leitura">Metas</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
-                    <a href="/livros/livros-favoritos">
-                        <img src="/img/Favorites.png" alt="Favoritos">
-                    </a>
-                    <span class="nomes"><a href="/livros/livros-favoritos">Favoritos</a></span>
+                    <img src="/img/Favorites.png" alt="Favoritos">
+                    <a href="/livros/livros-favoritos"></a>
+                    <span><a href="/livros/livros-favoritos">Favoritos</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
-                    <a href="/notas/">
-                        <img src="/img/Quote.png" alt="Citações">
-                    </a>
-                    <span class="nomes"><a href="/notas/">Anotações</a></span>
+                    <img src="/img/Quote.png" alt="Citações">
+                    <a href="/notas/"></a>
+                    <span><a href="/notas/">Anotações</a></span>
                 </span>
             </button>
     
             <button>
                 <span>
-                <a href="/logout">
+                <a href="/logout"></a>
                     <img src="/img/Exit.png" alt="Sair">
-                </a>
-                    <span class="nomes"><a href="/logout">Sair</a></span>
+                    <span><a href="/logout">Sair</a></span>
                 </span>
             </button>
             
@@ -137,20 +131,21 @@
         <div class="barradepes">
             <input type="text" id="search-txt" placeholder="Encontre o livro que você gosta...">
             <button id="btnBuscar" type="button">
-                <img src="/BookBee/src/main/resources/static/img/lupa.png" alt="Lupa">
+                <img src="/img/lupa.png" alt="Lupa">
             </button>
         </div>
 
         <div class="container-perfil">
-            <div class="perfil">
-                <img class="perfilimg" src="/BookBee/src/main/resources/static/img/perfil.png" alt="">
-              <h3>Olá, Nome do Usuário!</h3>
+            <div class="perfil conf">
+                <img class="perfilimg" src="/img/perfil.png" alt="">
+              <h3>Olá, <span th:text="${nomeUsuario}"></span>!</h3>
             </div>
           </div>
 
         
-        <div class="container-alterar">
-            <form class="alterar" action="#">
+          <div class="container-alterar">
+            <form class="alterar" action="/usuario/atualiza" method="post">
+                <input type="hidden" id="emailAtual" name="emailAtual" th:value="${leitor.email}"/>
                 <label for="Nome">Altera Nome</label>
                 <input name="nome" type="text" id="nome" placeholder="Digite seu Nome" >
                 
@@ -159,11 +154,15 @@
                 
                 <label for="senha">Alterar Senha</label>
                 <input name="senha" type="password" required id="senha" placeholder="Insira sua Senha" >
-
-                <button class="salvar-alterar">Salvar</button>
+        
+                <button type="submit" class="salvar-alterar">Salvar</button>
             </form>
         </div>
-        
+
         <script src="/js/menuBolha.js"></script>
-    </main>
-</body>
+        
+    </main>
+
+   </body>
+
+</main>

@@ -4530,6 +4530,15 @@ h3 {
         cursor: pointer;
     }
 
+    .resultfavoritos {
+        display: flex;
+        width: 40%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 9%;
+        cursor: pointer;
+    }
 }
 
     @media only screen and (max-width: 410px){
@@ -4556,6 +4565,15 @@ h3 {
         .logofixa {
             margin-left: 0%;
             margin-top: -123%;
+        }
+
+        .container-perfil {
+            margin-left: -106%;
+        }
+
+        .alterar {
+            margin-left: 14%;
+            width: 300px;
         }
 
 
