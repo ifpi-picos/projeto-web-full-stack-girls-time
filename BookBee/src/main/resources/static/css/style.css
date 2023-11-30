@@ -3909,6 +3909,25 @@ h3 {
         width: 313px;
     }
 
+    .container-botoes-lista {
+        display: flex;
+        flex-direction: column;
+        margin-left: 18%;
+    }
+
+    .perfil.conf{
+        margin-top: 0.5%;
+    }
+
+    .alterar input {
+        width: 320px;
+    }
+
+    .alterar {
+        margin-left: 14%;
+        width: 330px;
+    }
+
 }
 
 @media only screen and (max-width: 420px){

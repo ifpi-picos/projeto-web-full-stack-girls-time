@@ -112,14 +112,17 @@ public class LivroGerenciador {
     public void verificarLivroELeitor(Livro livro, LocalDate data, String subject) throws Exception{
         LOGGER.info("Verificando se o livro existe no banco de dados e pertence a: {}", subject);
         if( livro == null || data == null){
+            LOGGER.error("Dados invalidos ou nulos");
             throw new IllegalArgumentException("Livro ou data nao podem ser nulos");
         }
         Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
         Leitor leitorLivro = livro.getLeitor();
         if(leitor == null || leitorLivro == null){
+            LOGGER.error("O leitor nao foi encontrado");
             throw new IllegalArgumentException("Nao foi possivel encontrar um leitor com o ID fornecido");
         }
         if(leitor.getId() != leitorLivro.getId()){
+            LOGGER.error("O Livro nao pertence a este leitor");
             throw new IllegalArgumentException("O livro nao pertecea ao usuario");
         }
     }
@@ -148,21 +151,26 @@ public class LivroGerenciador {
         LOGGER.info("Atualizando posicoes de leitura para o livro com ID: {}", livroParam.getIdLivro());
         Optional<Livro> livroOptional = getLivro(livroParam.getIdLivro());
         if(!livroOptional.isPresent()){
+            LOGGER.error("Não foi possível localizar o livro com id: {}", livroParam.getIdLivro());
             throw new Exception("Livro nao encontrado");
         }
         Livro livro = livroOptional.get();
         if (novasPaginasLidas <= livro.getPgLidas()) {
+            LOGGER.warn("A quantidade de paginas lida é menor que a anterior");
             throw new Exception("O novo valor das páginas lidas deve ser maior que o valor anterior.");
         }
         if (novasPaginasLidas > livro.getPaginas()) {
+            LOGGER.warn("A quantidade de paginas lida é superior a quantidade total de paginas do livro");
             throw new Exception("O novo valor das páginas lidas não pode ser maior que o número total de páginas do livro.");
         }
         if (livro.getDataDeIni() == null) {
+            LOGGER.info("Adicionando um data inicial apos o cadastro de paginas");
             livro.setDataDeIni(LocalDate.now());
             livroRepo.atualizarDataDeInicio(livro.getIdLivro(), livro.getDataDeFim());
             
         }
         if (novasPaginasLidas == livro.getPaginas()) {
+            LOGGER.info("Adicionando uma data fim apos o cadstro de paginas ser igual ao numero de Paginas do Livro");
             livro.setDataDeFim(LocalDate.now());
             livroRepo.atualizarDataDeFim(livro.getIdLivro(), livro.getDataDeFim());
         }
@@ -179,7 +187,8 @@ public class LivroGerenciador {
         Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
         List<Livro> livros = (List<Livro>)livroRepo.findByLeitor(leitor);
         if (livros.isEmpty()) {
-            throw new Exception("Nenhum livro encontrado");
+            LOGGER.info("Nem um livro cadastrado para o usuário: {}", subject);
+            throw new Exception("Nem um livro encontrado");
         }
         model.put("livros", livros);
         LOGGER.info("Todos os livros obtidos com sucesso para o assunto: {}", subject);
@@ -187,31 +196,36 @@ public class LivroGerenciador {
     }
 
     public void atualizarClassificacao(Long id, String classificacao) {
-
+        LOGGER.info("Adicionando a classificacao do livro: {}", id);
         int classificacaoInt = Integer.parseInt(classificacao);
   
         Optional<Livro> livroExistente = livroRepo.findById(id);
         if (!livroExistente.isPresent()) {
+            LOGGER.error("Erro ao tentar adicionar a clasificação do livro: {}, pois ele não existe.", id);
             throw new IllegalArgumentException("Livro não encontrado");
         }
         Livro livro = livroExistente.get();
         if (classificacaoInt < 1 || classificacaoInt > 5) {
+            LOGGER.error("Clasificacao inválida. Clasificacao aceita entre 1 e 5 estrelas");
             throw new IllegalArgumentException("Classificação inválida");
         }
         livro.setDataDeAtualizacao(LocalDateTime.now());
         livro.setClassificacao(classificacaoInt);
         livroRepo.save(livro);
+        LOGGER.info("A clasificação foi atualizado com sucesso para o livro: {}", id);
     }
 
     public void atualizarFavorito(Long id, String favoritoString) {
+        LOGGER.info("Adicionando o livro: {} ao favoritos.", id );
         boolean favorito = Boolean.parseBoolean(favoritoString);
-        System.out.println(favorito);
 
         if (id == null) {
+            LOGGER.error("ID do livro é obrigatório.");
             throw new IllegalArgumentException("ID não pode ser nulo");
         }
         Optional<Livro> livroExistente = livroRepo.findById(id);
         if (!livroExistente.isPresent()) {
+            LOGGER.error("Erro ao tentar adicionar o livro: {}, pois ele não existe.", id);
             throw new IllegalArgumentException("Livro não encontrado");
         }
         
@@ -220,6 +234,7 @@ public class LivroGerenciador {
         livro.setDataDeAtualizacao(LocalDateTime.now());
         livro.setFavorito(favorito);
         livroRepo.save(livro);
+        LOGGER.info("O livro foi atualizado com sucesso como favorito ou nao para o ID: {}", id);
        
     }
 
@@ -229,7 +244,8 @@ public class LivroGerenciador {
         Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
         List<Livro> livros = (List<Livro>)livroRepo.findByLeitorAndFavorito(leitor, true);
         if (livros.isEmpty()) {
-            throw new Exception("Nenhum livro favorito encontrado");
+            LOGGER.warn("Nem um livro favorito foi encontrado");
+            throw new Exception("Nem um livro favorito encontrado");
         }
         model.put("livros", livros);
         LOGGER.info("Todos os livros favoritos obtidos com sucesso para o assunto: {}", subject);
@@ -242,10 +258,11 @@ public class LivroGerenciador {
         Leitor leitor = leitorGerenciador.findLeitorByEmail(subject);
         List<Livro> livros = (List<Livro>)livroRepo.findByLeitorAndPgLidasNotEqualPaginas(leitor);
         if (livros.isEmpty()) {
-            throw new Exception("Nenhum livro encontrado");
+            LOGGER.warn("Nem um livro em andamento foi encontrado");
+            throw new Exception("Nem um livro encontrado");
         }
         model.put("livros", livros);
-        LOGGER.info("Todos os livros em progresso obtidos com sucesso para o assunto: {}", subject);
+        LOGGER.info("Todos os livros em progresso obtidos com sucesso para o usuario: {}", subject);
         return model;
     }
 

@@ -57,7 +57,7 @@ public class ResenhaGerenciador {
         
             Optional<Resenha> resenhas = repo.findByLeitorAndLivroAndDeletadoFalse(leitor, livro);
             if(!resenhas.isPresent()) {
-                LOGGER.info("Nenhuma resenha encontrada pelo email: {} e livro id: {}", leitor.getEmail(), livro.getIdLivro());
+                LOGGER.info("Nem uma resenha encontrada pelo email: {} e livro id: {}", leitor.getEmail(), livro.getIdLivro());
                 return Optional.empty();
             }
             LOGGER.info("Resenha encontrada com sucesso pelo email: {} e livro id: {}", leitor.getEmail(), livro.getIdLivro());
