@@ -14,3 +14,6 @@ A equipe responsável pelo projeto é composta por:
 
 - Dielle lopes - Dev back-end
 - Déborah Andrade - Dev Front-end
+
+# Link do Site
+* [BookBee](https://bookbee-kkxc.onrender.com)
